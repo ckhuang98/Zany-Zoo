@@ -8,18 +8,23 @@ class Player extends Phaser.GameObjects.Sprite {
     }
 
     update(){
-
     }
 
     levelUpEndurance(){
-        this.endurance += 1;
+        if(this.endurance < 20){
+            this.endurance++;
+        }
     }
 
     levelUpWit(){
-        this.wit += 1;
+        if(this.wit < 20){
+            this.wit++;
+        }
     }
 
     levelUpDexterity(){
-        this.dexterity +1;
+        if(this.dexterity < 20){
+            this.dexterity++;
+        }
     }
 }
