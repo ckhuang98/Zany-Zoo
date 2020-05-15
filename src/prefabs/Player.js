@@ -5,9 +5,19 @@ class Player extends Phaser.GameObjects.Sprite {
         this.endurance = endurance;
         this.wit = wit;
         this.dexterity = dexterity;
+        this.damage = 1;
+        this. hp = 10;
     }
 
     update(){
+    }
+
+    attack(target){
+        target.takeDamage(this.damage);
+    }
+
+    takeDamage(damage){
+        this.hp -= damage;
     }
 
     levelUpEndurance(){
