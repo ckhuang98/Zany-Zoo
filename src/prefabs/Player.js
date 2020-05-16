@@ -7,6 +7,7 @@ class Player extends Phaser.GameObjects.Sprite {
         this.dexterity = dexterity;
         this.damage = 1;
         this. hp = 10;
+        this.attacks = [];
     }
 
     update(){
@@ -19,6 +20,13 @@ class Player extends Phaser.GameObjects.Sprite {
     takeDamage(damage){
         this.hp -= damage;
     }
+
+    createAttacks(){
+        if(this.endurance >= 5){
+            this.attacks.push('Karate Chop!');
+        }
+    }
+
 
     levelUpEndurance(){
         if(this.endurance < 20){
