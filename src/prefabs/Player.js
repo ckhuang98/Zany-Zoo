@@ -5,10 +5,43 @@ class Player extends Phaser.GameObjects.Sprite {
         this.endurance = endurance;
         this.wit = wit;
         this.dexterity = dexterity;
+        this.damage = 1;
+        this. hp = 10;
+        this.attacks = [];
+        this.items = ['Cane'];
+        this.isLiving = true;
     }
 
     update(){
     }
+
+    attack(target){
+        target.takeDamage(this.damage);
+        console.log('Player attacks for ' + this.damage);
+    }
+
+    takeDamage(damage){
+        this.hp -= damage;
+        if(this.hp <= 0) {
+            this.hp = 0;
+            this.living = false;
+            this.visible = false;   
+            this.menuItem = null;
+        }
+    }
+
+    createAttacks(){
+        if(this.endurance >= 1){
+            this.attacks.push('Slap');
+        }
+        if(this.wit >= 1){
+            this.attacks.push('Scream');
+        }
+        if(this.dexterity >= 1){
+            this.attacks.push('Cartwheel');
+        }
+    }
+
 
     levelUpEndurance(){
         if(this.endurance < 20){
