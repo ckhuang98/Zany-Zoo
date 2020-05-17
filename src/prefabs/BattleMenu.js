@@ -46,7 +46,6 @@ class BattleMenu extends Phaser.GameObjects.Container{
     }
 
     confirm(){
-        //Lets player think twice about action.
     }
 
     // clears menu

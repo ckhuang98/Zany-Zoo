@@ -6,4 +6,8 @@ class ActionsMenu extends BattleMenu{
         this.addMenuItem('Dexterity');
         this.addMenuItem('items');
     }
+
+    confirm(){
+        this.scene.events.emit('SelectAttacks', this.menuItemIndex);
+    }
 }

@@ -7,7 +7,13 @@ class Player extends Phaser.GameObjects.Sprite {
         this.dexterity = dexterity;
         this.damage = 1;
         this. hp = 10;
-        this.attacks = [];
+        this.ENDAttacks = [];
+        this.ENDAttacksDmg = [];
+        this.WITAttacks = [];
+        this.WITAttackDmg = [];
+        this.DEXAttacks = [];
+        this.DEXAttackDmg = [];
+        this.items = ['Cane'];
     }
 
     update(){
@@ -22,8 +28,14 @@ class Player extends Phaser.GameObjects.Sprite {
     }
 
     createAttacks(){
-        if(this.endurance >= 5){
-            this.attacks.push('Karate Chop!');
+        if(this.endurance >= 1){
+            this.ENDAttacks.push('Slap');
+        }
+        if(this.wit >= 1){
+            this.WITAttacks.push('Scream');
+        }
+        if(this.dexterity >= 1){
+            this.DEXAttacks.push('Cartwheel');
         }
     }
 
