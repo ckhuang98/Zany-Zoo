@@ -9,13 +9,15 @@ class City extends Phaser.Scene {
     }
 
     create(){
-        /*this.add.tileSprite(0, 0, 1000, 1000, 'cityBackground').setOrigin(0, 0);
-        this.button1 = this.add.image(200, 700, 'button');
-        this.button2 = this.add.image(500, 700, 'button');
-        this.button3 = this.add.image(790, 700, 'button');
+        this.add.tileSprite(0, 0, 1000, 1000, 'cityBackground').setOrigin(0, 0);
+        let button1 = this.add.image(200, 700, 'button');
+        //this.button2 = this.add.image(500, 700, 'button');
+        //this.button3 = this.add.image(790, 700, 'button');
 
-        this.button1.inputEnabled = true;
-        this.button1.events.onInputDown.add(listener, this);*/
+        //this.button1.inputEnabled = true;
+        //this.button1.events.onInputDown.add(listener, this);
+        button1.inputEnabled = true;
+        button1.events.onInputDown.add(listener, this);
     }
 
     update(){
@@ -23,6 +25,6 @@ class City extends Phaser.Scene {
     }
 
     listener(){
-        //console.log("test")   
+        console.log("test")   
     }
 }
