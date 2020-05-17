@@ -5,19 +5,22 @@ class Battle extends Phaser.Scene{
 
     preload(){
         this.load.image('bear', './assets/images/bear.png');
+        this.load.image('player', './assets/images/sprite.png');
+        this.load.image('background', './assets/images/minigameBackground.png');
     }
 
     create(){
         // Sets placehold background
-        this.cameras.main.setBackgroundColor('rgba(0, 200, 0, 0.5)');
+        this.background = this.add.tileSprite(0, 0, WIDTH, HEIGHT, 'background').setOrigin(0,0);
         
         // Creates Player
-        this.player = new Player(this, 200, 700, 'bear', 1, 5, 5, 5);
+        this.player = new Player(this, 1000, 700, 'player', 1, 5, 5, 5);
         this.add.existing(this.player);
         this.player.createAttacks();
+        this.player.flipX = true;
 
         // Creates Animal
-        this.animal = new Animal(this, 1200, 700, 'bear', 1, 2, 1);
+        this.animal = new Animal(this, 300, 200, 'bear', 1, 2, 1);
         this.add.existing(this.animal);
 
         // Keeps track of whose turn it is
@@ -70,7 +73,6 @@ class Battle extends Phaser.Scene{
     
     // Ends battle, removes player and animal, and sleeps scene
     endBattle(){
-        this.player.destroy();
         this.animal.destroy();
         console.log('Battle is over');
         this.scene.sleep('battleUiScene');
