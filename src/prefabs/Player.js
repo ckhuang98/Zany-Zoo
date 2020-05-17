@@ -24,7 +24,7 @@ class Player extends Phaser.GameObjects.Sprite {
         this.hp -= damage;
         if(this.hp <= 0) {
             this.hp = 0;
-            this.living = false;
+            this.isLiving = false;
             this.visible = false;   
             this.menuItem = null;
         }

@@ -18,10 +18,10 @@ class Animal extends Phaser.GameObjects.Sprite{
         this.hp -= damage;
         if(this.hp <= 0) {
             this.hp = 0;
-            this.menuItem.unitKilled();
-            this.living = false;
-            this.visible = false;   
-            this.menuItem = null;
+
+            this.isLiving = false;
+            console.log('Player deffeated enemy!');
+            this.visible = false;
         }
     }
 }
