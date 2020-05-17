@@ -5,43 +5,86 @@ class Battle extends Phaser.Scene{
 
     preload(){
         this.load.image('bear', './assets/images/bear.png');
+        this.load.image('player', './assets/images/sprite.png');
+        this.load.image('background', './assets/images/minigameBackground.png');
     }
 
     create(){
         // Sets placehold background
-        this.cameras.main.setBackgroundColor('rgba(0, 200, 0, 0.5)');
+        this.background = this.add.tileSprite(0, 0, WIDTH, HEIGHT, 'background').setOrigin(0,0);
         
         // Creates Player
-        this.player = new Player(this, 200, 700, 'bear', 1, 5, 5, 5);
+        this.player = new Player(this, 1000, 700, 'player', 1, 5, 5, 5);
         this.add.existing(this.player);
         this.player.createAttacks();
+        this.player.flipX = true;
 
         // Creates Animal
-        this.animal = new Animal(this, 1200, 700, 'bear', 1, 3, 1);
+        this.animal = new Animal(this, 300, 200, 'bear', 1, 2, 1);
         this.add.existing(this.animal);
 
         // Keeps track of whose turn it is
-        this.isPlayerTurn = true;
+        this.turnCounter = 0;
 
         this.scene.launch('battleUiScene');
 
         
     }
 
+    // Moves the battle along
     nextTurn(){
-        if(isPlayerTurn){
+        this.turnCounter++;
+        if(this.turnCounter % 2 != 0){
             this.events.emit('PlayerTurn');
-            isPlayerTurn = false;
         } else{
-            this.animal.attack(player);
-            isPlayerTurn = true;
-            this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
+            this.animal.attack(this.player);
+            console.log();
+            this.time.addEvent({ delay: 1000, callback: this.nextTurn, callbackScope: this });
         }
     }
 
+    // recieves player selection and calls nextTurn()
     receivePlayerSelection(action, index){
         if(action == 'attack'){
-            this.player.attack(animal);
+            this.player.attack(this.animal);
+        } 
+        if(this.animal.isLiving && this.player.isLiving){
+            this.time.addEvent({ delay: 1000, callback: this.nextTurn, callbackScope: this });
+        } else{
+            this.endBattle();
         }
+        
+    }
+
+    /*
+    // Checks if battle is over by checking animal and player is living or not
+    checkEndBattle(){
+        let victory = true;
+        if(this.animal.living == true){
+            victory = false;
+        }
+        let loseBattle = false;
+        if(this.player.living == false){
+            loseBattle = true;
+        }
+        return victory || loseBattle;
+    }
+    */
+    
+    // Ends battle, removes player and animal, and sleeps scene
+    endBattle(){
+        this.animal.destroy();
+        console.log('Battle is over');
+        this.scene.sleep('battleUiScene');
+        //this.scene.switch('cityScene');
+    }
+
+    
+
+    exitBattle(){
+        this.scene.sleep('battleUiScene');
+        this.scene.switch('cityScene');
     }
 }
+
+
