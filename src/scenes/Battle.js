@@ -21,27 +21,38 @@ class Battle extends Phaser.Scene{
         this.add.existing(this.animal);
 
         // Keeps track of whose turn it is
-        this.isPlayerTurn = true;
+        this.turnCounter = 0;
 
         this.scene.launch('battleUiScene');
 
         
     }
 
+    // Moves the battle along
     nextTurn(){
-        if(isPlayerTurn){
+        this.turnCounter++;
+        if(this.turnCounter % 2 != 0){
             this.events.emit('PlayerTurn');
-            isPlayerTurn = false;
         } else{
-            this.animal.attack(player);
-            isPlayerTurn = true;
+            this.animal.attack(this.player);
+            console.log();
             this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
         }
     }
 
+    // recieves player selection and calls nextTurn()
     receivePlayerSelection(action, index){
         if(action == 'attack'){
-            this.player.attack(animal);
+            this.player.attack(this.animal);
+            console.log('player attacks animal');
         }
+        this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
+    }
+
+    exitBattle(){
+        this.scene.sleep('battleUiScene');
+        this.scene.switch('cityScene');
     }
 }
+
+

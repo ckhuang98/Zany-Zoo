@@ -31,9 +31,7 @@ class BattleUi extends Phaser.Scene{
         this.battleScene = this.scene.get('battleScene');
 
         // Grabs the attack arrays from BattleScene
-        this.ENDAttacks = this.battleScene.player.ENDAttacks;
-        this.WITAttacks = this.battleScene.player.WITAttacks;
-        this.DEXAttacks = this.battleScene.player.DEXAttacks;
+        this.attacks = this.battleScene.player.attacks;
         this.items = this.battleScene.player.items;
 
         // Event listener for keystrokes
@@ -46,6 +44,8 @@ class BattleUi extends Phaser.Scene{
         this.events.on('SelectAttacks', this.showAttacks, this);
 
         this.events.on('attack', this.attackEnemy, this);
+
+        this.battleScene.nextTurn();
         
 
     }
@@ -76,14 +76,7 @@ class BattleUi extends Phaser.Scene{
         
         // Depending on player selection, remaps attack menu to display the correct options
         if(menuItemIndex == 0){
-            this.attacksMenu.remap(this.ENDAttacks);
-            this.attackType = 'endurance';
-        } else if(menuItemIndex == 1){
-            this.attacksMenu.remap(this.WITAttacks);
-            this.attackType = 'wit';
-        } else if(menuItemIndex == 2){
-            this.attacksMenu.remap(this.DEXAttacks);
-            this.attackType = 'dexterity';
+            this.attacksMenu.remap(this.attacks);
         } else{
             this.attacksMenu.remap(this.items);
         }
