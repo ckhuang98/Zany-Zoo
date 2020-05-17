@@ -17,7 +17,7 @@ class Battle extends Phaser.Scene{
         this.player.createAttacks();
 
         // Creates Animal
-        this.animal = new Animal(this, 1200, 700, 'bear', 1, 3, 1);
+        this.animal = new Animal(this, 1200, 700, 'bear', 1, 2, 1);
         this.add.existing(this.animal);
 
         // Keeps track of whose turn it is
@@ -36,7 +36,7 @@ class Battle extends Phaser.Scene{
         } else{
             this.animal.attack(this.player);
             console.log();
-            this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
+            this.time.addEvent({ delay: 1000, callback: this.nextTurn, callbackScope: this });
         }
     }
 
@@ -44,10 +44,40 @@ class Battle extends Phaser.Scene{
     receivePlayerSelection(action, index){
         if(action == 'attack'){
             this.player.attack(this.animal);
-            console.log('player attacks animal');
+        } 
+        if(this.animal.isLiving && this.player.isLiving){
+            this.time.addEvent({ delay: 1000, callback: this.nextTurn, callbackScope: this });
+        } else{
+            this.endBattle();
         }
-        this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
+        
     }
+
+    /*
+    // Checks if battle is over by checking animal and player is living or not
+    checkEndBattle(){
+        let victory = true;
+        if(this.animal.living == true){
+            victory = false;
+        }
+        let loseBattle = false;
+        if(this.player.living == false){
+            loseBattle = true;
+        }
+        return victory || loseBattle;
+    }
+    */
+    
+    // Ends battle, removes player and animal, and sleeps scene
+    endBattle(){
+        this.player.destroy();
+        this.animal.destroy();
+        console.log('Battle is over');
+        this.scene.sleep('battleUiScene');
+        //this.scene.switch('cityScene');
+    }
+
+    
 
     exitBattle(){
         this.scene.sleep('battleUiScene');
