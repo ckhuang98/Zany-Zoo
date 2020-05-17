@@ -2,12 +2,14 @@ let config = {
     type: Phaser.CANVAS,
     width: 1400,
     height: 1400,
-    scene: [ Battle, BattleUi]
+    scene: [ Menu, City, Battle, BattleUi]
 }
 
 let game = new Phaser.Game(config);
 let WIDTH = game.config.width;
 let HEIGHT = game.config.height;
+
+let keyUP, keySPACE;
 
 // Main conditionals for choosing scenes
 let numOfDays = 1;
