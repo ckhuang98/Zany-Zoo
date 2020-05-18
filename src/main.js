@@ -1,7 +1,7 @@
 let config = {
     type: Phaser.CANVAS,
-    width: 1200,
-    height: 1200,
+    width: 1000,
+    height: 1000,
     scene: [ Menu, Battle, BattleUi]
 }
 
