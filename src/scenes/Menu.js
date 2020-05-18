@@ -6,6 +6,8 @@ class Menu extends Phaser.Scene {
         this.load.image('menu', './assets/images/TitleMenu.png');
         this.load.image('button', './assets/images/Button.png');
         this.load.image('instructions', './assets/images/Instructions.png');
+
+        this.load.audio('bgm', './assets/sound/hipjazz.mp3'); // place holder bgm until I have time to make one.
     }
 
     create(){
@@ -13,6 +15,8 @@ class Menu extends Phaser.Scene {
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.instructionPressed = false;
+        this.bgm = this.sound.add('bgm')
+        this.bgm.play();
     }
 
     update(){
@@ -24,6 +28,7 @@ class Menu extends Phaser.Scene {
             if(!this.instructionPressed){
                 //this.scene.start("cityScene");
                 this.scene.start("battleScene");
+                this.bgm.stop();
             }else{
             this.instructions.destroy();
             this.instructionPressed = false;
