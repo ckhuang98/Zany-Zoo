@@ -11,7 +11,7 @@ class Animal extends Phaser.GameObjects.Sprite{
 
     attack(target){
         target.takeDamage(this.damage);
-        console.log('animal attack player for ' + this.damage);
+        console.log('Animal attack player for ' + this.damage);
     }
     
     takeDamage(damage){
