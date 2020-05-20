@@ -26,16 +26,16 @@ class Battle extends Phaser.Scene{
         this.player.flipX = true;
 
         // HELP PHILIP!
-        this.playerHp = new Phaser.GameObjects.Text(this, 500, 775, "", { color: '#ffffff', align: 'left', fontSize: 25, wordWrap: { width: 500}}).setOrigin(0,0);
-        this.playerHp.setText("Health: " + this.player.hp);
+        this.playerHp = this.add.text(760, 330, "", { color: '#ffffff', align: 'left', fontSize: 25}).setOrigin(0.5);
+        this.playerHp.setText("HP: " + this.player.hp);
 
         // Creates Animal
         this.animal = new Bear(this, 125, 150, 'bear', 1, 'str');
         this.add.existing(this.animal);
 
         // SAVE ME PHILIP!!!!!
-        this.playerHp = new Phaser.GameObjects.Text(this, 500, 775, "", { color: '#ffffff', align: 'left', fontSize: 25, wordWrap: { width: 500}}).setOrigin(0,0);
-        this.playerHp.setText("Health: " + this.player.hp);
+        this.animalHp = this.add.text(125, 300, "", { color: '#ffffff', align: 'left', fontSize: 25}).setOrigin(0.5);
+        this.animalHp.setText("HP: " + this.animal.hp);
 
 
         // Keeps track of whose turn it is
@@ -56,8 +56,8 @@ class Battle extends Phaser.Scene{
                 this.events.emit('PlayerTurn');
             } else{
                 this.animal.attack(this.player);
+                this.playerHp.setText("HP: " + this.player.hp);
                 this.sound.add('bearRoar').play();
-                console.log("Player Health: " + this.player.hp);
                 this.time.addEvent({ delay: 3500, callback: this.nextTurn, callbackScope: this });
             }  
         } else {
@@ -113,8 +113,8 @@ class Battle extends Phaser.Scene{
                 }
 
             }
+            this.animalHp.setText("HP: " + this.animal.hp);
             this.time.addEvent({ delay: 3500, callback: this.nextTurn, callbackScope: this });
-            console.log("Animal health: " + this.animal.hp);
         
         }
     }
