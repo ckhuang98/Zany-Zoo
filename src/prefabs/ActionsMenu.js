@@ -2,7 +2,7 @@ class ActionsMenu extends BattleMenu{
     constructor(scene, x, y){
         super(scene, x, y);
         this.addMenuItem('Attack')
-        this.addMenuItem('Items');
+        //this.addMenuItem('Items');
     }
 
     confirm(){

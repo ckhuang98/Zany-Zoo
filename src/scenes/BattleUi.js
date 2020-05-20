@@ -3,15 +3,12 @@ class BattleUi extends Phaser.Scene{
         super("battleUiScene");
     }
 
-
-
-
     create(){
 
         // container to hold the menus
         this.menus = this.add.container();
-        this.actionsMenu = new ActionsMenu(this, 804, 1100);
-        this.attacksMenu = new AttacksMenu(this, 8, 1100);
+        this.actionsMenu = new ActionsMenu(this, 610, 800);
+        this.attacksMenu = new AttacksMenu(this, 8, 800);
 
         // select current menu
         this.currentMenu = this.actionsMenu;
@@ -25,7 +22,7 @@ class BattleUi extends Phaser.Scene{
 
         // Grabs the attack arrays from BattleScene
         this.attacks = this.battleScene.player.attacks;
-        this.items = this.battleScene.player.items;
+        //this.items = this.battleScene.player.items;
 
         // Event listener for keystrokes
         this.input.keyboard.on('keydown', this.onKeyInput, this);
@@ -47,8 +44,10 @@ class BattleUi extends Phaser.Scene{
     onKeyInput(event){
         if(this.currentMenu){
             if(event.code == "ArrowUp"){
+                this.battleScene.sound.add('click').play();
                 this.currentMenu.moveSelectionUp();
             } else if(event.code === "ArrowDown") {
+                this.battleScene.sound.add('click').play();
                 this.currentMenu.moveSelectionDown();
             } else if(event.code === "ArrowRight" || event.code === "Shift") {
  
@@ -81,12 +80,22 @@ class BattleUi extends Phaser.Scene{
     attackEnemy(){
         let index = this.attacksMenu.menuItemIndex;
         this.actionsMenu.deselect();
+        if(this.attacks[index] === 'Slap'){
+            this.battleScene.sound.add('slap').play();
+            console.log('With all five fingers, you slap the bear right across the face. It is sufficiently irritated.');
+        } else if (this.attacks[index] === 'Scream'){
+            this.battleScene.sound.add('scream').play();
+            console.log("\"REEEEEEEEEEEEE,\" says the zookeeper. The bear stares at you and blinks confusedly.");
+        } else{
+            this.battleScene.sound.add('swoosh').play();
+            console.log("Gracefully, you cartwheel directly into the animal, slamming it with your body.");
+        }
         this.attacksMenu.deselect();
+        this.attacksMenu.clear();
+
         this.currentMenu = null;
         this.battleScene.receivePlayerSelection('attack', index);
     }
-
-
 
 
 

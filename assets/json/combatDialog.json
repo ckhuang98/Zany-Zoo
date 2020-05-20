@@ -1,0 +1,38 @@
+[
+	[
+		{
+			"speaker" : "narrator",
+			"dialog" : "BATTLE START!",
+			"newSpeaker" : "true"
+		}
+	],
+	[
+		{
+			"speaker" : "player",
+			"dialog" : "With all five fingers, you slap the bear right across the face. It is sufficiently irritated.",
+			"newSpeaker" : "true"
+		},
+		{
+			"speaker" : "player",
+			"dialog" : "\"REEEEEEEEEEEEE,\" says the zookeeper. The bear stares at you and blinks confusedly."
+		},
+		{	
+			"speaker" : "bear",
+			"dialog" : "The bear swipes at you with his fluffiest paw.",
+			"newSpeaker" : "true"
+		},
+        {
+            "speaker" : "bear",
+            "dialog" : "The bear yawns in your general direction, filling your nose with the smell of rotted meat."
+        },
+        {
+            "speaker" : "narrator",
+            "dialog" : "Victory! You've done it! You've beaten a captivated animal with no real sense of self or instincts in battle! Excellent job!",
+            "newSpeaker" : "true"
+        },
+        {
+            "speaker" : "narrator",
+            "dialog" : "Sorry about the loss, champ. We're getting there. You'll be okay. Better life decisions starting tomorrow, for sure."
+        }
+	]
+]
