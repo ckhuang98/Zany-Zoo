@@ -10,9 +10,9 @@ class Battle extends Phaser.Scene{
 
         this.load.audio('click', './assets/sounds/click.mp3');
         this.load.audio('bearRoar', './assets/sounds/bearRoar.mp3');
-        this.load.audio('slap', './assets/sounds/slap.mp3');
-        this.load.audio('scream', './assets/sounds/scream.mp3');
-        this.load.audio('swoosh', './assets/sounds/swoosh.mp3');
+        this.load.audio('Slap', './assets/sounds/slap.mp3');
+        this.load.audio('Scream', './assets/sounds/scream.mp3');
+        this.load.audio('Cartwheel', './assets/sounds/swoosh.mp3');
     }
 
     create(){
@@ -20,17 +20,27 @@ class Battle extends Phaser.Scene{
         this.background = this.add.tileSprite(0, 0, WIDTH, HEIGHT, 'background').setOrigin(0,0);
         
         // Creates Player
-        this.player = new Player(this, 900, 500, 'player', 1, 5, 5, 5);
+        this.player = new Player(this, 750, 500, 'player', 1);
         this.add.existing(this.player);
         this.player.createAttacks();
         this.player.flipX = true;
 
+        // HELP PHILIP!
+        this.playerHp = new Phaser.GameObjects.Text(this, 500, 775, "", { color: '#ffffff', align: 'left', fontSize: 25, wordWrap: { width: 500}}).setOrigin(0,0);
+        this.playerHp.setText("Health: " + this.player.hp);
+
         // Creates Animal
-        this.animal = new Animal(this, 200, 200, 'bear', 1, 3, 1);
+        this.animal = new Bear(this, 125, 150, 'bear', 1, 'str');
         this.add.existing(this.animal);
+
+        // SAVE ME PHILIP!!!!!
+        this.playerHp = new Phaser.GameObjects.Text(this, 500, 775, "", { color: '#ffffff', align: 'left', fontSize: 25, wordWrap: { width: 500}}).setOrigin(0,0);
+        this.playerHp.setText("Health: " + this.player.hp);
+
 
         // Keeps track of whose turn it is
         this.turnCounter = 0;
+
 
         this.scene.launch('battleUiScene');
 
@@ -40,28 +50,73 @@ class Battle extends Phaser.Scene{
     // Moves the battle along
     nextTurn(){
         this.turnCounter++;
-        if(this.turnCounter % 2 != 0){
-            this.events.emit('PlayerTurn');
-        } else{
-            this.animal.attack(this.player);
-            this.sound.add('bearRoar').play();
-            console.log("Player Health: " + this.player.hp);
-            this.time.addEvent({ delay: 2000, callback: this.nextTurn, callbackScope: this });
+
+        if(this.animal.isLiving && this.player.isLiving){
+            if(this.turnCounter % 2 != 0){
+                this.events.emit('PlayerTurn');
+            } else{
+                this.animal.attack(this.player);
+                this.sound.add('bearRoar').play();
+                console.log("Player Health: " + this.player.hp);
+                this.time.addEvent({ delay: 3500, callback: this.nextTurn, callbackScope: this });
+            }  
+        } else {
+            if(this.animal.isLiving == true){
+                this.events.emit("Message", "You've been defeated...");
+                let timer = setTimeout(() =>{
+                    this.exitBattle();
+                }, 3500);
+            } else{
+                this.events.emit("Message", "You won!");
+                let timer = setTimeout(() =>{
+                    this.exitBattle();
+                }, 3500);
+            }
         }
     }
 
     // recieves player selection and calls nextTurn()
     receivePlayerSelection(action, index){
         if(action == 'attack'){
-            this.player.attack(this.animal);
+            if(index == 0){
+                let type = "str";
+                for(let i = 0; i < this.player.attackText.length; i += 6){
+                    if(this.player.attacks[index] === this.player.attackText[i]){
+                        let damage = this.player.attacks[index + 1];
+                        if(this.player.attacks[index] === 'Slap'){
+                            this.sound.add('Slap').play();
+                        }
+                        this.player.attack(this.animal, type, damage, i);
+                    }
+                }
+            } else if(index == 1){
+                let type = "wit";
+                for(let i = 2; i < this.player.attackText.length; i += 6){
+                    if(this.player.attacks[index + 1] === this.player.attackText[i]){
+                        let damage = this.player.attacks[index + 2];
+                        if(this.player.attacks[index + 1] === 'Scream'){
+                            this.sound.add('Scream').play();
+                        }
+                        this.player.attack(this.animal, type, damage, i);
+                    }
+                }
+            } else{
+                let type = "dex";
+                for(let i = 4; i < this.player.attackText.length; i += 6){
+                    if(this.player.attacks[index + 2] === this.player.attackText[i]){
+                        let damage = this.player.attacks[index + 3];
+                        if(this.player.attacks[index + 2] === 'Cartwheel'){
+                            this.sound.add('Cartwheel').play();
+                        }
+                        this.player.attack(this.animal, type, damage, i);
+                    }
+                }
+
+            }
+            this.time.addEvent({ delay: 3500, callback: this.nextTurn, callbackScope: this });
             console.log("Animal health: " + this.animal.hp);
-        } 
-        if(this.animal.isLiving && this.player.isLiving){
-            this.time.addEvent({ delay: 2000, callback: this.nextTurn, callbackScope: this });
-        } else{
-            this.endBattle();
-        }
         
+        }
     }
 
     /*
@@ -78,14 +133,7 @@ class Battle extends Phaser.Scene{
         return victory || loseBattle;
     }
     */
-    
-    // Ends battle, removes player and animal, and sleeps scene
-    endBattle(){
-        this.animal.destroy();
-        console.log('Battle is over, you win!');
-        this.scene.sleep('battleUiScene');
-        //this.scene.switch('cityScene');
-    }
+
     
     keyPressListener(event){
         if(event.code === "Space")
@@ -94,9 +142,8 @@ class Battle extends Phaser.Scene{
     
 
     exitBattle(){
-        this.scene.sleep('battleUiScene');
-        this.scene.switch('cityScene');
+        this.scene.stop('battleUiScene');
+        this.scene.start('cityScene');
     }
 }
-
 

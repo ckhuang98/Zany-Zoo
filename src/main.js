@@ -14,3 +14,8 @@ let keyUP, keySPACE;
 // Main conditionals for choosing scenes
 let DAY = 1;
 let isNight = false;
+
+let END = 0;
+let STR = 0;
+let WIT = 0;
+let DEX = 0;

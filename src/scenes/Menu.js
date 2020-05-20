@@ -15,7 +15,7 @@ class Menu extends Phaser.Scene {
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.instructionPressed = false;
-        this.bgm = this.sound.add('bgm')
+        this.bgm = this.sound.add('bgm', {volume: 0.5});
         this.bgm.play();
     }
 

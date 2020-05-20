@@ -1,17 +1,12 @@
 class Animal extends Phaser.GameObjects.Sprite{
-    constructor(scene, x, y, texture, frame, damage){
+    constructor(scene, x, y, texture, frame){
         super(scene, x, y, texture, frame);
         this.hp = 5 * (DAY - 1) + 10;
-        this.damage = damage;
+        this.damage = 1;
         this.isLiving = true;
-    }
-    
-    update(){
     }
 
     attack(target){
-        target.takeDamage(this.damage);
-        console.log('Animal attack player for ' + this.damage);
     }
     
     takeDamage(damage){
@@ -21,7 +16,6 @@ class Animal extends Phaser.GameObjects.Sprite{
 
             this.isLiving = false;
             console.log('Player deffeated enemy!');
-            this.visible = false;
         }
     }
 }

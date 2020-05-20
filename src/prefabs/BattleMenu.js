@@ -1,9 +1,8 @@
 class BattleMenu extends Phaser.GameObjects.Container{
-    constructor(scene, x, y, player){
+    constructor(scene, x, y){
         super(scene, x, y);
         this.menuItems = [];
         this.menuItemIndex = 0;
-        this.player = player;
         this.x = x;
         this.y = y;
     }
