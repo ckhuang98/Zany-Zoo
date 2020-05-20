@@ -12,6 +12,10 @@ class City extends Phaser.Scene {
         this.load.image('selectGym', 'selectGym.png');
         this.load.image('apartment', 'apartment.png');
         this.load.image('selectApartment', 'selectApartment.png');
+        this.load.image('apartmentMenu', 'apartmentMenu.png');
+        this.load.image('libraryMenu', 'libraryMenu.png');
+        this.load.image('gymMenu', 'gymMenu.png');
+        this.load.image('exit', 'exit.png');
     }
 
     create(){
@@ -21,45 +25,71 @@ class City extends Phaser.Scene {
         this.apartment = this.add.image(185, 270, 'apartment');
         let inEvent = false;
 
+
+
         this.library.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
             console.log('clicked');
             console.log(inEvent);
             if(!inEvent){
                 inEvent = true;
+                this.scene.start("battleScene");
+                /*this.menu = this.add.image(450, 450, 'libraryMenu');
+                this.plus = this.add.image(500, 430, 'plus').setOrigin(0, 0);
+                this.minus = this.add.image(325, 430, 'minus').setOrigin(0, 0);*/
+            }else{
+                inEvent = false;
+            }
+        });
+
+        this.apartment.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
+            console.log('clicked');
+            console.log(inEvent);
+            if(!inEvent){
+                inEvent = true;
+                this.scene.start("battleScene");
+                /*this.menu = this.add.image(450, 450, 'libraryMenu');
+                this.plus = this.add.image(500, 430, 'plus').setOrigin(0, 0);
+                this.minus = this.add.image(325, 430, 'minus').setOrigin(0, 0);*/
+            }else{
+                inEvent = false;
+            }
+        });
+
+        this.gym.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
+            console.log('clicked');
+            console.log(inEvent);
+            if(!inEvent){
+                inEvent = true;
+                this.scene.start("battleScene");
+                /*this.menu = this.add.image(450, 450, 'libraryMenu');
+                this.plus = this.add.image(500, 430, 'plus').setOrigin(0, 0);
+                this.minus = this.add.image(325, 430, 'minus').setOrigin(0, 0);*/
             }else{
                 inEvent = false;
             }
         });
     
         this.library.setInteractive().on('pointerover',()=>{
-            console.log(inEvent);
             if(!inEvent){
             this.library.setTexture('selectLibrary');
-            console.log('over');
             }
         });
         this.gym.setInteractive().on('pointerover',()=>{
-            console.log(inEvent);
             if(!inEvent){
             this.gym.setTexture('selectGym');
-            console.log('over');
             }
         });
         this.apartment.setInteractive().on('pointerover',()=>{
-            console.log(inEvent);
             if(!inEvent){
             this.apartment.setTexture('selectApartment');
-            console.log('over');
             }
         });
 
-        this.background.setInteractive().on('pointerover',()=>{
-            console.log(inEvent);
+        this.background.setInteractive().on('pointerover',()=>{;
             if(!inEvent){
             this.library.setTexture('library');
             this.gym.setTexture('gym');
             this.apartment.setTexture('apartment');
-            console.log('away');
             }
         });
     
