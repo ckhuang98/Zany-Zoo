@@ -12,5 +12,5 @@ let HEIGHT = game.config.height;
 let keyUP, keySPACE;
 
 // Main conditionals for choosing scenes
-let numOfDays = 1;
+let DAY = 1;
 let isNight = false;
