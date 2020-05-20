@@ -26,8 +26,7 @@ class Menu extends Phaser.Scene {
         }
         if (Phaser.Input.Keyboard.JustDown(keySPACE)){
             if(!this.instructionPressed){
-                //this.scene.start("cityScene");
-                this.scene.start("battleScene");
+                this.scene.start("skillsScene");
                 this.bgm.stop();
             }else{
             this.instructions.destroy();

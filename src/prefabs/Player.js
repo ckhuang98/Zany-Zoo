@@ -6,13 +6,14 @@ class Player extends Phaser.GameObjects.Sprite {
         this.wit = wit;
         this.dexterity = dexterity;
         this.damage = 1;
-        this.hp = 10;
+        this.hp = 2 * (this.endurance - 1) + 14;
         this.attacks = [];
         this.items = ['Cane'];
         this.isLiving = true;
     }
 
-    update(){
+    updateHp(){
+
     }
 
     attack(target){
