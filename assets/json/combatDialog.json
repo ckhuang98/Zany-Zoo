@@ -4,35 +4,42 @@
 			"speaker" : "narrator",
 			"dialog" : "BATTLE START!",
 			"newSpeaker" : "true"
+		},
+		{
+			"speaker" : "narrator",
+            "dialog" : "Victory! You've done it! You've beaten a captivated animal with no real sense of self or instincts in battle! Excellent job!",
+		},
+		{
+			"speaker" : "narrator",
+            "dialog" : "Sorry about the loss, champ. We're getting there. You'll be okay. Better life decisions starting tomorrow, for sure."
 		}
 	],
 	[
-		{
-			"speaker" : "player",
-			"dialog" : "With all five fingers, you slap the bear right across the face. It is sufficiently irritated.",
-			"newSpeaker" : "true"
-		},
-		{
-			"speaker" : "player",
-			"dialog" : "\"REEEEEEEEEEEEE,\" says the zookeeper. The bear stares at you and blinks confusedly."
-		},
 		{	
 			"speaker" : "bear",
-			"dialog" : "The bear swipes at you with his fluffiest paw.",
-			"newSpeaker" : "true"
+			"dialog" : "The bear swipes at you with his fluffiest paw."
 		},
         {
             "speaker" : "bear",
             "dialog" : "The bear yawns in your general direction, filling your nose with the smell of rotted meat."
-        },
-        {
-            "speaker" : "narrator",
-            "dialog" : "Victory! You've done it! You've beaten a captivated animal with no real sense of self or instincts in battle! Excellent job!",
-            "newSpeaker" : "true"
-        },
-        {
-            "speaker" : "narrator",
-            "dialog" : "Sorry about the loss, champ. We're getting there. You'll be okay. Better life decisions starting tomorrow, for sure."
-        }
+		},
+		{
+			"speaker" : "bear",
+			"dialog" : "\"Where is my honey?!?!\" the bear roars, and unleashes a hellish growl in your face."
+		}
+	],
+	[
+		{
+			"speaker" : "pig",
+			"dialog" : "\"Squeeeeeeeeeeeeeeeeeee!!!!\" the pig screeches at you, leaving a faint ringing in your ears."
+		},
+		{
+			"speaker" : "pig",
+			"dialog" : "\"Take this cretin!\", the pig shouts as he throws a clump of (hopefully) mud in your eyes."
+		},
+		{
+			"speaker" : "pig",
+			"dialog" : "The pig rises up on his hind legs and flicks the muck on his belly at you. Disgusting!"
+		}
 	]
 ]

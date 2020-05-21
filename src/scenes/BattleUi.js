@@ -7,8 +7,8 @@ class BattleUi extends Phaser.Scene{
 
         // container to hold the menus
         this.menus = this.add.container();
-        this.actionsMenu = new ActionsMenu(this, 610, 800);
-        this.attacksMenu = new AttacksMenu(this, 8, 800);
+        this.actionsMenu = new ActionsMenu(this, 575, 725);
+        this.attacksMenu = new AttacksMenu(this, 8, 725);
 
         // select current menu
         this.currentMenu = this.actionsMenu;
@@ -21,7 +21,10 @@ class BattleUi extends Phaser.Scene{
         this.battleScene = this.scene.get('battleScene');
 
         // Grabs the attack arrays from BattleScene
-        this.attacks = this.battleScene.player.attacks;
+        this.attacks = [];
+        for(let i = 0; i < this.battleScene.player.attacks.length; i += 2){
+            this.attacks.push(this.battleScene.player.attacks[i]);
+        }
         //this.items = this.battleScene.player.items;
 
         // Event listener for keystrokes
@@ -36,6 +39,9 @@ class BattleUi extends Phaser.Scene{
         this.events.on('attack', this.attackEnemy, this);
 
         this.battleScene.nextTurn();
+
+        this.message = new Message(this, this.battleScene.events);
+        this.add.existing(this.message);
         
 
     }
@@ -80,16 +86,6 @@ class BattleUi extends Phaser.Scene{
     attackEnemy(){
         let index = this.attacksMenu.menuItemIndex;
         this.actionsMenu.deselect();
-        if(this.attacks[index] === 'Slap'){
-            this.battleScene.sound.add('slap').play();
-            console.log('With all five fingers, you slap the bear right across the face. It is sufficiently irritated.');
-        } else if (this.attacks[index] === 'Scream'){
-            this.battleScene.sound.add('scream').play();
-            console.log("\"REEEEEEEEEEEEE,\" says the zookeeper. The bear stares at you and blinks confusedly.");
-        } else{
-            this.battleScene.sound.add('swoosh').play();
-            console.log("Gracefully, you cartwheel directly into the animal, slamming it with your body.");
-        }
         this.attacksMenu.deselect();
         this.attacksMenu.clear();
 
