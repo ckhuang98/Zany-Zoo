@@ -5,6 +5,8 @@ class Battle extends Phaser.Scene{
 
     preload(){
         this.load.image('bear', './assets/images/bear.png');
+        this.load.image('pig', './assets/images/piggy.png');
+        this.load.image('monkey', './assets/images/monkey.png');
         this.load.image('player', './assets/images/sprite.png');
         this.load.image('background', './assets/images/minigameBackground.png');
 
@@ -30,7 +32,14 @@ class Battle extends Phaser.Scene{
         this.playerHp.setText("HP: " + this.player.hp);
 
         // Creates Animal
-        this.animal = new Bear(this, 125, 150, 'bear', 1, 'str');
+        this.animal = null;
+        if(DAY == 2 || DAY == 8){
+            this.animal = new Bear(this, 125, 150, 'bear', 1, 'str');
+        } else if(DAY == 4 || DAY == 10){
+            this.animal = new Bear(this, 125, 150, 'piggy', 1, 'str');
+        } else if(DAY == 6 || DAY == 12){
+            this.animal = new Bear(this, 125, 150, 'monkey', 1, 'str');
+        }
         this.add.existing(this.animal);
 
         // SAVE ME PHILIP!!!!!
