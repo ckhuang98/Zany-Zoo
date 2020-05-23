@@ -36,9 +36,9 @@ class Battle extends Phaser.Scene{
         if(DAY == 2 || DAY == 8){
             this.animal = new Bear(this, 125, 150, 'bear', 1, 'str');
         } else if(DAY == 4 || DAY == 10){
-            this.animal = new Bear(this, 125, 150, 'piggy', 1, 'str');
+            this.animal = new Pig(this, 125, 150, 'piggy', 1, 'wit');
         } else if(DAY == 6 || DAY == 12){
-            this.animal = new Bear(this, 125, 150, 'monkey', 1, 'str');
+            this.animal = new Monkey(this, 125, 150, 'monkey', 1, 'dex');
         }
         this.add.existing(this.animal);
 

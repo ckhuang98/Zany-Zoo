@@ -113,19 +113,19 @@ class Player extends Phaser.GameObjects.Sprite {
             this.attacks.push(20);
         }
         if(DEX >= 0 && DEX < 7){
-            this.attacks.push('Scream');
+            this.attacks.push('Cartwheel');
             this.attacks.push(4);
         } else if(DEX >= 7 && DEX < 11){
-            this.attacks.push('Intimidate');
+            this.attacks.push('Spin Attack');
             this.attacks.push(8);
         } else if(DEX >= 11 && DEX < 22){
-            this.attacks.push('Persuade');
+            this.attacks.push('Jump Kick');
             this.attacks.push(12);
         } else if(DEX >= 22 && WIT < 33){
-            this.attacks.push('Trap');
+            this.attacks.push('Maneuver');
             this.attacks.push(16)
         } else{
-            this.attacks.push('Trick');
+            this.attacks.push('Acrobatics');
             this.attacks.push(20);
         }
     }
