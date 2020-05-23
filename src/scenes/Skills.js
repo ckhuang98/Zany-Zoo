@@ -15,10 +15,10 @@ class Skills extends Phaser.Scene {
 
         //initialization
         this.points = 5;
-        this.endurance = 0;
-        this.strength = 0;
-        this.wit = 0;
-        this.dexterity = 0;
+        END = 0;
+        STR = 0;
+        WIT = 0;
+        DEX = 0;
 
         // interactable images
         this.plusEndurance = this.add.image(780, 320, 'plus');
@@ -32,26 +32,26 @@ class Skills extends Phaser.Scene {
         this.confirm = this.add.image(450, 825, 'confirm');
 
         //skill display
-        this.enduranceDisplay = this.add.text(690, 325, `${this.endurance}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
-        this.strengthDisplay = this.add.text(680, 430, `${this.strength}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
-        this.witDisplay = this.add.text(570, 535, `${this.wit}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
-        this.dexterityDisplay = this.add.text(715, 630, `${this.dexterity}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
+        this.enduranceDisplay = this.add.text(690, 325, `${END}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
+        this.strengthDisplay = this.add.text(680, 430, `${STR}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
+        this.witDisplay = this.add.text(570, 535, `${WIT}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
+        this.dexterityDisplay = this.add.text(715, 630, `${DEX}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
         this.pointsDisplay = this.add.text(735, 740, `${this.points}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
 
         //endurance display and iteraction
         this.plusEndurance.setInteractive().on('pointerdown',()=>{
             if(this.points > 0){
             this.points--;
-            this.endurance++;
-            this.enduranceDisplay.setText(`${this.endurance}`);
+            END++;
+            this.enduranceDisplay.setText(`${END}`);
             this.pointsDisplay.setText(`${this.points}`);    
             } 
         });
         this.minusEndurance.setInteractive().on('pointerdown',()=>{
             if(this.points < 5){
             this.points++;
-            this.endurance--;
-            this.enduranceDisplay.setText(`${this.endurance}`); 
+            END--;
+            this.enduranceDisplay.setText(`${END}`); 
             this.pointsDisplay.setText(`${this.points}`);    
             } 
         });
@@ -60,16 +60,16 @@ class Skills extends Phaser.Scene {
         this.plusStrength.setInteractive().on('pointerdown',()=>{
             if(this.points > 0){
             this.points--;
-            this.strength++;
-            this.strengthDisplay.setText(`${this.strength}`); 
+            STR++;
+            this.strengthDisplay.setText(`${STR}`); 
             this.pointsDisplay.setText(`${this.points}`);   
             } 
         });
         this.minusStrength.setInteractive().on('pointerdown',()=>{
             if(this.points < 5){
             this.points++;
-            this.strength--;
-            this.strengthDisplay.setText(`${this.strength}`); 
+            STR--;
+            this.strengthDisplay.setText(`${STR}`); 
             this.pointsDisplay.setText(`${this.points}`);    
             } 
         });
@@ -78,16 +78,16 @@ class Skills extends Phaser.Scene {
         this.plusWit.setInteractive().on('pointerdown',()=>{
             if(this.points > 0){
             this.points--;
-            this.wit++;
-            this.witDisplay.setText(`${this.wit}`); 
+            WIT++;
+            this.witDisplay.setText(`${WIT}`); 
             this.pointsDisplay.setText(`${this.points}`);   
             } 
         });
         this.minusWit.setInteractive().on('pointerdown',()=>{
             if(this.points < 5){
             this.points++;
-            this.wit--;
-            this.witDisplay.setText(`${this.wit}`); 
+            WIT--;
+            this.witDisplay.setText(`${WIT}`); 
             this.pointsDisplay.setText(`${this.points}`);   
             } 
         });
@@ -96,16 +96,16 @@ class Skills extends Phaser.Scene {
         this.plusDexterity.setInteractive().on('pointerdown',()=>{
             if(this.points > 0){
             this.points--;
-            this.dexterity++;
-            this.dexterityDisplay.setText(`${this.dexterity}`);
+            DEX++;
+            this.dexterityDisplay.setText(`${DEX}`);
             this.pointsDisplay.setText(`${this.points}`);   
             } 
         });
         this.minusDexterity.setInteractive().on('pointerdown',()=>{
             if(this.points < 5){
             this.points++;
-            this.dexterity--;
-            this.dexterityDisplay.setText(`${this.dexterity}`);
+            DEX--;
+            this.dexterityDisplay.setText(`${DEX}`);
             this.pointsDisplay.setText(`${this.points}`);   
             } 
         });
