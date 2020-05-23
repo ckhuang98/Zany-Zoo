@@ -5,6 +5,8 @@ class Battle extends Phaser.Scene{
 
     preload(){
         this.load.image('bear', './assets/images/bear.png');
+        this.load.image('pig', './assets/images/piggy.png');
+        this.load.image('monkey', './assets/images/monkey.png');
         this.load.image('player', './assets/images/sprite.png');
         this.load.image('background', './assets/images/minigameBackground.png');
 
@@ -12,7 +14,7 @@ class Battle extends Phaser.Scene{
         this.load.audio('bearRoar', './assets/sounds/bearRoar.mp3');
         this.load.audio('Slap', './assets/sounds/slap.mp3');
         this.load.audio('Scream', './assets/sounds/scream.mp3');
-        this.load.audio('Cartwheel', './assets/sounds/swoosh.mp3');
+        this.load.audio('Cartwheel', './assets/sounds/cartwheel.mp3');
     }
 
     create(){
@@ -30,7 +32,14 @@ class Battle extends Phaser.Scene{
         this.playerHp.setText("HP: " + this.player.hp);
 
         // Creates Animal
-        this.animal = new Bear(this, 125, 150, 'bear', 1, 'str');
+        this.animal = null;
+        if(DAY == 2 || DAY == 8){
+            this.animal = new Bear(this, 125, 150, 'bear', 1, 'str');
+        } else if(DAY == 4 || DAY == 10){
+            this.animal = new Pig(this, 125, 150, 'piggy', 1, 'wit');
+        } else if(DAY == 6 || DAY == 12){
+            this.animal = new Monkey(this, 125, 150, 'monkey', 1, 'dex');
+        }
         this.add.existing(this.animal);
 
         // SAVE ME PHILIP!!!!!
@@ -40,6 +49,9 @@ class Battle extends Phaser.Scene{
 
         // Keeps track of whose turn it is
         this.turnCounter = 0;
+        if(DAY % 7 == 0){
+            REWARD = 15;
+        }
 
 
         this.scene.launch('battleUiScene');
@@ -67,7 +79,8 @@ class Battle extends Phaser.Scene{
                     this.exitBattle();
                 }, 3500);
             } else{
-                this.events.emit("Message", "You won!");
+                this.events.emit("Message", "You won! You find yourself rewarded with " + REWARD + " dollars!");
+                MONEY += REWARD;
                 let timer = setTimeout(() =>{
                     this.exitBattle();
                 }, 3500);
