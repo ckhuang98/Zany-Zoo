@@ -31,6 +31,8 @@ class Player extends Phaser.GameObjects.Sprite {
 
     }
 
+    // Attacks target. Keeps track of damage for the rock paper sissor fighting system
+    // Index is used to navigate the attack arrays.
     attack(target, type, damage, index){
         let text = this.attackText[index + 1];
         if(target.type === type){
@@ -78,36 +80,54 @@ class Player extends Phaser.GameObjects.Sprite {
     }
 
     createAttacks(){
-        if(STR >= 0){
+        if(STR >= 0 && STR < 7){
             this.attacks.push('Slap');
             this.attacks.push(4);
+        } else if(STR >= 7 && STR < 11){
+            this.attacks.push('Smash');
+            this.attacks.push(8);
+        } else if(STR >= 11 && STR < 22){
+            this.attacks.push('Haymaker');
+            this.attacks.push(12);
+        } else if(STR >= 22 && STR < 33){
+            this.attacks.push('Toss');
+            this.attacks.push(16)
+        } else{
+            this.attacks.push('Rage');
+            this.attacks.push(20);
         }
-        if(WIT >= 0){
+        if(WIT >= 0 && WIT < 7){
             this.attacks.push('Scream');
             this.attacks.push(4);
+        } else if(WIT >= 7 && WIT < 11){
+            this.attacks.push('Intimidate');
+            this.attacks.push(8);
+        } else if(WIT >= 11 && WIT < 22){
+            this.attacks.push('Persuade');
+            this.attacks.push(12);
+        } else if(WIT >= 22 && WIT < 33){
+            this.attacks.push('Trap');
+            this.attacks.push(16)
+        } else{
+            this.attacks.push('Trick');
+            this.attacks.push(20);
         }
-        if(DEX >= 0){
-            this.attacks.push('Cartwheel');
+        if(DEX >= 0 && DEX < 7){
+            this.attacks.push('Scream');
             this.attacks.push(4);
+        } else if(DEX >= 7 && DEX < 11){
+            this.attacks.push('Intimidate');
+            this.attacks.push(8);
+        } else if(DEX >= 11 && DEX < 22){
+            this.attacks.push('Persuade');
+            this.attacks.push(12);
+        } else if(DEX >= 22 && WIT < 33){
+            this.attacks.push('Trap');
+            this.attacks.push(16)
+        } else{
+            this.attacks.push('Trick');
+            this.attacks.push(20);
         }
     }
 
-
-    levelUpEndurance(){
-        if(END < 20){
-            END++;
-        }
-    }
-
-    levelUpWit(){
-        if(this.wit < 20){
-            this.wit++;
-        }
-    }
-
-    levelUpDexterity(){
-        if(this.dexterity < 20){
-            this.dexterity++;
-        }
-    }
 }

@@ -13,7 +13,8 @@ let keyUP, keySPACE;
 
 // Main conditionals for choosing scenes
 let DAY = 1;
-let isNight = false;
+
+let MONEY = 0;
 
 let END = 0;
 let STR = 0;
