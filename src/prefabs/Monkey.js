@@ -6,7 +6,7 @@ class Monkey extends Animal{
 
     // attacks target and emits Message event
     attack(target){
-        this.scene.events.emit("Message", "\"Take this cretin!\", the pig shouts as he throws a clump of (hopefully) mud in your eyes.\n\nYou take " + this.damage + " damage.");
+        this.scene.events.emit("Message", "\"HIIIIIIIII-YA!\" the monkey screams at you, and smacks you with his tail.\n\nYou take " + this.damage + " damage.");
         target.takeDamage(this.damage);
     }
 }
