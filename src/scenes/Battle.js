@@ -40,6 +40,9 @@ class Battle extends Phaser.Scene{
 
         // Keeps track of whose turn it is
         this.turnCounter = 0;
+        if(DAY % 7 == 0){
+            REWARD = 15;
+        }
 
 
         this.scene.launch('battleUiScene');
@@ -67,7 +70,8 @@ class Battle extends Phaser.Scene{
                     this.exitBattle();
                 }, 3500);
             } else{
-                this.events.emit("Message", "You won!");
+                this.events.emit("Message", "You won! You find yourself rewarded with " + REWARD + " dollars!");
+                MONEY += REWARD;
                 let timer = setTimeout(() =>{
                     this.exitBattle();
                 }, 3500);

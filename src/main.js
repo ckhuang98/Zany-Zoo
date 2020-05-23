@@ -15,6 +15,7 @@ let keyUP, keySPACE;
 let DAY = 1;
 
 let MONEY = 0;
+let REWARD = 10;
 
 let END = 0;
 let STR = 0;
