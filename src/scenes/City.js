@@ -66,7 +66,7 @@ class City extends Phaser.Scene {
                 });
                 this.exit.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
                     if(this.energy == 0){
-                        if(DAY % 2 == 1){
+                        if(DAY % 2 == 1){ //checks if day is even or odd
                             DAY++;
                             this.scene.start("cityScene");
                         }else{
