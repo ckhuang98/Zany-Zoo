@@ -34,6 +34,7 @@ class City extends Phaser.Scene {
         this.hpMenu = this.add.text(837, 798, `${2 * (END - 1) + 14}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
 
         let inEvent = false;
+        let firstClick = true;
 
 
         //library event if clicked
@@ -113,10 +114,8 @@ class City extends Phaser.Scene {
                     if(this.energy == 0){
                         if(DAY % 2 == 1){
                             DAY++;
-                            console.log(DAY);
                             this.scene.start("cityScene");
                         }else{
-                            console.log(DAY);
                             this.scene.start("battleScene");
                         }
                     }else{
@@ -139,11 +138,10 @@ class City extends Phaser.Scene {
                 this.energyDisplay = this.add.text(450, 640, `${this.energy}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
                 this.enduranceDisplay = this.add.text(450, 350, `${END}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
                 this.strengthDisplay = this.add.text(450, 490, `${STR}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
-                let firstClick = true;
                 if(firstClick){
                     firstClick = false;
-                    this.intialStr = STR;
-                    this.intialEndur = END;
+                    this.initialStr = STR;
+                    this.initialEndur = END;
                 }
 
                 this.plusEndurance.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
@@ -155,9 +153,11 @@ class City extends Phaser.Scene {
                     }
                 });
                 this.minusEndurance.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
-                    if(this.energy < 3 && END > this.intialEndur){
+                    if(this.energy < 3 && END > this.initialEndur){
                         END--;
                         this.energy++;
+                        console.log(this.initialEndur);
+                        console.log(firstClick);
                         this.enduranceDisplay.setText(`${END}`);
                         this.energyDisplay.setText(`${this.energy}`);
                         }
@@ -172,9 +172,11 @@ class City extends Phaser.Scene {
                     }
                 });
                 this.minusStrength.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
-                    if(this.energy < 3 && STR > this.intialStr){
+                    if(this.energy < 3 && STR > this.initialStr){
                         STR--;
                         this.energy++;
+                        console.log(this.initialStr);
+                        console.log(firstClick);
                         this.strengthDisplay.setText(`${STR}`);
                         this.energyDisplay.setText(`${this.energy}`);
                         }
@@ -184,12 +186,13 @@ class City extends Phaser.Scene {
                     if(this.energy == 0){
                         if(DAY % 2 == 1){
                             DAY++;
-                            firstClick = true;
                             console.log(DAY);
+                            firstClick = true;
                             this.scene.start("cityScene");
                         }else{
-                            firstClick = true;
+                            DAY++;
                             console.log(DAY);
+                            firstClick = true;
                             this.scene.start("battleScene");
                         }
                     }else{
