@@ -4,6 +4,11 @@ class AttacksMenu extends BattleMenu{
     }
 
     confirm(){
-        this.scene.events.emit('attack');
+        if(this.scene.selectedItems == false){
+            this.scene.events.emit('attack');
+        } else{
+            this.scene.events.emit('item');
+        }
+        
     }
 }

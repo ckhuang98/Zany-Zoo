@@ -25,9 +25,11 @@ class Battle extends Phaser.Scene{
         this.player = new Player(this, 750, 500, 'player', 1);
         this.add.existing(this.player);
         this.player.createAttacks();
+        this.player.createItems();
+        console.log(this.player.items);
         this.player.flipX = true;
 
-        // HELP PHILIP!
+        // Displays player health
         this.playerHp = this.add.text(760, 330, "", { color: '#ffffff', align: 'left', fontSize: 25}).setOrigin(0.5);
         this.playerHp.setText("HP: " + this.player.hp);
 
@@ -42,7 +44,7 @@ class Battle extends Phaser.Scene{
         }
         this.add.existing(this.animal);
 
-        // SAVE ME PHILIP!!!!!
+        // Displays animal health
         this.animalHp = this.add.text(125, 300, "", { color: '#ffffff', align: 'left', fontSize: 25}).setOrigin(0.5);
         this.animalHp.setText("HP: " + this.animal.hp);
 
@@ -128,7 +130,17 @@ class Battle extends Phaser.Scene{
             }
             this.animalHp.setText("HP: " + this.animal.hp);
             this.time.addEvent({ delay: 3500, callback: this.nextTurn, callbackScope: this });
-        
+        } else if(action == 'item'){
+            if(this.player.items[index] == 'Potion'){
+                this.events.emit("Message", "SLURRRP. You drink greedily from the potion you just pulled out of your pocket.");
+                this.player.hp += 20;
+                if(this.player.hp > (2 * (END - 1) + 14)){
+                    this.player.hp = 2 * (END - 1) + 14;
+                }
+                this.playerHp.setText("HP: " + this.player.hp);
+                this.player.items.splice(index, 1);
+            }
+            this.time.addEvent({ delay: 3500, callback: this.nextTurn, callbackScope: this });
         }
     }
 

@@ -17,6 +17,9 @@ let DAY = 1;
 let MONEY = 0;
 let REWARD = 10;
 
+// Hard coded value for testing item loop
+let BOUGHTPOTION = true;
+
 let END = 0;
 let STR = 0;
 let WIT = 0;

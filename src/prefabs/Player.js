@@ -5,7 +5,7 @@ class Player extends Phaser.GameObjects.Sprite {
         // Health
         this.hp = 2 * (END - 1) + 14;
         this.attacks = [];
-        this.items = ['Cane'];
+        this.items = [];
         this.isLiving = true;
         this.attackText = [
             'Slap', 'With all five fingers, you slap the animal right across the face.\n\n',
@@ -74,8 +74,6 @@ class Player extends Phaser.GameObjects.Sprite {
         if(this.hp <= 0) {
             this.hp = 0;
             this.isLiving = false;
-            this.visible = false;   
-            this.menuItem = null;
             DAY++;
         }
     }
@@ -129,6 +127,11 @@ class Player extends Phaser.GameObjects.Sprite {
             this.attacks.push('Acrobatics');
             this.attacks.push(20);
         }
+    }
+
+    createItems(){
+        if(BOUGHTPOTION)
+            this.items.push('Potion');
     }
 
 }

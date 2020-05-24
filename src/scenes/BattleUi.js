@@ -25,7 +25,10 @@ class BattleUi extends Phaser.Scene{
         for(let i = 0; i < this.battleScene.player.attacks.length; i += 2){
             this.attacks.push(this.battleScene.player.attacks[i]);
         }
-        //this.items = this.battleScene.player.items;
+        this.items = this.battleScene.player.items;
+
+        // Flag for attacksMenu to determine whether to emit attack or item
+        this.selectedItems = false;
 
         // Event listener for keystrokes
         this.input.keyboard.on('keydown', this.onKeyInput, this);
@@ -36,13 +39,19 @@ class BattleUi extends Phaser.Scene{
         // Listerner for actionsMenu Confirm()
         this.events.on('SelectAttacks', this.showAttacks, this);
 
+        this.events.on('SelectItems', this.showItems, this);
+
         this.events.on('attack', this.attackEnemy, this);
+
+        this.events.on('item', this.useItem, this);
 
         this.battleScene.nextTurn();
 
         this.message = new Message(this, this.battleScene.events);
         this.add.existing(this.message);
         
+        this.message2 = new Message(this, this.events);
+        this.add.existing(this.message2);
 
     }
 
@@ -70,14 +79,9 @@ class BattleUi extends Phaser.Scene{
     }
 
     // Function that calls when Player selects a type of attack they want to use.
-    showAttacks(menuItemIndex){
-        
-        // Depending on player selection, remaps attack menu to display the correct options
-        if(menuItemIndex == 0){
-            this.attacksMenu.remap(this.attacks);
-        } else{
-            this.attacksMenu.remap(this.items);
-        }
+    showAttacks(){
+        this.selectedItems = false;
+        this.attacksMenu.remap(this.attacks);
 
         this.currentMenu = this.attacksMenu;
         this.attacksMenu.select();
@@ -91,6 +95,32 @@ class BattleUi extends Phaser.Scene{
 
         this.currentMenu = null;
         this.battleScene.receivePlayerSelection('attack', index);
+    }
+
+    showItems(){
+        this.selectedItems = true;
+        if(BOUGHTPOTION == false || this.items.length < 1){
+            this.events.emit("Message", "You do not have any items to use...");
+            let timer = setTimeout(() =>{
+                this.currentMenu = this.actionsMenu;
+                this.actionsMenu.select();
+            }, 3500);
+            return;
+        }
+            console.log(this.items);
+            this.attacksMenu.remap(this.items);
+            this.currentMenu = this.itemsMenu;
+            this.attacksMenu.select();
+    }
+
+    useItem(){
+        let index = this.itemsMenu.menuItemIndex;
+        this.actionsMenu.deselect();
+        this.attacksMenu.deselect();
+        this.attacksMenu.clear();
+
+        this.currentMenu = null;
+        this.battleScene.receivePlayerSelection('item', index);
     }
 
 
