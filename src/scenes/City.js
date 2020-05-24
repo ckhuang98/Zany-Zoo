@@ -68,8 +68,10 @@ class City extends Phaser.Scene {
                     if(this.energy == 0){
                         if(DAY % 2 == 1){ //checks if day is even or odd
                             DAY++;
+                            console.log(DAY);
                             this.scene.start("cityScene");
                         }else{
+                            console.log(DAY);
                             this.scene.start("battleScene");
                         }
                     }else{
@@ -111,8 +113,10 @@ class City extends Phaser.Scene {
                     if(this.energy == 0){
                         if(DAY % 2 == 1){
                             DAY++;
+                            console.log(DAY);
                             this.scene.start("cityScene");
                         }else{
+                            console.log(DAY);
                             this.scene.start("battleScene");
                         }
                     }else{
@@ -181,9 +185,11 @@ class City extends Phaser.Scene {
                         if(DAY % 2 == 1){
                             DAY++;
                             firstClick = true;
+                            console.log(DAY);
                             this.scene.start("cityScene");
                         }else{
                             firstClick = true;
+                            console.log(DAY);
                             this.scene.start("battleScene");
                         }
                     }else{

@@ -7,7 +7,7 @@
 		},
 		{
 			"speaker" : "narrator",
-            "dialog" : "Victory! You've done it! You've beaten a captivated animal with no real sense of self or instincts in battle! Excellent job!",
+            "dialog" : "Victory! You've done it! You've beaten a captivated animal with no real sense of self or instincts in battle! Excellent job!"
 		},
 		{
 			"speaker" : "narrator",
@@ -16,7 +16,7 @@
 	],
 	[
 		{	
-			"speaker" : "bear",
+			"speaker" : "narrator",
 			"dialog" : "The bear swipes at you with his fluffiest paw."
 		},
         {
@@ -40,6 +40,20 @@
 		{
 			"speaker" : "pig",
 			"dialog" : "The pig rises up on his hind legs and flicks the muck on his belly at you. Disgusting!"
+		}
+	],
+	[
+		{
+			"speaker" : "monkey",
+			"dialog" : "\"HIIIIIIIII-YA!\" the monkey screams at you, and smacks you with his tail."
+		},
+		{
+			"speaker" : "monkey",
+			"dialog" : "You hear a \"whoosh\"as the monkey reaches behind himself and tosses some poop at you."
+		},
+		{
+			"speaker" : "monkey",
+			"dialog" : "The monkey crawls all over you and holds your hands behind your back, humiliating you."
 		}
 	]
 ]
