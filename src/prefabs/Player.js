@@ -76,6 +76,7 @@ class Player extends Phaser.GameObjects.Sprite {
             this.isLiving = false;
             this.visible = false;   
             this.menuItem = null;
+            DAY++;
         }
     }
 

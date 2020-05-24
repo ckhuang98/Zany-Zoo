@@ -32,7 +32,7 @@ class City extends Phaser.Scene {
         this.dexMenu = this.add.text(785, 857, `${DEX}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
         this.dayMenu = this.add.text(267, 800, `${15 - DAY}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
         this.hpMenu = this.add.text(837, 798, `${2 * (END - 1) + 14}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
-
+        console.log(DAY);
         let inEvent = false;
         let firstClick = true;
 
@@ -138,6 +138,8 @@ class City extends Phaser.Scene {
                 this.energyDisplay = this.add.text(450, 640, `${this.energy}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
                 this.enduranceDisplay = this.add.text(450, 350, `${END}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
                 this.strengthDisplay = this.add.text(450, 490, `${STR}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
+
+                this.test = "";
                 if(firstClick){
                     firstClick = false;
                     this.initialStr = STR;
@@ -190,8 +192,6 @@ class City extends Phaser.Scene {
                             firstClick = true;
                             this.scene.start("cityScene");
                         }else{
-                            DAY++;
-                            console.log(DAY);
                             firstClick = true;
                             this.scene.start("battleScene");
                         }

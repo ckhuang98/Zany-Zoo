@@ -14,6 +14,7 @@ class Animal extends Phaser.GameObjects.Sprite{
         if(this.hp <= 0) {
             this.hp = 0;
             this.isLiving = false;
+            DAY++;
         }
     }
 }
