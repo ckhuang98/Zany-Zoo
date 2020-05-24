@@ -50,6 +50,8 @@ class BattleUi extends Phaser.Scene{
         this.message = new Message(this, this.battleScene.events);
         this.add.existing(this.message);
         
+
+        // Event listner for item messages in the ui scene.
         this.message2 = new Message(this, this.events);
         this.add.existing(this.message2);
 
@@ -97,8 +99,11 @@ class BattleUi extends Phaser.Scene{
         this.battleScene.receivePlayerSelection('attack', index);
     }
 
+    // Displays the items player has
     showItems(){
-        this.selectedItems = true;
+        this.selectedItems = true;          // Set items flag to true
+
+        // If player has no item, display message and return player to action menu
         if(BOUGHTPOTION == false || this.items.length < 1){
             this.events.emit("Message", "You do not have any items to use...");
             let timer = setTimeout(() =>{
@@ -107,10 +112,10 @@ class BattleUi extends Phaser.Scene{
             }, 3500);
             return;
         }
-            console.log(this.items);
-            this.attacksMenu.remap(this.items);
-            this.currentMenu = this.itemsMenu;
-            this.attacksMenu.select();
+
+        this.attacksMenu.remap(this.items);
+        this.currentMenu = this.itemsMenu;
+        this.attacksMenu.select();
     }
 
     useItem(){
