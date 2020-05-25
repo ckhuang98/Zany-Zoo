@@ -45,6 +45,8 @@ class BattleUi extends Phaser.Scene{
 
         this.events.on('item', this.useItem, this);
 
+        this.sys.events.once('shutdown', this.shutdown, this);
+
         this.battleScene.nextTurn();
 
         this.message = new Message(this, this.battleScene.events);
@@ -126,6 +128,26 @@ class BattleUi extends Phaser.Scene{
 
         this.currentMenu = null;
         this.battleScene.receivePlayerSelection('item', index);
+    }
+
+
+    shutdown(){
+        console.log('ui scene shutdown');
+        this.input.keyboard.off('keydown');
+
+        // Event listener for player's turn
+        this.battleScene.events.off('PlayerTurn');
+
+        // Listerner for actionsMenu Confirm()
+        this.events.off('SelectAttacks');
+
+        this.events.off('SelectItems';
+
+        this.events.off('attack');
+
+        this.events.off('item');
+        this.message.destroy();
+        this.message2.destroy();
     }
 
 

@@ -29,7 +29,7 @@ class Battle extends Phaser.Scene{
         console.log(this.player.items);
         this.player.flipX = true;
 
-        // Displays player health
+        // Displays player
         this.playerHp = this.add.text(760, 330, "", { color: '#ffffff', align: 'left', fontSize: 25}).setOrigin(0.5);
         this.playerHp.setText("HP: " + this.player.hp);
 
@@ -167,7 +167,7 @@ class Battle extends Phaser.Scene{
     
 
     exitBattle(){
-        this.scene.stop('battleUiScene');
+        this.scene.destroy('battleUiScene');
         this.scene.start('cityScene');
     }
 }
