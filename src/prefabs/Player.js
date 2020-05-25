@@ -65,7 +65,6 @@ class Player extends Phaser.GameObjects.Sprite {
             }
         }
         target.takeDamage(damage);
-
         this.scene.events.emit("Message", text);
     }
 

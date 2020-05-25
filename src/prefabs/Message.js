@@ -14,7 +14,7 @@ class Message extends Phaser.GameObjects.Container{
 
     // Display the text that is passed through the event listner
     showMessage(text) {
-        console.log('call message');
+        console.log(text);
         this.text.setText(text);
         this.visible = true;
         if(this.hideEvent)
