@@ -8,6 +8,8 @@ class Menu extends Phaser.Scene {
         this.load.image('instructions', './assets/images/Instructions.png');
 
         this.load.audio('bgm', './assets/sound/hipjazz.mp3'); // place holder bgm until I have time to make one.
+        this.load.bitmapFont('gem_font', './assets/font/gem.png', './assets/font/gem.xml');
+        this.load.json('dialog', './assets/json/dialog.json');
     }
 
     create(){
@@ -26,7 +28,7 @@ class Menu extends Phaser.Scene {
         }
         if (Phaser.Input.Keyboard.JustDown(keySPACE)){
             if(!this.instructionPressed){
-                this.scene.start("skillsScene");
+                this.scene.start("talkingScene");
                 this.bgm.stop();
             }else{
             this.instructions.destroy();
