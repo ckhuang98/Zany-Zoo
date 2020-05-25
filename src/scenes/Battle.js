@@ -48,6 +48,7 @@ class Battle extends Phaser.Scene{
         this.animalHp = this.add.text(125, 300, "", { color: '#ffffff', align: 'left', fontSize: 25}).setOrigin(0.5);
         this.animalHp.setText("HP: " + this.animal.hp);
 
+        
 
         // Keeps track of whose turn it is
         this.turnCounter = 0;
@@ -55,8 +56,53 @@ class Battle extends Phaser.Scene{
             REWARD = 15;
         }
 
+        
+        // container to hold the menus
+        this.menus = this.add.container();
+        this.actionsMenu = new ActionsMenu(this, 575, 725);
+        this.attacksMenu = new AttacksMenu(this, 8, 725);
 
-        this.scene.launch('battleUiScene');
+        // select current menu
+        this.currentMenu = this.actionsMenu;
+
+        // add menu to container
+        this.menus.add(this.actionsMenu);
+        this.menus.add(this.attacksMenu);
+
+        // Grabs the attack arrays from BattleScene
+        this.attacks = [];
+        for(let i = 0; i < this.player.attacks.length; i += 2){
+            this.attacks.push(this.player.attacks[i]);
+        }
+        this.items = this.player.items;
+
+        // Flag for attacksMenu to determine whether to emit attack or item
+        this.selectedItems = false;
+
+        // Event listener for keystrokes
+        this.input.keyboard.on('keydown', this.onKeyInput, this);
+
+        // Event listener for player's turn
+        this.events.on('PlayerTurn', this.onPlayerTurn, this);
+
+        // Listerner for actionsMenu Confirm()
+        this.events.on('SelectAttacks', this.showAttacks, this);
+
+        this.events.on('SelectItems', this.showItems, this);
+
+        this.events.on('attack', this.attackEnemy, this);
+
+        this.events.on('item', this.useItem, this);
+
+        this.sys.events.once('shutdown', this.shutdown, this);
+
+        this.message = new Message(this, this.events);
+                this.add.existing(this.message);
+
+        this.nextTurn();
+
+        
+        
 
         
     }
@@ -64,7 +110,6 @@ class Battle extends Phaser.Scene{
     // Moves the battle along
     nextTurn(){
         this.turnCounter++;
-
         if(this.animal.isLiving && this.player.isLiving){
             if(this.turnCounter % 2 != 0){
                 this.events.emit('PlayerTurn');
@@ -89,6 +134,97 @@ class Battle extends Phaser.Scene{
             }
         }
     }
+
+    // Function that calls on keystrokes
+    onKeyInput(event){
+        if(this.currentMenu){
+            if(event.code == "ArrowUp"){
+                this.sound.add('click').play();
+                this.currentMenu.moveSelectionUp();
+            } else if(event.code === "ArrowDown") {
+                this.sound.add('click').play();
+                this.currentMenu.moveSelectionDown();
+            } else if(event.code === "ArrowRight" || event.code === "Shift") {
+ 
+            } else if(event.code === "Space" || event.code === "ArrowLeft") {
+                this.currentMenu.confirm();
+            }
+        }   
+    }
+
+    // Function that calls on Player's turn.
+    onPlayerTurn(){
+        this.currentMenu = this.actionsMenu;
+        this.actionsMenu.select();
+    }
+
+    // Function that calls when Player selects a type of attack they want to use.
+    showAttacks(){
+        this.selectedItems = false;
+        this.attacksMenu.remap(this.attacks);
+
+        this.currentMenu = this.attacksMenu;
+        this.attacksMenu.select();
+    }
+
+    attackEnemy(){
+        let index = this.attacksMenu.menuItemIndex;
+        this.actionsMenu.deselect();
+        this.attacksMenu.deselect();
+        this.attacksMenu.clear();
+
+        this.currentMenu = null;
+        this.receivePlayerSelection('attack', index);
+    }
+
+    // Displays the items player has
+    showItems(){
+        this.selectedItems = true;          // Set items flag to true
+
+        // If player has no item, display message and return player to action menu
+        if(BOUGHTPOTION == false || this.items.length < 1){
+            this.events.emit("Message", "You do not have any items to use...");
+            let timer = setTimeout(() =>{
+                this.currentMenu = this.actionsMenu;
+                this.actionsMenu.select();
+            }, 3500);
+            return;
+        }
+
+        this.attacksMenu.remap(this.items);
+        this.currentMenu = this.itemsMenu;
+        this.attacksMenu.select();
+    }
+
+    useItem(){
+        let index = this.itemsMenu.menuItemIndex;
+        this.actionsMenu.deselect();
+        this.attacksMenu.deselect();
+        this.attacksMenu.clear();
+
+        this.currentMenu = null;
+        this.receivePlayerSelection('item', index);
+    }
+
+
+    shutdown(){
+        console.log('ui shutdown');
+        this.input.keyboard.off('keydown');
+
+        // Event listener for player's turn
+        this.events.off('PlayerTurn');
+
+        // Listerner for actionsMenu Confirm()
+        this.events.off('SelectAttacks');
+
+        this.events.off('SelectItems');
+
+        this.events.off('attack');
+
+        this.events.off('item');
+        this.message.destroy();
+    }
+
 
     // recieves player selection and calls nextTurn()
     receivePlayerSelection(action, index){
@@ -158,16 +294,9 @@ class Battle extends Phaser.Scene{
         return victory || loseBattle;
     }
     */
-
-    
-    keyPressListener(event){
-        if(event.code === "Space")
-            this.scene.switch('menuScene');
-    }
     
 
     exitBattle(){
-        this.scene.destroy('battleUiScene');
         this.scene.start('cityScene');
     }
 }
