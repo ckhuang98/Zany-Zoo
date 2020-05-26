@@ -96,14 +96,15 @@ class Battle extends Phaser.Scene{
 
         this.sys.events.once('shutdown', this.shutdown, this);
 
-        this.message = new Message(this, this.events);
-                this.add.existing(this.message);
+        // Displays Combat Text
+        this.combatText = new Phaser.GameObjects.Text(
+            this, 250, 795, "", { color: '#ffffff', align: 'left', fontSize: 25, wordWrap: { width: 500, basicWordWrap: true }}
+        ).setOrigin(0.5);
+        this.add.existing(this.combatText);
+
+        this.events.on("Message", this.showMessage, this);
 
         this.nextTurn();
-
-        
-        
-
         
     }
 
@@ -222,7 +223,7 @@ class Battle extends Phaser.Scene{
         this.events.off('attack');
 
         this.events.off('item');
-        this.message.destroy();
+        this.combatText.destroy();
     }
 
 
@@ -280,21 +281,23 @@ class Battle extends Phaser.Scene{
         }
     }
 
-    /*
-    // Checks if battle is over by checking animal and player is living or not
-    checkEndBattle(){
-        let victory = true;
-        if(this.animal.living == true){
-            victory = false;
-        }
-        let loseBattle = false;
-        if(this.player.living == false){
-            loseBattle = true;
-        }
-        return victory || loseBattle;
+    showMessage(text) {
+        console.log(text);
+        this.combatText.setText(text);
+        this.visible = true;
+        if(this.hideEvent)
+            this.hideEvent.remove(false);
+
+        // Displays text for 3.5 seconds and then hides it.
+        this.hideEvent = this.time.addEvent({ delay: 3500, callback: this.hideMessage, callbackScope: this });
     }
-    */
-    
+
+    // Hides displayed text
+    hideMessage() {
+        this.hideEvent = null;
+        this.visible = false;
+    }
+
 
     exitBattle(){
         this.scene.start('cityScene');
