@@ -284,7 +284,7 @@ class Battle extends Phaser.Scene{
     showMessage(text) {
         console.log(text);
         this.combatText.setText(text);
-        this.visible = true;
+        this.combatText.visible = true;
         if(this.hideEvent)
             this.hideEvent.remove(false);
 
@@ -295,7 +295,7 @@ class Battle extends Phaser.Scene{
     // Hides displayed text
     hideMessage() {
         this.hideEvent = null;
-        this.visible = false;
+        this.combatText.visible = false;
     }
 
 
