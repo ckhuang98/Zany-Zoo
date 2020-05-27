@@ -18,7 +18,7 @@ class Player extends Phaser.GameObjects.Sprite {
             'Persuade', "You have a long chat with the animal and convince it that it to do what you want.\n\n",
             'Jump Kick', "You jump! And then. . . you kick! You're so nimble, you don't even know what to do with yourself.\n\n",
             'Toss', "You pick up the animal and toss it aside. You feel pretty good about yourself after.\n\n",
-            'Trap', "You trick the creature into sticking it's hand into a pot of honey. It's bamboozled.\n\n",
+            'Trap', "You lure the creature into a delicious cheese trap. It's bamboozled.\n\n",
             'Maneuver', "You jab and dodge your way around the animal so quickly that it can hardly keep track of you.\n\n",
             'Rage', "You go full on beast mode on this god dang critter. You go stupid. You go crazy.\n\n",
             'Trick', "With the ancient art of manipulation, you're able to distract the animal and successfully confuse it.\n\n",
