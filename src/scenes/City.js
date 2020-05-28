@@ -183,8 +183,6 @@ class City extends Phaser.Scene {
                     if(this.energy < maxEnergy && END > this.initialEndur){
                         END--;
                         this.energy++;
-                        console.log(this.initialEndur);
-                        console.log(firstClick);
                         this.enduranceDisplay.setText(`${END}`);
                         this.energyDisplay.setText(`${this.energy}`);
                         }
@@ -203,8 +201,6 @@ class City extends Phaser.Scene {
                     if(this.energy < maxEnergy && STR > this.initialStr){
                         STR--;
                         this.energy++;
-                        console.log(this.initialStr);
-                        console.log(firstClick);
                         this.strengthDisplay.setText(`${STR}`);
                         this.energyDisplay.setText(`${this.energy}`);
                         }
@@ -436,10 +432,8 @@ class City extends Phaser.Scene {
         //sets scene based on day if odd it was players day off if even player goes to work
         if(DAY % 2 == 1){
             DAY++;
-            firstClick = true;
             this.scene.start("cityScene");
         }else{
-            firstClick = true;
             this.scene.start("battleScene");
         }
     }
