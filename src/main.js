@@ -19,6 +19,8 @@ let REWARD = 10;
 
 // Hard coded value for testing item loop
 let BOUGHTPOTION = true;
+let REDPOTION = 0;
+let BLUEPOTION = 0;
 
 let END = 0;
 let STR = 0;

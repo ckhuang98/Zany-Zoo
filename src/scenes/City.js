@@ -5,6 +5,7 @@ class City extends Phaser.Scene {
 
     preload(){
         this.load.path = "./assets/images/";
+        //all interactable select images and building images
         this.load.image('cityBackground', 'CityBackground.png');
         this.load.image('library', 'library.png');
         this.load.image('selectLibrary', 'selectLibrary.png');
@@ -12,19 +13,41 @@ class City extends Phaser.Scene {
         this.load.image('selectGym', 'selectGym.png');
         this.load.image('apartment', 'apartment.png');
         this.load.image('selectApartment', 'selectApartment.png');
+        this.load.image('store', 'store.png');
+        this.load.image('selectStore', 'selectStore.png');
+
+        //all menus that can be created
+        this.load.image('gymMenu', 'gymMenu.png');
         this.load.image('apartmentMenu', 'apartmentMenu.png');
         this.load.image('libraryMenu', 'libraryMenu.png');
-        this.load.image('gymMenu', 'gymMenu.png');
+        this.load.image('storeMenu', 'storeMenu.png');
+
+        //all buttons and displayable images
         this.load.image('exit', 'exit.png');
+        this.load.image('exitSmall', 'exitSmall.png');
+        this.load.image('buy', 'buy.png');
+        this.load.image('shoe', 'shoe.png');
+        this.load.image('protein', 'protein.png');
+        this.load.image('book', 'book.png');
+        this.load.image('controller', 'controller.png');
+        this.load.image('redPotion', 'redPotion.png');
+        this.load.image('bluePotion', 'bluePotion.png');
+        this.load.image('n/a', 'nothing.png');
     }
 
     create(){
+        //main city menu display
         this.background = this.add.tileSprite(0, 0, 900, 900, 'cityBackground').setOrigin(0, 0);
         this.library = this.add.image(450, 455, 'library');
-        this.gym = this.add.image(720, 470, 'gym');
+        this.store = this.add.image(755, 331, 'store');
+        this.gym = this.add.image(720, 472, 'gym');
         this.apartment = this.add.image(185, 270, 'apartment');
-        this.energy = 3;
 
+        //to keep track of energy used throughout day
+        this.energy = 2;
+        this.maxEnergy = 2;//to adjust and balance game a variable is used for convinance
+
+        //keeps track of all player stats
         this.energyMenu = this.add.text(243, 740, `${this.energy}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
         this.endMenu = this.add.text(592, 800, `${END}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
         this.strMenu = this.add.text(293, 856, `${STR}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
@@ -32,16 +55,18 @@ class City extends Phaser.Scene {
         this.dexMenu = this.add.text(785, 857, `${DEX}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
         this.dayMenu = this.add.text(267, 800, `${15 - DAY}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
         this.hpMenu = this.add.text(837, 798, `${2 * (END - 1) + 14}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
-        console.log(DAY);
-        let inEvent = false;
-        let firstClick = true;
+        this.moneyMenu = this.add.text(840, 738, `${MONEY}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
+
+        let inEvent = false;//keeps track of menu's being used to lock other menu's
+        let firstClick = true;//used for the gym to keep track of intial stats to prevent unlimited level up bug
 
 
         //library event if clicked
         this.library.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
             if(!inEvent){
                 inEvent = true;
-                //this.scene.start("battleScene");
+
+                //interactive display
                 this.menu = this.add.image(450, 450, 'libraryMenu');
                 this.plus = this.add.image(500, 430, 'plus').setOrigin(0, 0);
                 this.minus = this.add.image(325, 430, 'minus').setOrigin(0, 0);
@@ -49,6 +74,7 @@ class City extends Phaser.Scene {
                 this.energyDisplay = this.add.text(450, 645, `${this.energy}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
                 this.skillDisplay = this.add.text(450, 465, `${WIT}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
 
+                //add or subtract skill
                 this.plus.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
                     if(this.energy > 0){
                         WIT++;
@@ -58,26 +84,21 @@ class City extends Phaser.Scene {
                     }
                 });
                 this.minus.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
-                    if(this.energy < 3){
+                    if(this.energy < maxEnergy){
                         WIT--;
                         this.energy++;
                         this.skillDisplay.setText(`${WIT}`);
                         this.energyDisplay.setText(`${this.energy}`);
                         }
                 });
+
+                //exit menu
                 this.exit.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
                     if(this.energy == 0){
-                        if(DAY % 2 == 1){ //checks if day is even or odd
-                            DAY++;
-                            console.log(DAY);
-                            this.scene.start("cityScene");
-                        }else{
-                            console.log(DAY);
-                            this.scene.start("battleScene");
-                        }
+                        this.startNewScene();
                     }else{
-                    this.clearEvent();
-                    inEvent=false;
+                        this.clearEvent();
+                        inEvent=false;
                     }
                 });
             }
@@ -88,12 +109,16 @@ class City extends Phaser.Scene {
         this.apartment.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
             if(!inEvent){
                 inEvent = true;
+
+                //interactive display
                 this.menu = this.add.image(450, 450, 'apartmentMenu');
                 this.plus = this.add.image(500, 430, 'plus').setOrigin(0, 0);
                 this.minus = this.add.image(325, 430, 'minus').setOrigin(0, 0);
                 this.exit = this.add.image(450, 750, 'exit');
                 this.energyDisplay = this.add.text(450, 640, `${this.energy}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
                 this.skillDisplay = this.add.text(450, 465, `${DEX}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
+
+                //add or subtract skill
                 this.plus.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
                     if(this.energy > 0){
                         DEX++;
@@ -103,24 +128,21 @@ class City extends Phaser.Scene {
                     }
                 });
                 this.minus.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
-                    if(this.energy < 3){
+                    if(this.energy < maxEnergy){
                         DEX--;
                         this.energy++;
                         this.skillDisplay.setText(`${DEX}`);
                         this.energyDisplay.setText(`${this.energy}`);
                         }
                 });
+
+                //exit menu
                 this.exit.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
                     if(this.energy == 0){
-                        if(DAY % 2 == 1){
-                            DAY++;
-                            this.scene.start("cityScene");
-                        }else{
-                            this.scene.start("battleScene");
-                        }
+                        this.startNewScene();
                     }else{
-                    this.clearEvent();
-                    inEvent=false;
+                        this.clearEvent();
+                        inEvent=false;
                     }
                 });
             }
@@ -129,6 +151,8 @@ class City extends Phaser.Scene {
         this.gym.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
             if(!inEvent){
                 inEvent = true;
+
+                //interactive display
                 this.menu = this.add.image(450, 450, 'gymMenu');
                 this.plusEndurance = this.add.image(495, 310, 'plus').setOrigin(0, 0);
                 this.plusStrength = this.add.image(495, 450, 'plus').setOrigin(0, 0);
@@ -139,13 +163,14 @@ class City extends Phaser.Scene {
                 this.enduranceDisplay = this.add.text(450, 350, `${END}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
                 this.strengthDisplay = this.add.text(450, 490, `${STR}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
 
-                this.test = "";
+                //prevent unlimited level up bug
                 if(firstClick){
                     firstClick = false;
                     this.initialStr = STR;
                     this.initialEndur = END;
                 }
 
+                //add or subtract skill
                 this.plusEndurance.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
                     if(this.energy > 0){
                         END++;
@@ -155,7 +180,7 @@ class City extends Phaser.Scene {
                     }
                 });
                 this.minusEndurance.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
-                    if(this.energy < 3 && END > this.initialEndur){
+                    if(this.energy < maxEnergy && END > this.initialEndur){
                         END--;
                         this.energy++;
                         console.log(this.initialEndur);
@@ -164,7 +189,8 @@ class City extends Phaser.Scene {
                         this.energyDisplay.setText(`${this.energy}`);
                         }
                 });
-
+                
+                //add or subtract skill
                 this.plusStrength.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
                     if(this.energy > 0){
                         STR++;
@@ -174,7 +200,7 @@ class City extends Phaser.Scene {
                     }
                 });
                 this.minusStrength.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
-                    if(this.energy < 3 && STR > this.initialStr){
+                    if(this.energy < maxEnergy && STR > this.initialStr){
                         STR--;
                         this.energy++;
                         console.log(this.initialStr);
@@ -184,51 +210,218 @@ class City extends Phaser.Scene {
                         }
                 });
 
+                //exit menu
                 this.exit.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
                     if(this.energy == 0){
-                        if(DAY % 2 == 1){
-                            DAY++;
-                            console.log(DAY);
-                            firstClick = true;
-                            this.scene.start("cityScene");
-                        }else{
-                            firstClick = true;
-                            this.scene.start("battleScene");
-                        }
+                        this.startNewScene();
                     }else{
-                    this.clearEventSpecial();
-                    inEvent=false;
+                        this.clearEventSpecial();
+                        inEvent=false;
                     }
                 });
             }
         });
     
-        this.library.setInteractive().on('pointerover',()=>{
+        this.store.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
             if(!inEvent){
-            this.library.setTexture('selectLibrary');
-            }
-        });
-        this.gym.setInteractive().on('pointerover',()=>{
-            if(!inEvent){
-            this.gym.setTexture('selectGym');
-            }
-        });
-        this.apartment.setInteractive().on('pointerover',()=>{
-            if(!inEvent){
-            this.apartment.setTexture('selectApartment');
+                inEvent = true;
+
+                //interactive display
+                this.menu = this.add.image(450, 450, 'storeMenu');
+                this.shoe = this.add.image(170, 430, 'shoe').setOrigin(0,0);
+                this.protein = this.add.image(340, 425, 'protein').setOrigin(0,0);
+                this.book = this.add.image(510, 430, 'book').setOrigin(0,0);
+                this.controller = this.add.image(690, 425, 'controller').setOrigin(0,0);
+                this.redPotion = this.add.image(332, 595, 'redPotion').setOrigin(0,0);
+                this.bluePotion = this.add.image(562, 595, 'bluePotion').setOrigin(0,0);
+                this.selectedItem = this.add.image(268, 760, 'n/a').setOrigin(0,0);
+                this.exit = this.add.image(650, 740, 'exitSmall').setOrigin(0,0);
+                this.buy = this.add.image(480, 740, 'buy').setOrigin(0,0);
+                this.currentMoney = this.add.text(735, 105, `${MONEY}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'});
+                this.cost = this.add.text(385, 705, "0", { fontFamily: 'Times New Roman', fontSize: '30px', color: '#FFFFFF'});
+                this.resetFlags();
+
+                //clickable items to buy if the player has enough money
+                this.shoe.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
+                    if(MONEY >= 15){
+                        if(!this.buyShoe){//select item
+                            this.selectedItem.setTexture('shoe');
+                            this.cost.setText("15");
+                            this.resetFlags();
+                            this.buyShoe = true;
+                        }else{//deselect item
+                            this.buyShoe = false;
+                            this.selectedItem.setTexture('n/a');
+                            this.cost.setText("0");
+                        }
+                    }
+                });
+                this.protein.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
+                    if(MONEY >= 15){
+                        if(!this.buyProtein){//select item
+                            this.selectedItem.setTexture('protein');
+                            this.cost.setText("15");
+                            this.resetFlags();
+                            this.buyProtein = true;
+                        }else{//deselect item
+                            this.buyProtein = false;
+                            this.selectedItem.setTexture('n/a');
+                            this.cost.setText("0");
+                        }
+                    }
+                });
+                this.book.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
+                    if(MONEY >= 15){
+                        if(!this.buyBook){//select item
+                            this.selectedItem.setTexture('book');
+                            this.cost.setText("15");
+                            this.resetFlags();
+                            this.buyBook = true;
+                        }else{//deselect item
+                            this.buyBook = false;
+                            this.selectedItem.setTexture('n/a');
+                            this.cost.setText("0");
+                        }
+                    }
+                });
+                this.controller.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
+                    if(MONEY >= 15){
+                        if(!this.buyController){//select item
+                            this.selectedItem.setTexture('controller');
+                            this.cost.setText("15");
+                            this.resetFlags();
+                            this.buyController = true;
+                        }else{//deselect item
+                            this.buyController = false;
+                            this.selectedItem.setTexture('n/a');
+                            this.cost.setText("0");
+                        }
+                    }
+                });
+                this.redPotion.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
+                    if(MONEY >= 10){
+                        if(!this.buyRedPotion){//select item
+                        this.selectedItem.setTexture('redPotion');
+                        this.cost.setText("10");
+                        this.resetFlags();
+                        this.buyRedPotion = true;
+                        }else{//deselect item
+                            this.buyRedPotion = false;
+                            this.selectedItem.setTexture('n/a');
+                            this.cost.setText("0");
+                        }
+                    }
+                });
+                this.bluePotion.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
+                    if(MONEY >= 25){
+                        if(!this.buyBluePotion){//select item
+                        this.selectedItem.setTexture('bluePotion');
+                        this.cost.setText("25");
+                        this.resetFlags();
+                        this.buyBluePotion = true;
+                        }else{//deselect item
+                            this.buyBluePotion = false;
+                            this.selectedItem.setTexture('n/a');
+                            this.cost.setText("0");
+                        }
+                    }
+                });
+
+                this.buy.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
+                    //checks to see what the player confirmed to buy
+                    if(this.buyShoe){
+                        END++;
+                        MONEY -= 15;
+                    }else if(this.buyProtein){
+                        STR++;
+                        MONEY -= 15;
+                    }else if(this.buyBook){
+                        WIT++;
+                        MONEY -= 15;
+                    }else if(this.buyController){
+                        DEX++;
+                        MONEY -= 15;
+                    }else if(this.buyRedPotion){
+                        REDPOTION++;
+                        MONEY -= 10;
+                    }else if(this.buyBluePotion){
+                        BLUEPOTION++;
+                        MONEY -= 25;
+                    }
+                    this.currentMoney.setText(`${MONEY}`);
+                    this.selectedItem.setTexture("n/a");
+                    this.resetFlags();
+                });
+
+                this.exit.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
+                    inEvent = false;
+                    this.clearStoreEvent();
+                });
             }
         });
 
-        this.background.setInteractive().on('pointerover',()=>{;
+        //highlights building choices and resets others
+        this.library.setInteractive().on('pointerover',()=>{
             if(!inEvent){
-            this.library.setTexture('library');
+            this.library.setTexture('selectLibrary');
+            this.store.setTexture('store');
             this.gym.setTexture('gym');
             this.apartment.setTexture('apartment');
             }
         });
-    
+
+        //highlights choices and resets others
+        this.gym.setInteractive().on('pointerover',()=>{
+            if(!inEvent){
+            this.gym.setTexture('selectGym');
+            this.store.setTexture('store');
+            this.library.setTexture('library');
+            this.apartment.setTexture('apartment');
+            }
+        });
+
+        //highlights building choices and resets others
+        this.apartment.setInteractive().on('pointerover',()=>{
+            if(!inEvent){
+            this.apartment.setTexture('selectApartment');
+            this.store.setTexture('store'); 
+            this.library.setTexture('library');
+            this.gym.setTexture('gym');
+            }
+        });
+
+        //highlights building choices and resets others
+        this.store.setInteractive().on('pointerover',()=>{
+            if(!inEvent){
+            this.store.setTexture('selectStore');    
+            this.apartment.setTexture('apartment');
+            this.library.setTexture('library');
+            this.gym.setTexture('gym');
+            }
+        });
+
+        //unhighlights all if touching the background
+        this.background.setInteractive().on('pointerover',()=>{;
+            if(!inEvent){
+            this.store.setTexture('store');
+            this.library.setTexture('library');
+            this.gym.setTexture('gym');
+            this.apartment.setTexture('apartment');
+            }
+        });      
     }
 
+    //store event flags to track which purchase the player made
+    resetFlags(){
+        this.buyShoe = false;
+        this.buyProtein = false;
+        this.buyBook = false;
+        this.buyController = false;
+        this.buyRedPotion = false;
+        this.buyBluePotion = false;
+    }
+
+    //updates all stats if changes are made
     update(){
         this.endMenu.setText(`${END}`);
         this.strMenu.setText(`${STR}`);
@@ -236,8 +429,22 @@ class City extends Phaser.Scene {
         this.dexMenu.setText(`${DEX}`);
         this.dayMenu.setText(`${15 - DAY}`);
         this.hpMenu.setText(`${2 * (END - 1) + 14}`);
+        this.moneyMenu.setText(`${MONEY}`);
     }
 
+    startNewScene(){
+        //sets scene based on day if odd it was players day off if even player goes to work
+        if(DAY % 2 == 1){
+            DAY++;
+            firstClick = true;
+            this.scene.start("cityScene");
+        }else{
+            firstClick = true;
+            this.scene.start("battleScene");
+        }
+    }
+
+    //clears library or apartment event
     clearEvent(){
         this.menu.destroy();
         this.plus.destroy();
@@ -247,6 +454,7 @@ class City extends Phaser.Scene {
         this.skillDisplay.destroy();
     }
 
+    //clears gym special case menu
     clearEventSpecial(){
         this.menu.destroy();
         this.plusEndurance.destroy();
@@ -257,5 +465,21 @@ class City extends Phaser.Scene {
         this.enduranceDisplay.destroy();
         this.strengthDisplay.destroy();
         this.exit.destroy();
+    }
+
+    //clears store event menu
+    clearStoreEvent(){
+        this.menu.destroy();
+        this.shoe.destroy();
+        this.protein.destroy();
+        this.book.destroy();
+        this.controller.destroy();
+        this.redPotion.destroy();
+        this.bluePotion.destroy();
+        this.selectedItem.destroy();
+        this.exit.destroy();
+        this.buy.destroy();
+        this.currentMoney.destroy();
+        this.cost.destroy();
     }
 }
