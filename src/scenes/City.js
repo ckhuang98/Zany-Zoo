@@ -45,7 +45,7 @@ class City extends Phaser.Scene {
 
         //to keep track of energy used throughout day
         this.energy = 2;
-        this.maxEnergy = 2;//to adjust and balance game a variable is used for convinance
+        this.maxEnergy = 3;//to adjust and balance the game, a variable is used for convenience
 
         //keeps track of all player stats
         this.energyMenu = this.add.text(243, 740, `${this.energy}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
