@@ -193,12 +193,12 @@ class Battle extends Phaser.Scene{
         }
 
         this.attacksMenu.remap(this.items);
-        this.currentMenu = this.itemsMenu;
+        this.currentMenu = this.attacksMenu;
         this.attacksMenu.select();
     }
 
     useItem(){
-        let index = this.itemsMenu.menuItemIndex;
+        let index = this.attacksMenu.menuItemIndex;
         this.actionsMenu.deselect();
         this.attacksMenu.deselect();
         this.attacksMenu.clear();
