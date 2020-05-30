@@ -2,7 +2,7 @@ let config = {
     type: Phaser.CANVAS,
     width: 900,
     height: 900,
-    scene: [ Menu, Talking, Skills, City, Battle, BattleUi]
+    scene: [ Menu, Skills, City, Battle]
 }
 
 let game = new Phaser.Game(config);
@@ -17,8 +17,9 @@ let DAY = 1;
 let MONEY = 0;
 let REWARD = 10;
 
-// Hard coded value for testing item loop
-let BOUGHTPOTION = true;
+// Consumable items tracker
+let REDPOTION = 0;
+let BLUEPOTION = 0;
 
 let END = 0;
 let STR = 0;

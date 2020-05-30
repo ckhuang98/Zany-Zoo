@@ -3,7 +3,8 @@ class Player extends Phaser.GameObjects.Sprite {
         super(scene, x, y, texture, frame);
         scene.add.existing(this);
         // Health
-        this.hp = 2 * (END - 1) + 14;
+        this.hp = 8 * END + 14;
+        this.maxHp = this.hp;
         this.attacks = [];
         this.items = [];
         this.isLiving = true;
@@ -18,7 +19,7 @@ class Player extends Phaser.GameObjects.Sprite {
             'Persuade', "You have a long chat with the animal and convince it that it to do what you want.\n\n",
             'Jump Kick', "You jump! And then. . . you kick! You're so nimble, you don't even know what to do with yourself.\n\n",
             'Toss', "You pick up the animal and toss it aside. You feel pretty good about yourself after.\n\n",
-            'Trap', "You trick the creature into sticking it's hand into a pot of honey. It's bamboozled.\n\n",
+            'Trap', "You lure the creature into a delicious cheese trap. It's bamboozled.\n\n",
             'Maneuver', "You jab and dodge your way around the animal so quickly that it can hardly keep track of you.\n\n",
             'Rage', "You go full on beast mode on this god dang critter. You go stupid. You go crazy.\n\n",
             'Trick', "With the ancient art of manipulation, you're able to distract the animal and successfully confuse it.\n\n",
@@ -65,7 +66,6 @@ class Player extends Phaser.GameObjects.Sprite {
             }
         }
         target.takeDamage(damage);
-
         this.scene.events.emit("Message", text);
     }
 
@@ -79,48 +79,48 @@ class Player extends Phaser.GameObjects.Sprite {
     }
 
     createAttacks(){
-        if(STR >= 0 && STR < 7){
+        if(STR >= 0 && STR < 4){
             this.attacks.push('Slap');
             this.attacks.push(4);
-        } else if(STR >= 7 && STR < 11){
+        } else if(STR >= 4 && STR < 8){
             this.attacks.push('Smash');
             this.attacks.push(8);
-        } else if(STR >= 11 && STR < 22){
+        } else if(STR >= 8 && STR < 12){
             this.attacks.push('Haymaker');
             this.attacks.push(12);
-        } else if(STR >= 22 && STR < 33){
+        } else if(STR >= 12 && STR < 16){
             this.attacks.push('Toss');
             this.attacks.push(16)
         } else{
             this.attacks.push('Rage');
             this.attacks.push(20);
         }
-        if(WIT >= 0 && WIT < 7){
+        if(WIT >= 0 && WIT < 4){
             this.attacks.push('Scream');
             this.attacks.push(4);
-        } else if(WIT >= 7 && WIT < 11){
+        } else if(WIT >= 4 && WIT < 8){
             this.attacks.push('Intimidate');
             this.attacks.push(8);
-        } else if(WIT >= 11 && WIT < 22){
+        } else if(WIT >= 8 && WIT < 12){
             this.attacks.push('Persuade');
             this.attacks.push(12);
-        } else if(WIT >= 22 && WIT < 33){
+        } else if(WIT >= 16 && WIT < 20){
             this.attacks.push('Trap');
             this.attacks.push(16)
         } else{
             this.attacks.push('Trick');
             this.attacks.push(20);
         }
-        if(DEX >= 0 && DEX < 7){
+        if(DEX >= 0 && DEX < 4){
             this.attacks.push('Cartwheel');
             this.attacks.push(4);
-        } else if(DEX >= 7 && DEX < 11){
+        } else if(DEX >= 4 && DEX < 8){
             this.attacks.push('Spin Attack');
             this.attacks.push(8);
-        } else if(DEX >= 11 && DEX < 22){
+        } else if(DEX >= 8 && DEX < 12){
             this.attacks.push('Jump Kick');
             this.attacks.push(12);
-        } else if(DEX >= 22 && WIT < 33){
+        } else if(DEX >= 12 && WIT < 16){
             this.attacks.push('Maneuver');
             this.attacks.push(16)
         } else{
@@ -130,8 +130,12 @@ class Player extends Phaser.GameObjects.Sprite {
     }
 
     createItems(){
-        if(BOUGHTPOTION)
-            this.items.push('Potion');
+        if(REDPOTION >= 1){
+            this.items.push('Red Potion');
+        }
+        if(BLUEPOTION >= 1){
+            this.items.push('Blue Potion');
+        }
     }
 
 }

@@ -1,0 +1,26 @@
+[
+    {
+        "speaker" : "narrator",
+        "dialog" : "With one final attack, you strike down the sketchy zookeeper with all your might."
+    },
+    {
+        "speaker" : "narrator",
+        "dialog" : "You wipe the sweat from your brow and gaze down at your fallen coworker."
+    },
+    {
+        "speaker" : "narrator",
+        "dialog" : "\"Don't ever show your face around these parts again,\" you hiss at your coworker,"
+    },
+    {
+        "speaker" : "narrator",
+        "dialog" : "\"Or you'll have me to deal with!\""
+    },
+    {
+        "speaker" : "narrator", 
+        "dialog" : "Congratulations! You've beaten the boss, and saved the animals!"
+    },
+    {
+        "speaker" : "narrator",
+        "dialog" : "We don't have anything to give you to prove your triumph, except for the knowledge that you did it. Good job!"
+    }
+]
