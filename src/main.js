@@ -17,8 +17,7 @@ let DAY = 1;
 let MONEY = 0;
 let REWARD = 10;
 
-// Hard coded value for testing item loop
-let BOUGHTPOTION = true;
+// Consumable items tracker
 let REDPOTION = 0;
 let BLUEPOTION = 0;
 

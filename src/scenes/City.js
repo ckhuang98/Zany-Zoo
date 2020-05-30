@@ -128,7 +128,7 @@ class City extends Phaser.Scene {
                     }
                 });
                 this.minus.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
-                    if(this.energy < maxEnergy){
+                    if(this.energy < this.maxEnergy){
                         DEX--;
                         this.energy++;
                         this.skillDisplay.setText(`${DEX}`);
@@ -180,7 +180,7 @@ class City extends Phaser.Scene {
                     }
                 });
                 this.minusEndurance.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
-                    if(this.energy < maxEnergy && END > this.initialEndur){
+                    if(this.energy < this.maxEnergy && END > this.initialEndur){
                         END--;
                         this.energy++;
                         this.enduranceDisplay.setText(`${END}`);
@@ -198,7 +198,7 @@ class City extends Phaser.Scene {
                     }
                 });
                 this.minusStrength.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
-                    if(this.energy < maxEnergy && STR > this.initialStr){
+                    if(this.energy < this.maxEnergy && STR > this.initialStr){
                         STR--;
                         this.energy++;
                         this.strengthDisplay.setText(`${STR}`);

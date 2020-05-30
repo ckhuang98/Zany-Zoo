@@ -117,7 +117,6 @@ class Battle extends Phaser.Scene{
             } else{
                 this.animal.attack(this.player);
                 this.playerHp.setText("HP: " + this.player.hp);
-                this.sound.add('bearRoar').play();
                 this.time.addEvent({ delay: 3500, callback: this.nextTurn, callbackScope: this });
             }  
         } else {
@@ -183,7 +182,7 @@ class Battle extends Phaser.Scene{
         this.selectedItems = true;          // Set items flag to true
 
         // If player has no item, display message and return player to action menu
-        if(BOUGHTPOTION == false || this.items.length < 1){
+        if(this.items.length < 1){
             this.events.emit("Message", "You do not have any items to use...");
             let timer = setTimeout(() =>{
                 this.currentMenu = this.actionsMenu;
@@ -268,14 +267,28 @@ class Battle extends Phaser.Scene{
             this.animalHp.setText("HP: " + this.animal.hp);
             this.time.addEvent({ delay: 3500, callback: this.nextTurn, callbackScope: this });
         } else if(action == 'item'){
-            if(this.player.items[index] == 'Potion'){
-                this.events.emit("Message", "SLURRRP. You drink greedily from the potion you just pulled out of your pocket.");
-                this.player.hp += 20;
-                if(this.player.hp > (2 * (END - 1) + 14)){
-                    this.player.hp = 2 * (END - 1) + 14;
+            if(this.player.items[index] == 'Red Potion'){
+                this.events.emit("Message", "SLURRRP. You drink greedily from the red potion you just pulled out of your pocket.");
+                this.player.hp += 40;
+                if(this.player.hp > (8 * END + 14)){
+                    this.player.hp = 8 * END  + 14;
                 }
                 this.playerHp.setText("HP: " + this.player.hp);
-                this.player.items.splice(index, 1);
+                REDPOTION--;
+                if(REDPOTION == 0){
+                    this.player.items.splice(index, 1);
+                }
+            } else if(this.player.items[index] == 'Blue Potion'){
+                this.events.emit("Message", "SLURRRP. You drink greedily from the blue potion you just pulled out of your pocket.");
+                this.player.hp += 80;
+                if(this.player.hp > (8 * END + 14)){
+                    this.player.hp = 8 * END + 14;
+                }
+                this.playerHp.setText("HP: " + this.player.hp);
+                BLUEPOTION--;
+                if(BLUEPOTION == 0){
+                    this.player.items.splice(index, 1);
+                }
             }
             this.time.addEvent({ delay: 3500, callback: this.nextTurn, callbackScope: this });
         }
