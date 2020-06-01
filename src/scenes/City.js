@@ -44,8 +44,9 @@ class City extends Phaser.Scene {
         this.apartment = this.add.image(185, 270, 'apartment');
 
         //to keep track of energy used throughout day
-        this.energy = 2;
+        this.energy = 3;
         this.maxEnergy = 3;//to adjust and balance the game, a variable is used for convenience
+        this.maxSkill = 20;
 
         //keeps track of all player stats
         this.energyMenu = this.add.text(243, 740, `${this.energy}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
@@ -76,7 +77,7 @@ class City extends Phaser.Scene {
 
                 //add or subtract skill
                 this.plus.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
-                    if(this.energy > 0){
+                    if(this.energy > 0 && WIT < this.maxSkill){
                         WIT++;
                         this.energy--;
                         this.skillDisplay.setText(`${WIT}`);
@@ -84,7 +85,7 @@ class City extends Phaser.Scene {
                     }
                 });
                 this.minus.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
-                    if(this.energy < maxEnergy){
+                    if(this.energy < this.maxEnergy){
                         WIT--;
                         this.energy++;
                         this.skillDisplay.setText(`${WIT}`);
@@ -120,7 +121,7 @@ class City extends Phaser.Scene {
 
                 //add or subtract skill
                 this.plus.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
-                    if(this.energy > 0){
+                    if(this.energy > 0 && DEX < this.maxSkill){
                         DEX++;
                         this.energy--;
                         this.skillDisplay.setText(`${DEX}`);
@@ -172,7 +173,7 @@ class City extends Phaser.Scene {
 
                 //add or subtract skill
                 this.plusEndurance.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
-                    if(this.energy > 0){
+                    if(this.energy > 0 && END < this.maxSkill){
                         END++;
                         this.energy--;
                         this.enduranceDisplay.setText(`${END}`);
@@ -190,7 +191,7 @@ class City extends Phaser.Scene {
                 
                 //add or subtract skill
                 this.plusStrength.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
-                    if(this.energy > 0){
+                    if(this.energy > 0 && STR < this.maxSkill){
                         STR++;
                         this.energy--;
                         this.strengthDisplay.setText(`${STR}`);
@@ -240,7 +241,7 @@ class City extends Phaser.Scene {
                 //clickable items to buy if the player has enough money
                 this.shoe.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
                     if(MONEY >= 15){
-                        if(!this.buyShoe){//select item
+                        if(!this.buyShoe && END <= (this.maxSkill - 2)){//select item
                             this.selectedItem.setTexture('shoe');
                             this.cost.setText("15");
                             this.resetFlags();
@@ -254,7 +255,7 @@ class City extends Phaser.Scene {
                 });
                 this.protein.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
                     if(MONEY >= 15){
-                        if(!this.buyProtein){//select item
+                        if(!this.buyProtein && STR <= (this.maxSkill - 2)){//select item
                             this.selectedItem.setTexture('protein');
                             this.cost.setText("15");
                             this.resetFlags();
@@ -268,7 +269,7 @@ class City extends Phaser.Scene {
                 });
                 this.book.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
                     if(MONEY >= 15){
-                        if(!this.buyBook){//select item
+                        if(!this.buyBook && WIT <= (this.maxSkill - 2)){//select item
                             this.selectedItem.setTexture('book');
                             this.cost.setText("15");
                             this.resetFlags();
@@ -282,7 +283,7 @@ class City extends Phaser.Scene {
                 });
                 this.controller.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
                     if(MONEY >= 15){
-                        if(!this.buyController){//select item
+                        if(!this.buyController && DEX <= (this.maxSkill - 2)){//select item
                             this.selectedItem.setTexture('controller');
                             this.cost.setText("15");
                             this.resetFlags();
@@ -326,16 +327,16 @@ class City extends Phaser.Scene {
                 this.buy.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
                     //checks to see what the player confirmed to buy
                     if(this.buyShoe){
-                        END++;
+                        END += 2;
                         MONEY -= 15;
                     }else if(this.buyProtein){
-                        STR++;
+                        STR += 2;
                         MONEY -= 15;
                     }else if(this.buyBook){
-                        WIT++;
+                        WIT += 2;
                         MONEY -= 15;
                     }else if(this.buyController){
-                        DEX++;
+                        DEX += 2;
                         MONEY -= 15;
                     }else if(this.buyRedPotion){
                         REDPOTION++;

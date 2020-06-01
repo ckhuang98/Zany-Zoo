@@ -15,10 +15,17 @@ class Skills extends Phaser.Scene {
 
         //initialization
         this.points = 5;
-        END = 0;
-        STR = 0;
-        WIT = 0;
-        DEX = 0;
+        this.maxPoints = 5;
+
+        END = 1;
+        STR = 1;
+        WIT = 1;
+        DEX = 1;
+        DAY = 1;
+        MONEY = 0;
+        REWARD = 10;
+        REDPOTION = 0;
+        BLUEPOTION = 0;
 
         // interactable images
         this.plusEndurance = this.add.image(780, 320, 'plus');
@@ -48,7 +55,7 @@ class Skills extends Phaser.Scene {
             } 
         });
         this.minusEndurance.setInteractive().on('pointerdown',()=>{
-            if(this.points < 5){
+            if(this.points < this.maxPoints){
             this.points++;
             END--;
             this.enduranceDisplay.setText(`${END}`); 
@@ -66,7 +73,7 @@ class Skills extends Phaser.Scene {
             } 
         });
         this.minusStrength.setInteractive().on('pointerdown',()=>{
-            if(this.points < 5){
+            if(this.points < this.maxPoints){
             this.points++;
             STR--;
             this.strengthDisplay.setText(`${STR}`); 
@@ -84,7 +91,7 @@ class Skills extends Phaser.Scene {
             } 
         });
         this.minusWit.setInteractive().on('pointerdown',()=>{
-            if(this.points < 5){
+            if(this.points < this.maxPoints){
             this.points++;
             WIT--;
             this.witDisplay.setText(`${WIT}`); 
@@ -102,7 +109,7 @@ class Skills extends Phaser.Scene {
             } 
         });
         this.minusDexterity.setInteractive().on('pointerdown',()=>{
-            if(this.points < 5){
+            if(this.points < this.maxPoints){
             this.points++;
             DEX--;
             this.dexterityDisplay.setText(`${DEX}`);

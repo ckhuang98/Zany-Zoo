@@ -3,7 +3,7 @@ class Player extends Phaser.GameObjects.Sprite {
         super(scene, x, y, texture, frame);
         scene.add.existing(this);
         // Health
-        this.hp = 8 * END + 14;
+        this.hp = 3 * (END - 1) + 18;
         this.maxHp = this.hp;
         this.attacks = [];
         this.items = [];
@@ -79,48 +79,48 @@ class Player extends Phaser.GameObjects.Sprite {
     }
 
     createAttacks(){
-        if(STR >= 0 && STR < 4){
+        if(STR >= 0 && STR < 5){
             this.attacks.push('Slap');
             this.attacks.push(4);
-        } else if(STR >= 4 && STR < 8){
+        } else if(STR >= 5 && STR < 10){
             this.attacks.push('Smash');
             this.attacks.push(8);
-        } else if(STR >= 8 && STR < 12){
+        } else if(STR >= 10 && STR < 15){
             this.attacks.push('Haymaker');
             this.attacks.push(12);
-        } else if(STR >= 12 && STR < 16){
+        } else if(STR >= 15 && STR < 20){
             this.attacks.push('Toss');
             this.attacks.push(16)
         } else{
             this.attacks.push('Rage');
             this.attacks.push(20);
         }
-        if(WIT >= 0 && WIT < 4){
+        if(WIT >= 0 && WIT < 5){
             this.attacks.push('Scream');
             this.attacks.push(4);
-        } else if(WIT >= 4 && WIT < 8){
+        } else if(WIT >= 5 && WIT < 10){
             this.attacks.push('Intimidate');
             this.attacks.push(8);
-        } else if(WIT >= 8 && WIT < 12){
+        } else if(WIT >= 10 && WIT < 15){
             this.attacks.push('Persuade');
             this.attacks.push(12);
-        } else if(WIT >= 16 && WIT < 20){
+        } else if(WIT >= 15 && WIT < 20){
             this.attacks.push('Trap');
             this.attacks.push(16)
         } else{
             this.attacks.push('Trick');
             this.attacks.push(20);
         }
-        if(DEX >= 0 && DEX < 4){
+        if(DEX >= 0 && DEX < 5){
             this.attacks.push('Cartwheel');
             this.attacks.push(4);
-        } else if(DEX >= 4 && DEX < 8){
+        } else if(DEX >= 5 && DEX < 10){
             this.attacks.push('Spin Attack');
             this.attacks.push(8);
-        } else if(DEX >= 8 && DEX < 12){
+        } else if(DEX >= 10 && DEX < 15){
             this.attacks.push('Jump Kick');
             this.attacks.push(12);
-        } else if(DEX >= 12 && WIT < 16){
+        } else if(DEX >= 15 && WIT < 20){
             this.attacks.push('Maneuver');
             this.attacks.push(16)
         } else{

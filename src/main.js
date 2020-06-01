@@ -21,7 +21,7 @@ let REWARD = 10;
 let REDPOTION = 0;
 let BLUEPOTION = 0;
 
-let END = 0;
-let STR = 0;
-let WIT = 0;
-let DEX = 0;
+let END = 1;
+let STR = 1;
+let WIT = 1;
+let DEX = 1;
