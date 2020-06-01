@@ -269,9 +269,9 @@ class Battle extends Phaser.Scene{
         } else if(action == 'item'){
             if(this.player.items[index] == 'Red Potion'){
                 this.events.emit("Message", "SLURRRP. You drink greedily from the red potion you just pulled out of your pocket.");
-                this.player.hp += 40;
-                if(this.player.hp > (8 * END + 14)){
-                    this.player.hp = 8 * END  + 14;
+                this.player.hp += 35;
+                if(this.player.hp > (3 * (END - 1) + 18)){
+                    this.player.hp =  3 * (END - 1) + 18;
                 }
                 this.playerHp.setText("HP: " + this.player.hp);
                 REDPOTION--;
@@ -280,9 +280,9 @@ class Battle extends Phaser.Scene{
                 }
             } else if(this.player.items[index] == 'Blue Potion'){
                 this.events.emit("Message", "SLURRRP. You drink greedily from the blue potion you just pulled out of your pocket.");
-                this.player.hp += 80;
-                if(this.player.hp > (8 * END + 14)){
-                    this.player.hp = 8 * END + 14;
+                this.player.hp += 70;
+                if(this.player.hp >  3 * (END - 1) + 18){
+                    this.player.hp =  3 * (END - 1) + 18;
                 }
                 this.playerHp.setText("HP: " + this.player.hp);
                 BLUEPOTION--;
