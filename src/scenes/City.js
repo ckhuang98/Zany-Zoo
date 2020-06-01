@@ -55,7 +55,7 @@ class City extends Phaser.Scene {
         this.witMenu = this.add.text(491, 857, `${WIT}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
         this.dexMenu = this.add.text(785, 857, `${DEX}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
         this.dayMenu = this.add.text(267, 800, `${15 - DAY}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
-        this.hpMenu = this.add.text(837, 798, `${2 * (END - 1) + 14}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
+        this.hpMenu = this.add.text(837, 798, `${3 * (END - 1) + 18}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
         this.moneyMenu = this.add.text(840, 738, `${MONEY}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
 
         let inEvent = false;//keeps track of menu's being used to lock other menu's
