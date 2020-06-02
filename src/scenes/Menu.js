@@ -6,10 +6,11 @@ class Menu extends Phaser.Scene {
         this.load.image('menu', './assets/images/TitleMenu.png');
         this.load.image('button', './assets/images/Button.png');
         this.load.image('instructions', './assets/images/Instructions.png');
+        
 
         this.load.audio('bgm', './assets/sound/hipjazz.mp3'); // place holder bgm until I have time to make one.
         this.load.bitmapFont('gem_font', './assets/font/gem.png', './assets/font/gem.xml');
-        this.load.json('dialog', './assets/json/dialog.json');
+        this.load.json('dialog', './assets/json/intro.json');
     }
 
     create(){

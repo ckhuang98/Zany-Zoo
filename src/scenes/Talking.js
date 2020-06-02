@@ -28,16 +28,19 @@ class Talking extends Phaser.Scene {
         this.nextText = null;			// player prompt text to continue typing
 
         // character variables
-        this.homer = null;
-        this.minerva = null;
-        this.neptune = null;
-        this.jove = null;
+        this.narrator = null;
+        this.boss = null;
         this.tweenDuration = 500;
 
         this.OFFSCREEN_X = -500;        // x,y values to place characters offscreen
         this.OFFSCREEN_Y = 1000;
     }
+    preload(){
+        this.load.image('player', './assets/images/sprite.png');
+        this.load.image('zooBackground', './assets/images/zooBackground.png');
+    }
     create() {
+        this.background = this.add.tileSprite(0, 0, 900, 900, 'zooBackground').setOrigin(0, 0);
         // parse dialog from JSON file
         this.dialog = this.cache.json.get('dialog');
         //console.log(this.dialog);
@@ -50,10 +53,7 @@ class Talking extends Phaser.Scene {
         this.nextText = this.add.bitmapText(this.NEXT_X, this.NEXT_Y, this.DBOX_FONT, '', this.TEXT_SIZE);
 
         // ready the character dialog images offscreen
-        this.homer = this.add.sprite(this.OFFSCREEN_X, this.DBOX_Y+8, 'homer').setOrigin(0, 1);
-        this.minerva = this.add.sprite(this.OFFSCREEN_X, this.DBOX_Y+8, 'minerva').setOrigin(0, 1);
-        this.neptune = this.add.sprite(this.OFFSCREEN_X, this.DBOX_Y+8, 'neptune').setOrigin(0, 1);
-        this.jove = this.add.sprite(this.OFFSCREEN_X, this.DBOX_Y+8, 'jove').setOrigin(0, 1);
+        this.player = this.add.sprite(this.OFFSCREEN_X, this.DBOX_Y+8, 'player').setOrigin(0, 1);
 
         // input
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -101,7 +101,7 @@ class Talking extends Phaser.Scene {
             // tween out prior speaker's image
             if(this.dialogLastSpeaker) {
                 this.tweens.add({
-                    targets: this[this.dialogLastSpeaker],
+                    targets: this.player,
                     x: this.OFFSCREEN_X,
                     duration: this.tweenDuration,
                     ease: 'Linear'
@@ -119,7 +119,7 @@ class Talking extends Phaser.Scene {
                 // tween out prior speaker's image
                 if(this.dialogLastSpeaker) {
                     this.tweens.add({
-                        targets: this[this.dialogLastSpeaker],
+                        targets: this.player,
                         x: this.OFFSCREEN_X,
                         duration: this.tweenDuration,
                         ease: 'Linear'
@@ -127,7 +127,7 @@ class Talking extends Phaser.Scene {
                 }
                 // tween in new speaker's image
                 this.tweens.add({
-                    targets: this[this.dialogSpeaker],
+                    targets: this.player,
                     x: this.DBOX_X + 50,
                     duration: this.tweenDuration,
                     ease: 'Linear'
