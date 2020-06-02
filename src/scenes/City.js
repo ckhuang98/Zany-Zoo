@@ -69,11 +69,11 @@ class City extends Phaser.Scene {
 
                 //interactive display
                 this.menu = this.add.image(450, 450, 'libraryMenu');
-                this.plus = this.add.image(500, 430, 'plus').setOrigin(0, 0);
-                this.minus = this.add.image(325, 430, 'minus').setOrigin(0, 0);
+                this.plus = this.add.image(495, 425, 'plus').setOrigin(0, 0);
+                this.minus = this.add.image(325, 425, 'minus').setOrigin(0, 0);
                 this.exit = this.add.image(450, 750, 'exit');
-                this.energyDisplay = this.add.text(450, 645, `${this.energy}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
-                this.skillDisplay = this.add.text(450, 465, `${WIT}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
+                this.energyDisplay = this.add.text(448, 648, `${this.energy}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
+                this.skillDisplay = this.add.text(448, 465, `${WIT}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
 
                 //add or subtract skill
                 this.plus.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
@@ -117,7 +117,7 @@ class City extends Phaser.Scene {
                 this.minus = this.add.image(325, 430, 'minus').setOrigin(0, 0);
                 this.exit = this.add.image(450, 750, 'exit');
                 this.energyDisplay = this.add.text(450, 640, `${this.energy}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
-                this.skillDisplay = this.add.text(450, 465, `${DEX}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
+                this.skillDisplay = this.add.text(450, 468, `${DEX}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
 
                 //add or subtract skill
                 this.plus.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
@@ -155,14 +155,14 @@ class City extends Phaser.Scene {
 
                 //interactive display
                 this.menu = this.add.image(450, 450, 'gymMenu');
-                this.plusEndurance = this.add.image(495, 310, 'plus').setOrigin(0, 0);
-                this.plusStrength = this.add.image(495, 450, 'plus').setOrigin(0, 0);
-                this.minusEndurance = this.add.image(325, 310, 'minus').setOrigin(0, 0);
-                this.minusStrength = this.add.image(325, 450, 'minus').setOrigin(0, 0);
+                this.plusEndurance = this.add.image(499, 290, 'plus').setOrigin(0, 0);
+                this.plusStrength = this.add.image(499, 455, 'plus').setOrigin(0, 0);
+                this.minusEndurance = this.add.image(325, 290, 'minus').setOrigin(0, 0);
+                this.minusStrength = this.add.image(325, 455, 'minus').setOrigin(0, 0);
                 this.exit = this.add.image(450, 750, 'exit');
-                this.energyDisplay = this.add.text(450, 640, `${this.energy}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
-                this.enduranceDisplay = this.add.text(450, 350, `${END}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
-                this.strengthDisplay = this.add.text(450, 490, `${STR}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
+                this.energyDisplay = this.add.text(450, 655, `${this.energy}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
+                this.enduranceDisplay = this.add.text(450, 330, `${END}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
+                this.strengthDisplay = this.add.text(450, 492, `${STR}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
 
                 //prevent unlimited level up bug
                 if(firstClick){
@@ -425,6 +425,7 @@ class City extends Phaser.Scene {
         this.witMenu.setText(`${WIT}`);
         this.dexMenu.setText(`${DEX}`);
         this.dayMenu.setText(`${15 - DAY}`);
+        this.energyMenu.setText(`${this.energy}`);
         this.hpMenu.setText(`${2 * (END - 1) + 14}`);
         this.moneyMenu.setText(`${MONEY}`);
     }

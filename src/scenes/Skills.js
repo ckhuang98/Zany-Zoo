@@ -55,7 +55,7 @@ class Skills extends Phaser.Scene {
             } 
         });
         this.minusEndurance.setInteractive().on('pointerdown',()=>{
-            if(this.points < this.maxPoints){
+            if(this.points < this.maxPoints && END > 1){
             this.points++;
             END--;
             this.enduranceDisplay.setText(`${END}`); 
@@ -73,7 +73,7 @@ class Skills extends Phaser.Scene {
             } 
         });
         this.minusStrength.setInteractive().on('pointerdown',()=>{
-            if(this.points < this.maxPoints){
+            if(this.points < this.maxPoints && STR > 1){
             this.points++;
             STR--;
             this.strengthDisplay.setText(`${STR}`); 
@@ -91,7 +91,7 @@ class Skills extends Phaser.Scene {
             } 
         });
         this.minusWit.setInteractive().on('pointerdown',()=>{
-            if(this.points < this.maxPoints){
+            if(this.points < this.maxPoints && WIT > 1){
             this.points++;
             WIT--;
             this.witDisplay.setText(`${WIT}`); 
@@ -109,7 +109,7 @@ class Skills extends Phaser.Scene {
             } 
         });
         this.minusDexterity.setInteractive().on('pointerdown',()=>{
-            if(this.points < this.maxPoints){
+            if(this.points < this.maxPoints && DEX > 1){
             this.points++;
             DEX--;
             this.dexterityDisplay.setText(`${DEX}`);
