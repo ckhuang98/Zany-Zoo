@@ -434,6 +434,8 @@ class City extends Phaser.Scene {
         if(DAY % 2 == 1){
             DAY++;
             this.scene.start("cityScene");
+        }else if(DAY == 14){
+            this.scene.start("bossBattleScene");
         }else{
             this.scene.start("battleScene");
         }
