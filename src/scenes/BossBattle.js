@@ -1,6 +1,6 @@
-class Battle extends Phaser.Scene{
+class BossBattle extends Phaser.Scene{
     constructor(){
-        super("battleScene");
+        super("bossBattleScene");
     }
 
     preload(){
@@ -8,6 +8,7 @@ class Battle extends Phaser.Scene{
         this.load.image('pig', './assets/images/piggy.png');
         this.load.image('monkey', './assets/images/monkey.png');
         this.load.image('player', './assets/images/sprite.png');
+        this.load.image('boss', './assets/images/bossSprite.png');
         this.load.image('background', './assets/images/minigameBackground.png');
 
         this.load.audio('click', './assets/sounds/click.mp3');
@@ -15,23 +16,6 @@ class Battle extends Phaser.Scene{
         this.load.audio('Slap', './assets/sounds/slap.mp3');
         this.load.audio('Scream', './assets/sounds/scream.mp3');
         this.load.audio('Cartwheel', './assets/sounds/cartwheel.mp3');
-        this.load.audio('pigSound', './assets/sounds/pigSound.mp3');
-        this.load.audio('monkeySound', './assets/sounds/monkeySound.mp3');
-        this.load.audio('Acrobatics', './assets/sounds/acrobatics.mp3');
-        this.load.audio('Haymaker', './assets/sounds/haymaker.mp3');
-        this.load.audio('Intimidate', './assets/sounds/intimidate.mp3');
-        this.load.audio('JumpKick', './assets/sounds/jumpKick.mp3');
-        this.load.audio('Manuever', './assets/sounds/manuever.mp3');
-        this.load.audio('Persuade', './assets/sounds/persuade.mp3');
-        this.load.audio('Rage', './assets/sounds/rage.mp3');
-        this.load.audio('Scream', './assets/sounds/smash.mp3');
-        this.load.audio('SpinAttack', './assets/sounds/spinAttack.mp3');
-        this.load.audio('Swipe', './assets/sounds/swipe.mp3');
-        this.load.audio('Toss', './assets/sounds/toss.mp3');
-        this.load.audio('Trap', './assets/sounds/trap.mp3');
-        this.load.audio('Trick', './assets/sounds/trick.mp3');
-        this.load.audio('Yawn', './assets/sounds/yawn.mp3');
-        this.load.audio('Smash', './assets/sounds/smash.mp3');
     }
 
     create(){
@@ -50,20 +34,15 @@ class Battle extends Phaser.Scene{
         this.playerHp = this.add.text(760, 330, "", { color: '#ffffff', align: 'left', fontSize: 25}).setOrigin(0.5);
         this.playerHp.setText("HP: " + this.player.hp);
 
-        // Creates Animal
-        this.animal = null;
-        if(DAY == 2 || DAY == 8){
-            this.animal = new Bear(this, 125, 150, 'bear', 1, 'str');
-        } else if(DAY == 4 || DAY == 10){
-            this.animal = new Pig(this, 125, 150, 'pig', 1, 'wit');
-        } else if(DAY == 6 || DAY == 12){
-            this.animal = new Monkey(this, 125, 150, 'monkey', 1, 'dex');
-        }
-        this.add.existing(this.animal);
+        // Creates Boss
+        this.boss = new Boss(this, 50, 50, 'boss', 1).setOrigin(0,0);
+        this.add.existing(this.boss);
+
+        this.boss.nextAnimal();
 
         // Displays animal health
         this.animalHp = this.add.text(125, 300, "", { color: '#ffffff', align: 'left', fontSize: 25}).setOrigin(0.5);
-        this.animalHp.setText("HP: " + this.animal.hp);
+        this.animalHp.setText("HP: " + this.boss.currentAnimal.hp);
 
         
 
@@ -128,26 +107,31 @@ class Battle extends Phaser.Scene{
     // Moves the battle along
     nextTurn(){
         this.turnCounter++;
-        if(this.animal.isLiving && this.player.isLiving){
+        if(this.boss.currentAnimal.isLiving && this.player.isLiving){
             if(this.turnCounter % 2 != 0){
                 this.events.emit('PlayerTurn');
             } else{
-                this.animal.attack(this.player);
+                this.boss.currentAnimal.attack(this.player);
                 this.playerHp.setText("HP: " + this.player.hp);
                 this.time.addEvent({ delay: 3500, callback: this.nextTurn, callbackScope: this });
             }  
-        } else {
-            if(this.animal.isLiving == true){
+        }
+        else {
+            if(this.boss.currentAnimal.isLiving == true){
                 this.events.emit("Message", "You've been defeated...");
                 let timer = setTimeout(() =>{
                     this.exitBattle();
                 }, 3500);
             } else{
-                this.events.emit("Message", "You won! You find yourself rewarded with " + REWARD + " dollars!");
-                MONEY += REWARD;
-                let timer = setTimeout(() =>{
-                    this.exitBattle();
-                }, 3500);
+                this.boss.nextAnimal();
+                if(this.boss.isLiving == false){
+                    this.events.emit("Message", "You won! That'll teach him a lesson!");
+                    let timer = setTimeout(() => {
+                        this.exitBattle();
+                    }, 3500);
+                }
+                this.events.emit("Message", "Is this all you got? Who's next?");
+                this.time.addEvent({ delay: 3500, callback: this.nextTurn, callbackScope: this });
             }
         }
     }
@@ -254,19 +238,7 @@ class Battle extends Phaser.Scene{
                         if(this.player.attacks[index] === 'Slap'){
                             this.sound.add('Slap').play();
                         }
-                        else if(this.player.attacks[index] === 'Smash'){
-                            this.sound.add('Smash').play();
-                        }
-                        else if(this.player.attacks[index] === 'Haymaker'){
-                            this.sound.add('Haymaker').play();
-                        }
-                        else if(this.player.attacks[index] === 'Toss'){
-                            this.sound.add('Toss');
-                        }
-                        else if(this.player.attacks[index] === 'Rage'){
-                            this.sound.add('Rage');
-                        }
-                        this.player.attack(this.animal, type, damage, i);
+                        this.player.attack(this.boss.currentAnimal, type, damage, i);
                     }
                 }
             } else if(index == 1){
@@ -277,19 +249,7 @@ class Battle extends Phaser.Scene{
                         if(this.player.attacks[index + 1] === 'Scream'){
                             this.sound.add('Scream').play();
                         }
-                        else if(this.player.attacks[index + 1] === 'Intimidate'){
-                            this.sound.add('Intimidate').play();
-                        }
-                        else if(this.player.attacks[index + 1] === 'Persuade'){
-                            this.sound.add('Persuade').play();
-                        }
-                        else if(this.player.attacks[index + 1] === 'Trap'){
-                            this.sound.add('Trap').play();
-                        }
-                        else if(this.player.attacks[index + 1] === 'Trick'){
-                            this.sound.add('Trick').play();
-                        }
-                        this.player.attack(this.animal, type, damage, i);
+                        this.player.attack(this.boss.currentAnimal, type, damage, i);
                     }
                 }
             } else{
@@ -300,24 +260,12 @@ class Battle extends Phaser.Scene{
                         if(this.player.attacks[index + 2] === 'Cartwheel'){
                             this.sound.add('Cartwheel').play();
                         }
-                        else if(this.player.attacks[index + 2] = 'SpinAttack'){
-                            this.sound.add('SpinAttack').play();
-                        }
-                        else if(this.player.attacks[index + 2] = 'JumpKick'){
-                            this.sound.add('JumpKick').play();
-                        }
-                        else if(this.player.attacks[index + 2] = 'Manuever'){
-                            this.sound.add('Manuever').play();
-                        }
-                        else if(this.player.attacks[index + 2] = 'Acrobatics'){
-                            this.sound.add('Acrobatics').play();
-                        }
-                        this.player.attack(this.animal, type, damage, i);
+                        this.player.attack(this.boss.currentAnimal, type, damage, i);
                     }
                 }
 
             }
-            this.animalHp.setText("HP: " + this.animal.hp);
+            this.animalHp.setText("HP: " + this.boss.currentAnimal.hp);
             this.time.addEvent({ delay: 3500, callback: this.nextTurn, callbackScope: this });
         } else if(action == 'item'){
             if(this.player.items[index] == 'Red Potion'){
