@@ -19,9 +19,13 @@ class Menu extends Phaser.Scene {
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.instructionPressed = false;
-        this.bgm = this.sound.add('bgm', {volume: 0.5});
+        this.bgm = this.sound.add('bgm');
         
-        this.bgm.play();
+        this.bgm.play({
+            loop: true,
+            volume: .5,
+            mute: false
+        });
 
         this.pressInstructions.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
             if(!this.instructionPressed){

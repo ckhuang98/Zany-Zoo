@@ -2,7 +2,11 @@ class Animal extends Phaser.GameObjects.Sprite{
     constructor(scene, x, y, texture, frame){
         super(scene, x, y, texture, frame);
         this.hp = 5 * (DAY - 1) + 19;
-        this.damage = 4*(DAY/2 - 1) + 4; // Final Math formula, courtesy of Philip
+        if(DAY < 14){
+            this.damage = 4*(DAY/2 - 1) + 4; // Final Math formula, courtesy of Philip
+        }else{
+            this.damage = 8;
+        }
         this.isLiving = true;
     }
 
