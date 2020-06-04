@@ -9,7 +9,10 @@ class BossBattle extends Phaser.Scene{
         this.load.image('monkey', './assets/images/monkey.png');
         this.load.image('player', './assets/images/sprite.png');
         this.load.image('boss', './assets/images/bossSprite.png');
-        this.load.image('background', './assets/images/minigameBackground.png');
+        
+        this.load.image('background', './assets/images/bossStage.png');
+
+        this.load.spritesheet('bossAnim', './assets/images/bossAnim.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 3});
 
         this.load.audio('click', './assets/sounds/click.mp3');
         this.load.audio('bearRoar', './assets/sounds/bearRoar.mp3');
@@ -35,10 +38,17 @@ class BossBattle extends Phaser.Scene{
         this.playerHp.setText("HP: " + this.player.hp);
 
         // Creates Boss
-        this.boss = new Boss(this, 50, 50, 'boss', 1).setOrigin(0,0);
+        this.boss = new Boss(this, 250, 35, 'boss', 1).setOrigin(0,0);
         this.add.existing(this.boss);
 
+        this.playAnimation();
         this.boss.nextAnimal();
+
+        this.anims.create({
+            key: 'bossAnim',
+            frames: this.anims.generateFrameNumbers('bossAnim', { start: 0, end: 3, first: 0}),
+            frameRate: 30
+        });
 
         // Displays animal health
         this.animalHp = this.add.text(125, 300, "", { color: '#ffffff', align: 'left', fontSize: 25}).setOrigin(0.5);
@@ -111,6 +121,7 @@ class BossBattle extends Phaser.Scene{
             if(this.turnCounter % 2 != 0){
                 this.events.emit('PlayerTurn');
             } else{
+                
                 this.boss.currentAnimal.attack(this.player);
                 this.playerHp.setText("HP: " + this.player.hp);
                 this.time.addEvent({ delay: 3500, callback: this.nextTurn, callbackScope: this });
@@ -123,6 +134,7 @@ class BossBattle extends Phaser.Scene{
                     this.exitBattle();
                 }, 3500);
             } else{
+                this.playAnimation();
                 this.boss.nextAnimal();
                 if(this.boss.isLiving == false){
                     this.events.emit("Message", "You won! That'll teach him a lesson!");
@@ -315,6 +327,11 @@ class BossBattle extends Phaser.Scene{
 
     exitBattle(){
         this.scene.start('cityScene');
+    }
+
+    playAnimation(){
+        let bossAnim = this.add.sprite(this.boss.x, this.boss.y, 'bossAnim').setOrigin(0, 0);
+        bossAnim.anims.play('bossAnim');
     }
 }
 
