@@ -12,7 +12,8 @@ class BossBattle extends Phaser.Scene{
         
         this.load.image('background', './assets/images/bossStage.png');
 
-        this.load.spritesheet('bossAnim', './assets/images/bossAnim.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 3});
+        // Animation Sprite Sheet
+        this.load.spritesheet('bossAnim', './assets/images/bossAnim.png', {frameWidth: 450, frameHeight: 400, startFrame: 0, endFrame: 3});
 
         this.load.audio('click', './assets/sounds/click.mp3');
         this.load.audio('bearRoar', './assets/sounds/bearRoar.mp3');
@@ -41,6 +42,7 @@ class BossBattle extends Phaser.Scene{
         this.boss = new Boss(this, 250, 35, 'boss', 1).setOrigin(0,0);
         this.add.existing(this.boss);
 
+        // Plays animation
         this.playAnimation();
         this.boss.nextAnimal();
 
@@ -329,6 +331,7 @@ class BossBattle extends Phaser.Scene{
         this.scene.start('cityScene');
     }
 
+    // Play animation
     playAnimation(){
         let bossAnim = this.add.sprite(this.boss.x, this.boss.y, 'bossAnim').setOrigin(0, 0);
         bossAnim.anims.play('bossAnim');

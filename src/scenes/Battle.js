@@ -5,6 +5,7 @@ class Battle extends Phaser.Scene{
 
     preload(){
         this.load.image('bear', './assets/images/bear.png');
+        this.load.spritesheet('bearIdle', './assets/images/bearSpriteSheet.png', {frameWidth: 183, frameHeight: 255, startFrame: 0, endFrame: 48})
         this.load.image('pig', './assets/images/piggy.png');
         this.load.image('monkey', './assets/images/monkey.png');
         this.load.image('player', './assets/images/sprite.png');
