@@ -12,7 +12,7 @@ class Player extends Phaser.GameObjects.Sprite {
             'Slap', 'With all five fingers, you slap the animal right across the face.\n\n',
             'Scream', "\"REEEEEEEEEEEEE,\" screams the zookeeper. The animal stares at you and blinks confusedly.\n\n",
             'Cartwheel', "Gracefully, you cartwheel directly into the animal, slamming it with your body.\n\n",
-            'Smash', "With the righteous force or your passion for zoos, you smash a rock over the animal's head. Ouch.\n\n",
+            'Smash', "With the righteous force of your passion for zoos, you smash a rock over the animal's head. Ouch.\n\n",
             'Intimidate', "You stomp your feet and insult the animal's mother. It now feels bad about itself.\n\n",
             'Spin Attack', "You sort of do like, this spin, karate thing? An ancient kung fu move. It does some damage.\n\n",
             'Haymaker', "You wind up your fist behind your back and spring it upon the creature with all your zookeeping might.\n\n",
@@ -37,31 +37,31 @@ class Player extends Phaser.GameObjects.Sprite {
     attack(target, type, damage, index){
         let text = this.attackText[index + 1];
         if(target.type === type){
-            text += "You deals " + damage + " damage";
+            text += "You deal " + damage + " damage";
         } else{
             if(target.type === 'str'){
                 if(type === 'wit'){
                     damage *= 0.5;
-                    text += "You deals " + damage + " damage. That could've gone better...";
+                    text += "You deal " + damage + " damage. That could've gone better...";
                 } else{
                     damage *= 2
-                    text += "You deals " + damage + " damage. Wow! That worked really well!";
+                    text += "You deal " + damage + " damage. Wow! That worked really well!";
                 }
             } else if(target.type === 'wit'){
                 if(type === 'dex'){
                     damage *= 0.5
-                    text += "You deals " + damage + " damage. That could've gone better...";
+                    text += "You deal " + damage + " damage. That could've gone better...";
                 } else{
                     damage *= 2
-                    text += "You deals " + damage + " damage. Wow! That worked really well!";
+                    text += "You deal " + damage + " damage. Wow! That worked really well!";
                 }
             } else{
                 if(type === 'str'){
                     damage *= 0.5
-                    text += "You deals " + damage + " damage. That could've gone better...";
+                    text += "You deal " + damage + " damage. That could've gone better...";
                 } else{
                     damage *= 2
-                    text += "You deals " + damage + " damage. Wow! That worked really well!";
+                    text += "You deal " + damage + " damage. Wow! That worked really well!";
                 }
             }
         }
