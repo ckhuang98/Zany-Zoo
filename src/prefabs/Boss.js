@@ -12,6 +12,14 @@ class Boss extends Phaser.GameObjects.Sprite{
         this.monkey = new Monkey(this.scene, this.OFFSCREEN_X, 150, 'monkey', 1, 'dex');
         this.scene.add.existing(this.monkey);
         this.currentAnimal = null;
+
+        this.scene.anims.create({
+            key: 'bossIdle',
+            frames: this.scene.anims.generateFrameNumbers('bossIdle', { start: 0, end: 49, first: 0}),
+            frameRate: 26,
+            repeat: -1
+        });
+        this.anims.play('bossIdle');
     }
 
     nextAnimal(){
