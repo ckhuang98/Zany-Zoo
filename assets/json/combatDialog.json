@@ -55,5 +55,28 @@
 			"speaker" : "monkey",
 			"dialog" : "The monkey crawls all over you and holds your hands behind your back, humiliating you."
 		}
+	],
+	[
+		{
+			"speaker" : "creeper",
+			"dialog" : "So you're trying to stop me, eh? You'll have to fight my friends first! Hehehe!"
+		},
+		{
+			"speaker" : "creeper",
+			"dialog" : "Go get him bear!"
+		},
+		{
+			"speaker" : "creeper",
+			"dialog" : "No matter! My pig will get you down!"
+		},
+		{
+			"speaker" : "creeper",
+			"dialog" : "You think you're pretty good, but wait til you see my monkey!"
+		},
+		{
+			"comment" : "this is for if the boss defeats the player",
+			"speaker" : "creeper",
+			"dialog" : "Pathetic! Victory is mine!"
+		}
 	]
 ]

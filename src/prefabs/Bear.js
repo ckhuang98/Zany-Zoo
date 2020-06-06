@@ -2,6 +2,13 @@ class Bear extends Animal{
     constructor(scene, x, y, texture, frame, type){
         super(scene, x, y, texture, frame);
         this.type = type;
+        this.scene.anims.create({
+            key: 'bearIdle',
+            frames: this.scene.anims.generateFrameNumbers('bearIdle', { start: 0, end: 48, first: 0}),
+            frameRate: 26,
+            repeat: -1
+        });
+        this.anims.play('bearIdle');
     }
 
     // attacks target and emits Message event

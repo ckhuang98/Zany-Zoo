@@ -2,6 +2,13 @@ class Monkey extends Animal{
     constructor(scene, x, y, texture, frame, type){
         super(scene, x, y, texture, frame);
         this.type = type;
+        this.scene.anims.create({
+            key: 'monkeyIdle',
+            frames: this.scene.anims.generateFrameNumbers('monkeyIdle', { start: 0, end: 49, first: 0}),
+            frameRate: 26,
+            repeat: -1
+        });
+        this.anims.play('monkeyIdle');
     }
 
     // attacks target and emits Message event

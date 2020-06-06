@@ -119,7 +119,7 @@ class Skills extends Phaser.Scene {
 
         this.confirm.setInteractive().on('pointerdown',()=>{
             if(this.points == 0){
-                this.scene.start("cityScene")
+                this.scene.start("cityScene");
             } 
         });
     }
