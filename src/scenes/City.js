@@ -52,8 +52,8 @@ class City extends Phaser.Scene {
         this.energyMenu = this.add.text(243, 740, `${this.energy}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
         this.endMenu = this.add.text(592, 800, `${END}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
         this.strMenu = this.add.text(293, 856, `${STR}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
-        this.witMenu = this.add.text(491, 857, `${WIT}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
-        this.dexMenu = this.add.text(785, 857, `${DEX}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
+        this.witMenu = this.add.text(495, 857, `${WIT}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
+        this.dexMenu = this.add.text(808, 857, `${DEX}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
         this.dayMenu = this.add.text(267, 800, `${15 - DAY}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
         this.hpMenu = this.add.text(837, 798, `${3 * (END - 1) + 18}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
         this.moneyMenu = this.add.text(840, 738, `${MONEY}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
@@ -426,7 +426,7 @@ class City extends Phaser.Scene {
         this.dexMenu.setText(`${DEX}`);
         this.dayMenu.setText(`${15 - DAY}`);
         this.energyMenu.setText(`${this.energy}`);
-        this.hpMenu.setText(`${2 * (END - 1) + 14}`);
+        this.hpMenu.setText(`${3 * (END - 1) + 18}`);
         this.moneyMenu.setText(`${MONEY}`);
     }
 

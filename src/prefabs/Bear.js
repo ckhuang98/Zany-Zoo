@@ -6,7 +6,9 @@ class Bear extends Animal{
 
     // attacks target and emits Message event
     attack(target){
-        this.scene.sound.add('bearRoar').play();
+        this.scene.sound.add('bearRoar').play({
+            volume: .25,
+        });
         this.scene.events.emit("Message", "The bear swipes at you with his fluffiest paw.\n\nYou take " + this.damage + " damage.");
         target.takeDamage(this.damage);
     }

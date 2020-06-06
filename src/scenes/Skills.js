@@ -24,7 +24,7 @@ class Skills extends Phaser.Scene {
         DAY = 1;
         MONEY = 0;
         REWARD = 10;
-        REDPOTION = 0;
+        REDPOTION = 1;
         BLUEPOTION = 0;
 
         // interactable images
@@ -119,7 +119,7 @@ class Skills extends Phaser.Scene {
 
         this.confirm.setInteractive().on('pointerdown',()=>{
             if(this.points == 0){
-                this.scene.start("bossBattleScene");
+                this.scene.start("cityScene")
             } 
         });
     }
