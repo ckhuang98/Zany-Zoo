@@ -24,7 +24,6 @@ class Player extends Phaser.GameObjects.Sprite {
             'Rage', "You go full on beast mode on this god dang critter. You go stupid. You go crazy.\n\n",
             'Trick', "With the ancient art of manipulation, you're able to distract the animal and successfully confuse it.\n\n",
             'Acrobatics', "You dance around this critter so quickly that you have it's head spinning.\n\n"
-
         ];
         this.scene.anims.create({
             key: 'playerIdle',
