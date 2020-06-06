@@ -2,6 +2,13 @@ class Pig extends Animal{
     constructor(scene, x, y, texture, frame, type){
         super(scene, x, y, texture, frame);
         this.type = type;
+        this.scene.anims.create({
+            key: 'pigIdle',
+            frames: this.scene.anims.generateFrameNumbers('pigIdle', { start: 0, end: 36, first: 0}),
+            frameRate: 26,
+            repeat: -1
+        });
+        this.anims.play('pigIdle');
     }
 
     // attacks target and emits Message event
