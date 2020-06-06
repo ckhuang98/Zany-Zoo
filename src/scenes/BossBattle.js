@@ -17,6 +17,8 @@ class BossBattle extends Phaser.Scene{
 
         this.load.audio('click', './assets/sounds/click.mp3');
         this.load.audio('bearRoar', './assets/sounds/bearRoar.mp3');
+        this.load.audio('pigSound', './assets/sounds/pigSound.mp3');
+        this.load.audio('monkeySound', './assets/sounds/monkeySound.mp3');
         this.load.audio('Slap', './assets/sounds/slap.mp3');
         this.load.audio('Scream', './assets/sounds/scream.mp3');
         this.load.audio('Cartwheel', './assets/sounds/cartwheel.mp3');

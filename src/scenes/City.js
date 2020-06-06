@@ -21,6 +21,7 @@ class City extends Phaser.Scene {
         this.load.image('apartmentMenu', 'apartmentMenu.png');
         this.load.image('libraryMenu', 'libraryMenu.png');
         this.load.image('storeMenu', 'storeMenu.png');
+        this.load.image('itemMenu', 'itemMenu.png');
 
         //all buttons and displayable images
         this.load.image('exit', 'exit.png');
@@ -33,6 +34,8 @@ class City extends Phaser.Scene {
         this.load.image('redPotion', 'redPotion.png');
         this.load.image('bluePotion', 'bluePotion.png');
         this.load.image('n/a', 'nothing.png');
+        this.load.image('itemButton', 'itemButton.png');
+        this.load.image('itemSelect', 'itemSelect.png');
     }
 
     create(){
@@ -42,6 +45,7 @@ class City extends Phaser.Scene {
         this.store = this.add.image(755, 331, 'store');
         this.gym = this.add.image(720, 472, 'gym');
         this.apartment = this.add.image(185, 270, 'apartment');
+        this.itemMenu = this.add.image(450, 745, 'itemButton');
 
         //to keep track of energy used throughout day
         this.energy = 3;
@@ -52,8 +56,8 @@ class City extends Phaser.Scene {
         this.energyMenu = this.add.text(243, 740, `${this.energy}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
         this.endMenu = this.add.text(592, 800, `${END}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
         this.strMenu = this.add.text(293, 856, `${STR}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
-        this.witMenu = this.add.text(491, 857, `${WIT}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
-        this.dexMenu = this.add.text(785, 857, `${DEX}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
+        this.witMenu = this.add.text(495, 857, `${WIT}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
+        this.dexMenu = this.add.text(808, 857, `${DEX}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
         this.dayMenu = this.add.text(267, 800, `${15 - DAY}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
         this.hpMenu = this.add.text(837, 798, `${3 * (END - 1) + 18}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
         this.moneyMenu = this.add.text(840, 738, `${MONEY}`, { fontFamily: 'Times New Roman', fontSize: '40px', color: '#FFFFFF'}).setOrigin(0.5);
@@ -357,53 +361,83 @@ class City extends Phaser.Scene {
             }
         });
 
+        this.itemMenu.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
+            if(!inEvent){
+                inEvent = true;
+                this.menu = this.add.image(450, 450, 'itemMenu');
+                this.exit = this.add.image(370, 700, 'exitSmall').setOrigin(0,0);
+                this.redPotDisplay = this.add.text(300, 700, `x${REDPOTION}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
+                this.bluePotDisplay = this.add.text(600, 700, `x${BLUEPOTION}`, { fontFamily: 'Times New Roman', fontSize: '60px', color: '#FFFFFF'}).setOrigin(0.5);
+                this.exit.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
+                    inEvent = false;
+                    this.clearItemEvent();
+                });
+            }
+        });
+
         //highlights building choices and resets others
         this.library.setInteractive().on('pointerover',()=>{
             if(!inEvent){
-            this.library.setTexture('selectLibrary');
-            this.store.setTexture('store');
-            this.gym.setTexture('gym');
-            this.apartment.setTexture('apartment');
+                this.itemMenu.setTexture('itemButton');
+                this.library.setTexture('selectLibrary');
+                this.store.setTexture('store');
+                this.gym.setTexture('gym');
+                this.apartment.setTexture('apartment');
             }
         });
 
         //highlights choices and resets others
         this.gym.setInteractive().on('pointerover',()=>{
             if(!inEvent){
-            this.gym.setTexture('selectGym');
-            this.store.setTexture('store');
-            this.library.setTexture('library');
-            this.apartment.setTexture('apartment');
+                this.itemMenu.setTexture('itemButton');
+                this.gym.setTexture('selectGym');
+                this.store.setTexture('store');
+                this.library.setTexture('library');
+                this.apartment.setTexture('apartment');
             }
         });
 
         //highlights building choices and resets others
         this.apartment.setInteractive().on('pointerover',()=>{
             if(!inEvent){
-            this.apartment.setTexture('selectApartment');
-            this.store.setTexture('store'); 
-            this.library.setTexture('library');
-            this.gym.setTexture('gym');
+                this.itemMenu.setTexture('itemButton');
+                this.apartment.setTexture('selectApartment');
+                this.store.setTexture('store'); 
+                this.library.setTexture('library');
+                this.gym.setTexture('gym');
             }
         });
 
         //highlights building choices and resets others
         this.store.setInteractive().on('pointerover',()=>{
             if(!inEvent){
-            this.store.setTexture('selectStore');    
-            this.apartment.setTexture('apartment');
-            this.library.setTexture('library');
-            this.gym.setTexture('gym');
+                this.itemMenu.setTexture('itemButton');
+                this.store.setTexture('selectStore');    
+                this.apartment.setTexture('apartment');
+                this.library.setTexture('library');
+                this.gym.setTexture('gym');
+            }
+        });
+
+        //highlights item menu and resets others
+        this.itemMenu.setInteractive().on('pointerover',()=>{
+            if(!inEvent){
+                this.itemMenu.setTexture('itemSelect');
+                this.gym.setTexture('gym');
+                this.store.setTexture('store');
+                this.library.setTexture('library');
+                this.apartment.setTexture('apartment');
             }
         });
 
         //unhighlights all if touching the background
         this.background.setInteractive().on('pointerover',()=>{;
             if(!inEvent){
-            this.store.setTexture('store');
-            this.library.setTexture('library');
-            this.gym.setTexture('gym');
-            this.apartment.setTexture('apartment');
+                this.itemMenu.setTexture('itemButton');
+                this.store.setTexture('store');
+                this.library.setTexture('library');
+                this.gym.setTexture('gym');
+                this.apartment.setTexture('apartment');
             }
         });      
     }
@@ -426,7 +460,7 @@ class City extends Phaser.Scene {
         this.dexMenu.setText(`${DEX}`);
         this.dayMenu.setText(`${15 - DAY}`);
         this.energyMenu.setText(`${this.energy}`);
-        this.hpMenu.setText(`${2 * (END - 1) + 14}`);
+        this.hpMenu.setText(`${3 * (END - 1) + 18}`);
         this.moneyMenu.setText(`${MONEY}`);
     }
 
@@ -463,6 +497,13 @@ class City extends Phaser.Scene {
         this.enduranceDisplay.destroy();
         this.strengthDisplay.destroy();
         this.exit.destroy();
+    }
+
+    clearItemEvent(){
+        this.menu.destroy();
+        this.exit.destroy();
+        this.redPotDisplay.destroy();
+        this.bluePotDisplay.destroy();
     }
 
     //clears store event menu
