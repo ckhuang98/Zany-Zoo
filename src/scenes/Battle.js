@@ -5,11 +5,11 @@ class Battle extends Phaser.Scene{
 
     preload(){
         this.load.image('bear', './assets/images/bear.png');
-        this.load.spritesheet('bearIdle', './assets/images/bearSpriteSheet.png', {frameWidth: 184, frameHeight: 262, startFrame: 0, endFrame: 48})
+        this.load.spritesheet('bearIdle', './assets/images/bearSpriteSheet1.png', {frameWidth: 184, frameHeight: 262, startFrame: 0, endFrame: 48})
         this.load.image('pig', './assets/images/piggy.png');
         this.load.spritesheet('pigIdle', './assets/images/pigSpriteSheet.png', {frameWidth: 198, frameHeight: 138, startFrame: 0, endFrame: 36})
         this.load.image('monkey', './assets/images/monkey.png');
-        this.load.spritesheet('monkeyIdle', './assets/images/monkeySpriteSheet.png', {frameWidth: 244, frameHeight: 200, startFrame: 0, endFrame: 49})
+        this.load.spritesheet('monkeyIdle', './assets/images/monkeySpriteSheet.png', {frameWidth: 226, frameHeight: 202, startFrame: 0, endFrame: 49})
         this.load.image('player', './assets/images/sprite.png');
         this.load.image('background', './assets/images/minigameBackground.png');
 
