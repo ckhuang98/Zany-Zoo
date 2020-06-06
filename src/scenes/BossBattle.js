@@ -9,11 +9,12 @@ class BossBattle extends Phaser.Scene{
         this.load.image('monkey', './assets/images/monkey.png');
         this.load.image('player', './assets/images/sprite.png');
         this.load.image('boss', './assets/images/bossSprite.png');
-        
-        this.load.image('background', './assets/images/bossStage.png');
 
         // Animation Sprite Sheet
-        this.load.spritesheet('bossAnim', './assets/images/bossAnim.png', {frameWidth: 450, frameHeight: 400, startFrame: 0, endFrame: 3});
+        this.load.spritesheet('bossIdle', './assets/images/bossAnim.png', {frameWidth: 291, frameHeight: 379, startFrame: 0, endFrame: 49});
+        this.load.image('background', './assets/images/bossStage.png');
+
+        
 
         this.load.audio('click', './assets/sounds/click.mp3');
         this.load.audio('bearRoar', './assets/sounds/bearRoar.mp3');
