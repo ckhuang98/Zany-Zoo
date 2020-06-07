@@ -49,8 +49,7 @@ class BossBattle extends Phaser.Scene{
         this.boss = new Boss(this, 250, 35, 'boss', 1).setOrigin(0,0);
         this.add.existing(this.boss);
 
-        // Plays animation
-        this.playAnimation();
+
         this.boss.nextAnimal();
 
         this.anims.create({
@@ -143,7 +142,6 @@ class BossBattle extends Phaser.Scene{
                     this.exitBattle();
                 }, 3500);
             } else{
-                this.playAnimation();
                 this.boss.nextAnimal();
                 if(this.boss.isLiving == false){
                     this.events.emit("Message", "You won! That'll teach him a lesson!");
@@ -338,10 +336,5 @@ class BossBattle extends Phaser.Scene{
         this.scene.start('cityScene');
     }
 
-    // Play animation
-    playAnimation(){
-        let bossAnim = this.add.sprite(this.boss.x, this.boss.y, 'bossAnim').setOrigin(0, 0);
-        bossAnim.anims.play('bossAnim');
-    }
 }
 
