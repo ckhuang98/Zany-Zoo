@@ -7,26 +7,42 @@ class BossBattle extends Phaser.Scene{
         this.load.image('bear', './assets/images/bear.png');
         this.load.spritesheet('bearIdle', './assets/images/bearSpriteSheet.png', {frameWidth: 184, frameHeight: 262, startFrame: 0, endFrame: 48});
         this.load.image('pig', './assets/images/piggy.png');
-        this.load.spritesheet('pigIdle', './assets/images/pigSpriteSheet.png', {frameWidth: 198, frameHeight: 138, startFrame: 0, endFrame: 36});
+        this.load.spritesheet('pigIdle', './assets/images/pigSpriteSheet.png', {frameWidth: 199, frameHeight: 138, startFrame: 0, endFrame: 36});
         this.load.image('monkey', './assets/images/monkey.png');
-        this.load.spritesheet('monkeyIdle', './assets/images/monkeySpriteSheet.png', {frameWidth: 226, frameHeight: 202, startFrame: 0, endFrame: 49});
+        this.load.spritesheet('monkeyIdle', './assets/images/monkeySpriteSheet.png', {frameWidth: 226, frameHeight: 202, startFrame: 0, endFrame: 50});
         this.load.image('player', './assets/images/sprite.png');
         this.load.spritesheet('playerIdle', './assets/images/playerSpriteSheet.png', {frameWidth: 138, frameHeight: 264, startFrame: 0, endFrame: 48});
         this.load.image('boss', './assets/images/bossSprite.png');
 
         // Animation Sprite Sheet
-        this.load.spritesheet('bossIdle', './assets/images/bossAnim.png', {frameWidth: 291, frameHeight: 379, startFrame: 0, endFrame: 50});
+        this.load.spritesheet('bossIdle', './assets/images/bossAnim.png', {frameWidth: 291, frameHeight: 380, startFrame: 0, endFrame: 49});
         this.load.image('background', './assets/images/bossStage.png');
 
         
 
         this.load.audio('click', './assets/sounds/click.mp3');
         this.load.audio('bearRoar', './assets/sounds/bearRoar.mp3');
-        this.load.audio('pigSound', './assets/sounds/pigSound.mp3');
-        this.load.audio('monkeySound', './assets/sounds/monkeySound.mp3');
         this.load.audio('Slap', './assets/sounds/slap.mp3');
         this.load.audio('Scream', './assets/sounds/scream.mp3');
         this.load.audio('Cartwheel', './assets/sounds/cartwheel.mp3');
+        this.load.audio('pigSound', './assets/sounds/pigSound.mp3');
+        this.load.audio('monkeySound', './assets/sounds/monkeySound.mp3');
+        this.load.audio('Acrobatics', './assets/sounds/acrobatics.mp3');
+        this.load.audio('Haymaker', './assets/sounds/haymaker.mp3');
+        this.load.audio('Intimidate', './assets/sounds/intimidate.mp3');
+        this.load.audio('JumpKick', './assets/sounds/jumpKick.mp3');
+        this.load.audio('Manuever', './assets/sounds/manuever.mp3');
+        this.load.audio('Persuade', './assets/sounds/persuade.mp3');
+        this.load.audio('Rage', './assets/sounds/rage.mp3');
+        this.load.audio('Scream', './assets/sounds/smash.mp3');
+        this.load.audio('SpinAttack', './assets/sounds/spinAttack.mp3');
+        this.load.audio('Swipe', './assets/sounds/swipe.mp3');
+        this.load.audio('Toss', './assets/sounds/toss.mp3');
+        this.load.audio('Trap', './assets/sounds/trap.mp3');
+        this.load.audio('Trick', './assets/sounds/trick.mp3');
+        this.load.audio('Yawn', './assets/sounds/yawn.mp3');
+        this.load.audio('Smash', './assets/sounds/smash.mp3');
+        this.load.audio('Slurp', './assets/sounds/slurp.mp3');
     }
 
     create(){
@@ -55,7 +71,7 @@ class BossBattle extends Phaser.Scene{
         this.anims.create({
             key: 'bossAnim',
             frames: this.anims.generateFrameNumbers('bossAnim', { start: 0, end: 3, first: 0}),
-            frameRate: 30
+            frameRate: 26
         });
 
         // Displays animal health
@@ -143,6 +159,7 @@ class BossBattle extends Phaser.Scene{
                 }, 3500);
             } else{
                 this.boss.nextAnimal();
+                this.animalHp.setText("HP: " + this.boss.currentAnimal.hp);
                 if(this.boss.isLiving == false){
                     this.events.emit("Message", "You won! That'll teach him a lesson!");
                     let timer = setTimeout(() => {
@@ -257,6 +274,18 @@ class BossBattle extends Phaser.Scene{
                         if(this.player.attacks[index] === 'Slap'){
                             this.sound.add('Slap').play();
                         }
+                        else if(this.player.attacks[index] === 'Smash'){
+                            this.sound.add('Smash').play();
+                        }
+                        else if(this.player.attacks[index] === 'Haymaker'){
+                            this.sound.add('Haymaker').play();
+                        }
+                        else if(this.player.attacks[index] === 'Toss'){
+                            this.sound.add('Toss');
+                        }
+                        else if(this.player.attacks[index] === 'Rage'){
+                            this.sound.add('Rage');
+                        }
                         this.player.attack(this.boss.currentAnimal, type, damage, i);
                     }
                 }
@@ -267,6 +296,18 @@ class BossBattle extends Phaser.Scene{
                         let damage = this.player.attacks[index + 2];
                         if(this.player.attacks[index + 1] === 'Scream'){
                             this.sound.add('Scream').play();
+                        }
+                        else if(this.player.attacks[index + 1] === 'Intimidate'){
+                            this.sound.add('Intimidate').play();
+                        }
+                        else if(this.player.attacks[index + 1] === 'Persuade'){
+                            this.sound.add('Persuade').play();
+                        }
+                        else if(this.player.attacks[index + 1] === 'Trap'){
+                            this.sound.add('Trap').play();
+                        }
+                        else if(this.player.attacks[index + 1] === 'Trick'){
+                            this.sound.add('Trick').play();
                         }
                         this.player.attack(this.boss.currentAnimal, type, damage, i);
                     }
@@ -279,6 +320,18 @@ class BossBattle extends Phaser.Scene{
                         if(this.player.attacks[index + 2] === 'Cartwheel'){
                             this.sound.add('Cartwheel').play();
                         }
+                        else if(this.player.attacks[index + 2] = 'Spin Attack'){
+                            this.sound.add('SpinAttack').play();
+                        }
+                        else if(this.player.attacks[index + 2] = 'JumpKick'){
+                            this.sound.add('JumpKick').play();
+                        }
+                        else if(this.player.attacks[index + 2] = 'Manuever'){
+                            this.sound.add('Manuever').play();
+                        }
+                        else if(this.player.attacks[index + 2] = 'Acrobatics'){
+                            this.sound.add('Acrobatics').play();
+                        }
                         this.player.attack(this.boss.currentAnimal, type, damage, i);
                     }
                 }
@@ -288,6 +341,7 @@ class BossBattle extends Phaser.Scene{
             this.time.addEvent({ delay: 3500, callback: this.nextTurn, callbackScope: this });
         } else if(action == 'item'){
             if(this.player.items[index] == 'Red Potion'){
+                this.sound.add('Slurp').play();
                 this.events.emit("Message", "SLURRRP. You drink greedily from the red potion you just pulled out of your pocket.");
                 this.player.hp += 35;
                 if(this.player.hp > (3 * (END - 1) + 18)){
@@ -299,6 +353,7 @@ class BossBattle extends Phaser.Scene{
                     this.player.items.splice(index, 1);
                 }
             } else if(this.player.items[index] == 'Blue Potion'){
+                this.sound.add('Slurp').play();
                 this.events.emit("Message", "SLURRRP. You drink greedily from the blue potion you just pulled out of your pocket.");
                 this.player.hp += 70;
                 if(this.player.hp >  3 * (END - 1) + 18){
@@ -335,6 +390,5 @@ class BossBattle extends Phaser.Scene{
     exitBattle(){
         this.scene.start('cityScene');
     }
-
 }
 

@@ -13,6 +13,7 @@ class Battle extends Phaser.Scene{
         this.load.image('player', './assets/images/sprite.png');
         this.load.spritesheet('playerIdle', './assets/images/playerSpriteSheet.png', {frameWidth: 138, frameHeight: 264, startFrame: 0, endFrame: 48});
         this.load.image('background', './assets/images/minigameBackground.png');
+        
 
         this.load.audio('click', './assets/sounds/click.mp3');
         this.load.audio('bearRoar', './assets/sounds/bearRoar.mp3');
@@ -36,6 +37,7 @@ class Battle extends Phaser.Scene{
         this.load.audio('Trick', './assets/sounds/trick.mp3');
         this.load.audio('Yawn', './assets/sounds/yawn.mp3');
         this.load.audio('Smash', './assets/sounds/smash.mp3');
+        this.load.audio('Slurp', './assets/sounds/slurp.mp3');
     }
 
     create(){
@@ -285,6 +287,7 @@ class Battle extends Phaser.Scene{
             this.time.addEvent({ delay: 3500, callback: this.nextTurn, callbackScope: this });
         } else if(action == 'item'){
             if(this.player.items[index] == 'Red Potion'){
+                this.sound.add('Slurp').play();
                 this.events.emit("Message", "SLURRRP. You drink greedily from the red potion you just pulled out of your pocket.");
                 this.player.hp += 35;
                 if(this.player.hp > (3 * (END - 1) + 18)){
@@ -296,6 +299,7 @@ class Battle extends Phaser.Scene{
                     this.player.items.splice(index, 1);
                 }
             } else if(this.player.items[index] == 'Blue Potion'){
+                this.sound.add('Slurp').play();
                 this.events.emit("Message", "SLURRRP. You drink greedily from the blue potion you just pulled out of your pocket.");
                 this.player.hp += 70;
                 if(this.player.hp >  3 * (END - 1) + 18){

@@ -75,7 +75,8 @@ class Menu extends Phaser.Scene {
     }
 
     startGame(){
-        this.scene.start("skillsScene");
+        //this.scene.start("skillsScene");
+        this.scene.start("bossBattleScene");
         this.bgm.stop();
     }
     update(){
