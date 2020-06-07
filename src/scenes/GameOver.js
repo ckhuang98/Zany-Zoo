@@ -10,6 +10,8 @@ class GameOver extends Phaser.Scene{
         this.load.image('creditSelected', './assets/images/creditsSelected.png');
         this.load.image('menuButton', './assets/images/menuButton.png');
         this.load.image('menuSelected', './assets/images/menuSelected.png');
+
+        this.load.audio('credit', './assets/music/credit.mp3');
     }
 
 
@@ -19,6 +21,13 @@ class GameOver extends Phaser.Scene{
         }else{
             this.background = this.add.tileSprite(0, 0, 900, 900, 'defeatEnding').setOrigin(0, 0);
         }
+        this.credit = this.sound.add('credit');
+        this.credit.play({
+            loop: true,
+            volume: .5,
+            mute: false
+        });
+
         this.creditButton = this.add.image(250, 700, 'creditButton');
         this.menuButton = this.add.image(650, 700, 'menuButton');
         this.inEvent = false;
@@ -29,6 +38,7 @@ class GameOver extends Phaser.Scene{
                 this.menuButton = this.add.image(680, 780, 'menuButton');
 
                 this.menuButton.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
+                    this.credit.stop();
                     this.scene.start("menuScene");
                 });
                 this.menuButton.setInteractive().on('pointerover',()=>{
@@ -42,7 +52,8 @@ class GameOver extends Phaser.Scene{
 
         this.menuButton.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
             if(!this.inEvent){
-            this.scene.start("menuScene");
+                this.credit.stop();
+                this.scene.start("menuScene");
             }
         });
 
