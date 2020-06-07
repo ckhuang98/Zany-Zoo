@@ -15,7 +15,7 @@ class BossBattle extends Phaser.Scene{
         this.load.image('boss', './assets/images/bossSprite.png');
 
         // Animation Sprite Sheet
-        this.load.spritesheet('bossIdle', './assets/images/bossAnim.png', {frameWidth: 291, frameHeight: 379, startFrame: 0, endFrame: 50});
+        this.load.spritesheet('bossIdle', './assets/images/bossAnim.png', {frameWidth: 291, frameHeight: 379, startFrame: 0, endFrame: 49});
         this.load.image('background', './assets/images/bossStage.png');
 
         
@@ -71,7 +71,7 @@ class BossBattle extends Phaser.Scene{
         this.anims.create({
             key: 'bossAnim',
             frames: this.anims.generateFrameNumbers('bossAnim', { start: 0, end: 3, first: 0}),
-            frameRate: 30
+            frameRate: 26
         });
 
         // Displays animal health
