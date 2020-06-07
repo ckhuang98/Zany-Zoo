@@ -146,17 +146,18 @@ class BossBattle extends Phaser.Scene{
                 this.boss.currentAnimal.attack(this.player);
                 this.playerHp.setText("HP: " + this.player.hp);
                 this.time.addEvent({ delay: 3500, callback: this.nextTurn, callbackScope: this });
-            }  
+            }
+            this.animalHp.setText("HP: " + this.boss.currentAnimal.hp);  
         }
         else {
             if(this.boss.currentAnimal.isLiving == true){
                 this.events.emit("Message", "You've been defeated...");
+                GAMEWON = false;
                 let timer = setTimeout(() =>{
                     this.exitBattle();
                 }, 3500);
             } else{
                 this.boss.nextAnimal();
-                this.animalHp.setText("HP: " + this.boss.currentAnimal.hp);
                 if(this.boss.isLiving == false){
                     this.events.emit("Message", "You won! That'll teach him a lesson!");
                     let timer = setTimeout(() => {
@@ -237,10 +238,10 @@ class BossBattle extends Phaser.Scene{
                             this.sound.add('Haymaker').play();
                         }
                         else if(this.player.attacks[index] === 'Toss'){
-                            this.sound.add('Toss');
+                            this.sound.add('Toss').play();
                         }
                         else if(this.player.attacks[index] === 'Rage'){
-                            this.sound.add('Rage');
+                            this.sound.add('Rage').play();
                         }
                         this.player.attack(this.boss.currentAnimal, type, damage, i);
                     }
@@ -276,7 +277,7 @@ class BossBattle extends Phaser.Scene{
                         if(this.player.attacks[index + 2] === 'Cartwheel'){
                             this.sound.add('Cartwheel').play();
                         }
-                        else if(this.player.attacks[index + 2] = 'Spin Attack'){
+                        else if(this.player.attacks[index + 2] = 'SpinAttack'){
                             this.sound.add('SpinAttack').play();
                         }
                         else if(this.player.attacks[index + 2] = 'JumpKick'){
@@ -348,7 +349,7 @@ class BossBattle extends Phaser.Scene{
 
 
     exitBattle(){
-        this.scene.start('cityScene');
+        this.scene.start('gameOverScene');
     }
 
     shutdown(){

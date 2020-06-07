@@ -2,7 +2,7 @@ let config = {
     type: Phaser.CANVAS,
     width: 900,
     height: 900,
-    scene: [ Menu, Skills, City, Battle, BossBattle]
+    scene: [ Menu, Skills, City, Battle, BossBattle, GameOver]
 }
 
 let game = new Phaser.Game(config);
@@ -12,7 +12,8 @@ let HEIGHT = game.config.height;
 let keyUP, keySPACE;
 
 // Main conditionals for choosing scenes
-let DAY = 0;
+let DAY = 14;
+let GAMEWON = true;
 
 let MONEY = 0;
 let REWARD = 10;
