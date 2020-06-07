@@ -50,6 +50,15 @@ class City extends Phaser.Scene {
         this.apartment = this.add.image(185, 270, 'apartment');
         this.itemMenu = this.add.image(450, 745, 'itemButton');
 
+        this.menuScene = this.scene.get('menuScene');
+        if(!this.menuScene.bgm.isPlaying){
+            this.menuScene.bgm.play({
+                loop: true,
+                volume: .5,
+                mute: false
+            });
+        }
+
         //to keep track of energy used throughout day
         this.energy = 3;
         this.maxEnergy = 3;//to adjust and balance the game, a variable is used for convenience
@@ -485,6 +494,7 @@ class City extends Phaser.Scene {
                 this.scene.start("cityScene");
             }); 
         }else if(DAY == 14){
+            this.menuScene.bgm.stop();
             this.scene.start("bossBattleScene");
         }else{
             this.exit.destroy();
@@ -498,6 +508,7 @@ class City extends Phaser.Scene {
                 this.continue.setTexture('continueSelect');
             }); 
             this.continue.setInteractive().on('pointerdown',()=>{;
+                this.menuScene.bgm.stop();
                 this.scene.start("battleScene");
             });
         }

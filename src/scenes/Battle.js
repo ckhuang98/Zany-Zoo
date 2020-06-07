@@ -14,6 +14,7 @@ class Battle extends Phaser.Scene{
         this.load.spritesheet('playerIdle', './assets/images/playerSpriteSheet.png', {frameWidth: 138, frameHeight: 264, startFrame: 0, endFrame: 48});
         this.load.image('background', './assets/images/minigameBackground.png');
         
+        this.load.audio('battleMusic', './assets/music/BattleMusic.mp3');
 
         this.load.audio('click', './assets/sounds/click.mp3');
         this.load.audio('bearRoar', './assets/sounds/bearRoar.mp3');
@@ -43,6 +44,14 @@ class Battle extends Phaser.Scene{
     create(){
         // Sets placehold background
         this.background = this.add.tileSprite(0, 0, WIDTH, HEIGHT, 'background').setOrigin(0,0);
+
+        this.battleMusic = this.sound.add('battleMusic');
+
+        this.battleMusic.play({
+            loop: true,
+            volume: .5,
+            mute: false
+        });
         
         // Creates Player
         this.player = new Player(this, 750, 500, 'player', 1);
@@ -332,6 +341,7 @@ class Battle extends Phaser.Scene{
 
 
     exitBattle(){
+        this.battleMusic.stop();
         this.scene.start('cityScene');
     }
 

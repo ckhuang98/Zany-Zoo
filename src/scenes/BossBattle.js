@@ -18,7 +18,7 @@ class BossBattle extends Phaser.Scene{
         this.load.spritesheet('bossIdle', './assets/images/bossAnim.png', {frameWidth: 291, frameHeight: 380, startFrame: 0, endFrame: 49});
         this.load.image('background1', './assets/images/bossStage.png');
 
-        
+        this.load.audio('battleMusic', './assets/music/BattleMusic.mp3');
 
         this.load.audio('click', './assets/sounds/click.mp3');
         this.load.audio('bearRoar', './assets/sounds/bearRoar.mp3');
@@ -49,6 +49,14 @@ class BossBattle extends Phaser.Scene{
         // Sets placehold background
         this.background = this.add.tileSprite(0, 0, WIDTH, HEIGHT, 'background1').setOrigin(0,0);
         
+        this.battleMusic = this.sound.add('battleMusic');
+
+        this.battleMusic.play({
+            loop: true,
+            volume: .5,
+            mute: false
+        });
+
         // Creates Player
         this.player = new Player(this, 750, 500, 'player', 1);
         this.add.existing(this.player);
@@ -277,16 +285,16 @@ class BossBattle extends Phaser.Scene{
                         if(this.player.attacks[index + 2] === 'Cartwheel'){
                             this.sound.add('Cartwheel').play();
                         }
-                        else if(this.player.attacks[index + 2] = 'Spin Attack'){
+                        else if(this.player.attacks[index + 2] == 'Spin Attack'){
                             this.sound.add('Spin Attack').play();
                         }
-                        else if(this.player.attacks[index + 2] = 'Jump Kick'){
+                        else if(this.player.attacks[index + 2] == 'Jump Kick'){
                             this.sound.add('Jump Kick').play();
                         }
-                        else if(this.player.attacks[index + 2] = 'Manuever'){
+                        else if(this.player.attacks[index + 2] == 'Manuever'){
                             this.sound.add('Manuever').play();
                         }
-                        else if(this.player.attacks[index + 2] = 'Acrobatics'){
+                        else if(this.player.attacks[index + 2] == 'Acrobatics'){
                             this.sound.add('Acrobatics').play();
                         }
                         this.player.attack(this.boss.currentAnimal, type, damage, i);
@@ -349,6 +357,7 @@ class BossBattle extends Phaser.Scene{
 
 
     exitBattle(){
+        this.battleMusic.stop();
         this.scene.start('gameOverScene');
     }
 

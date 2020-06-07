@@ -14,7 +14,7 @@ class Menu extends Phaser.Scene {
 
         this.load.image('instructions', './assets/images/instructions.png');
 
-        this.load.audio('bgm', './assets/sound/hipjazz.mp3'); // place holder bgm until I have time to make one.
+        this.load.audio('bgm', './assets/music/BGM.mp3');
     }
 
     create(){
@@ -91,7 +91,7 @@ class Menu extends Phaser.Scene {
             this.scene.start("skillsScene");
             //this.scene.start("bossBattleScene");
             //this.scene.start("gameOverScene");
-            this.bgm.stop();
+
         });
 
     }
