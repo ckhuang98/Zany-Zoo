@@ -17,6 +17,7 @@ class City extends Phaser.Scene {
         this.load.image('selectStore', 'selectStore.png');
         this.load.image('dayOff', 'dayOff.png');
         this.load.image('workDay', 'workDay.png');
+        this.load.image('preBossPage', 'preBossPage.png');
 
         //all menus that can be created
         this.load.image('gymMenu', 'gymMenu.png');
@@ -38,6 +39,8 @@ class City extends Phaser.Scene {
         this.load.image('n/a', 'nothing.png');
         this.load.image('itemButton', 'itemButton.png');
         this.load.image('itemSelect', 'itemSelect.png');
+        this.load.image('gobackButton', 'gobackButton.png');
+        this.load.image('gobackSelect', 'goBackSelect.png');
 
     }
 
@@ -103,6 +106,7 @@ class City extends Phaser.Scene {
                 //exit menu
                 this.exit.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
                     if(this.energy == 0){
+                        this.clearEvent();
                         this.startNewScene();
                     }else{
                         this.clearEvent();
@@ -147,6 +151,7 @@ class City extends Phaser.Scene {
                 //exit menu
                 this.exit.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
                     if(this.energy == 0){
+                        this.clearEvent();
                         this.startNewScene();
                     }else{
                         this.clearEvent();
@@ -217,6 +222,7 @@ class City extends Phaser.Scene {
                 //exit menu
                 this.exit.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
                     if(this.energy == 0){
+                        this.clearEventSpecial();
                         this.startNewScene();
                     }else{
                         this.clearEventSpecial();
@@ -471,8 +477,6 @@ class City extends Phaser.Scene {
         //sets scene based on day if odd it was players day off if even player goes to work
         if(DAY % 2 == 1){
             DAY++;
-            this.exit.destroy();
-            this.inEvent = true;
             this.dayOff = this.add.image(0, 0, 'dayOff').setOrigin(0.0, 0.0);
             this.continue = this.add.image(450, 800, 'continueButton');
             this.dayOff.setInteractive().on('pointerover',()=>{;
@@ -485,10 +489,30 @@ class City extends Phaser.Scene {
                 this.scene.start("cityScene");
             }); 
         }else if(DAY == 14){
-            this.scene.start("bossBattleScene");
+            this.preBossPage = this.add.image(0, 0, 'preBossPage').setOrigin(0.0, 0.0);
+            this.continue = this.add.image(600, 800, 'continueButton');
+            this.goBack = this.add.image(300, 800, 'goBackButton');
+            this.preBossPage.setInteractive().on('pointerover',()=>{;
+                this.continue.setTexture('continueButton');
+                this.continue.setTexture('goBackButton');
+            }); 
+            this.continue.setInteractive().on('pointerover',()=>{;
+                this.continue.setTexture('continueSelect');
+                this.continue.setTexture('goBackButton');
+            }); 
+            this.goBack.setInteractive().on('pointerover',()=>{;
+                this.continue.setTexture('gobackSelect');
+                this.continue.setTexture('continueButton');
+            }); 
+            this.continue.setInteractive().on('pointerdown',()=>{;
+                this.scene.start("bossBattleScene");
+            });
+            this.goBack.setInteractive().on('pointerdown',()=>{;
+                this.preBossPage.destroy();
+                this.continue.destroy();
+                this.goBack.destroy();
+            });
         }else{
-            this.exit.destroy();
-            this.inEvent = true;
             this.workDay = this.add.image(0, 0, 'workDay').setOrigin(0.0, 0.0);
             this.continue = this.add.image(450, 800, 'continueButton');
             this.workDay.setInteractive().on('pointerover',()=>{;
