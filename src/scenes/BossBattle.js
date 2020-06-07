@@ -143,6 +143,7 @@ class BossBattle extends Phaser.Scene{
                 }, 3500);
             } else{
                 this.boss.nextAnimal();
+                this.animalHp.setText("HP: " + this.boss.currentAnimal.hp);
                 if(this.boss.isLiving == false){
                     this.events.emit("Message", "You won! That'll teach him a lesson!");
                     let timer = setTimeout(() => {
@@ -335,6 +336,5 @@ class BossBattle extends Phaser.Scene{
     exitBattle(){
         this.scene.start('cityScene');
     }
-
 }
 
