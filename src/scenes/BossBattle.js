@@ -285,29 +285,16 @@ class BossBattle extends Phaser.Scene{
                         if(this.player.attacks[index + 2] === 'Dexterity: Cartwheel'){
                             this.sound.add('Cartwheel').play();
                         }
-<<<<<<< HEAD
-                        else if(this.player.attacks[index + 2] == 'Spin Attack'){
+                        else if(this.player.attacks[index + 2] === 'Dexterity: Spin Attack'){
                             this.sound.add('Spin Attack').play();
                         }
-                        else if(this.player.attacks[index + 2] == 'Jump Kick'){
+                        else if(this.player.attacks[index + 2] === 'Dexterity: Jump Kick'){
                             this.sound.add('Jump Kick').play();
                         }
-                        else if(this.player.attacks[index + 2] == 'Manuever'){
+                        else if(this.player.attacks[index + 2] === 'Dexterity: Manuever'){
                             this.sound.add('Manuever').play();
                         }
-                        else if(this.player.attacks[index + 2] == 'Acrobatics'){
-=======
-                        else if(this.player.attacks[index + 2] = 'Dexterity: Spin Attack'){
-                            this.sound.add('Spin Attack').play();
-                        }
-                        else if(this.player.attacks[index + 2] = 'Dexterity: Jump Kick'){
-                            this.sound.add('Jump Kick').play();
-                        }
-                        else if(this.player.attacks[index + 2] = 'Dexterity: Manuever'){
-                            this.sound.add('Manuever').play();
-                        }
-                        else if(this.player.attacks[index + 2] = 'Dexterity: Acrobatics'){
->>>>>>> 854cc2744bb17803ef34183e9b8bafe9e5dbab08
+                        else if(this.player.attacks[index + 2] === 'Dexterity: Acrobatics'){
                             this.sound.add('Acrobatics').play();
                         }
                         this.player.attack(this.boss.currentAnimal, type, damage, i);
