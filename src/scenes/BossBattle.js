@@ -109,9 +109,6 @@ class BossBattle extends Phaser.Scene{
         // Flag for attacksMenu to determine whether to emit attack or item
         this.selectedItems = false;
 
-        // Event listener for keystrokes
-        this.input.keyboard.on('keydown', this.onKeyInput, this);
-
         // Event listener for player's turn
         this.events.on('PlayerTurn', this.onPlayerTurn, this);
 
@@ -245,7 +242,7 @@ class BossBattle extends Phaser.Scene{
                         else if(this.player.attacks[index] === 'Rage'){
                             this.sound.add('Rage');
                         }
-                        this.player.attack(this.animal, type, damage, i);
+                        this.player.attack(this.boss.currentAnimal, type, damage, i);
                     }
                 }
             } else if(index == 1){
@@ -268,7 +265,7 @@ class BossBattle extends Phaser.Scene{
                         else if(this.player.attacks[index + 1] === 'Trick'){
                             this.sound.add('Trick').play();
                         }
-                        this.player.attack(this.animal, type, damage, i);
+                        this.player.attack(this.boss.currentAnimal, type, damage, i);
                     }
                 }
             } else if(index == 2){
@@ -291,12 +288,12 @@ class BossBattle extends Phaser.Scene{
                         else if(this.player.attacks[index + 2] = 'Acrobatics'){
                             this.sound.add('Acrobatics').play();
                         }
-                        this.player.attack(this.animal, type, damage, i);
+                        this.player.attack(this.boss.currentAnimal, type, damage, i);
                     }
                 }
 
             }
-            this.animalHp.setText("HP: " + this.animal.hp);
+            this.animalHp.setText("HP: " + this.boss.currentAnimal.hp);
             this.time.addEvent({ delay: 3500, callback: this.nextTurn, callbackScope: this });
         } else if(action == 'item'){
             if(this.player.items[index] == 'Red Potion'){

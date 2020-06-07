@@ -12,7 +12,7 @@ let HEIGHT = game.config.height;
 let keyUP, keySPACE;
 
 // Main conditionals for choosing scenes
-let DAY = 14;
+let DAY = 0;
 
 let MONEY = 0;
 let REWARD = 10;
