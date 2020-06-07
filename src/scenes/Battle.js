@@ -260,16 +260,16 @@ class Battle extends Phaser.Scene{
                         if(this.player.attacks[index + 2] === 'Cartwheel'){
                             this.sound.add('Cartwheel').play();
                         }
-                        else if(this.player.attacks[index + 2] = 'Spin Attack'){
+                        else if(this.player.attacks[index + 2] === 'Spin Attack'){
                             this.sound.add('Spin Attack').play();
                         }
-                        else if(this.player.attacks[index + 2] = 'Jump Kick'){
+                        else if(this.player.attacks[index + 2] === 'Jump Kick'){
                             this.sound.add('Jump Kick').play();
                         }
-                        else if(this.player.attacks[index + 2] = 'Manuever'){
+                        else if(this.player.attacks[index + 2] === 'Manuever'){
                             this.sound.add('Manuever').play();
                         }
-                        else if(this.player.attacks[index + 2] = 'Acrobatics'){
+                        else if(this.player.attacks[index + 2] === 'Acrobatics'){
                             this.sound.add('Acrobatics').play();
                         }
                         this.player.attack(this.animal, type, damage, i);
