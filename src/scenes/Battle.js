@@ -24,10 +24,10 @@ class Battle extends Phaser.Scene{
         this.load.audio('Cartwheel', './assets/sounds/cartwheel.mp3');
         this.load.audio('Smash', './assets/sounds/smash.mp3');
         this.load.audio('Intimidate', './assets/sounds/intimidate.mp3');
-        this.load.audio('SpinAttack', './assets/sounds/spinAttack.mp3');
+        this.load.audio('Spin Attack', './assets/sounds/spinAttack.mp3');
         this.load.audio('Haymaker', './assets/sounds/haymaker.mp3');
         this.load.audio('Persuade', './assets/sounds/persuade.mp3');
-        this.load.audio('JumpKick', './assets/sounds/jumpKick.mp3');
+        this.load.audio('Jump Kick', './assets/sounds/jumpKick.mp3');
         this.load.audio('Toss', './assets/sounds/toss.mp3');
         this.load.audio('Trap', './assets/sounds/trap.mp3');
         this.load.audio('Manuever', './assets/sounds/manuever.mp3');
@@ -260,11 +260,11 @@ class Battle extends Phaser.Scene{
                         if(this.player.attacks[index + 2] === 'Cartwheel'){
                             this.sound.add('Cartwheel').play();
                         }
-                        else if(this.player.attacks[index + 2] = 'SpinAttack'){
-                            this.sound.add('SpinAttack').play();
+                        else if(this.player.attacks[index + 2] = 'Spin Attack'){
+                            this.sound.add('Spin Attack').play();
                         }
-                        else if(this.player.attacks[index + 2] = 'JumpKick'){
-                            this.sound.add('JumpKick').play();
+                        else if(this.player.attacks[index + 2] = 'Jump Kick'){
+                            this.sound.add('Jump Kick').play();
                         }
                         else if(this.player.attacks[index + 2] = 'Manuever'){
                             this.sound.add('Manuever').play();
