@@ -211,19 +211,19 @@ class Battle extends Phaser.Scene{
                 for(let i = 0; i < this.player.attackText.length; i += 6){
                     if(this.player.attacks[index] === this.player.attackText[i]){
                         let damage = this.player.attacks[index + 1];
-                        if(this.player.attacks[index] === 'Slap'){
+                        if(this.player.attacks[index] === 'Strength: Slap'){
                             this.sound.add('Slap').play();
                         }
-                        else if(this.player.attacks[index] === 'Smash'){
+                        else if(this.player.attacks[index] === 'Strength: Smash'){
                             this.sound.add('Smash').play();
                         }
-                        else if(this.player.attacks[index] === 'Haymaker'){
+                        else if(this.player.attacks[index] === 'Strength: Haymaker'){
                             this.sound.add('Haymaker').play();
                         }
-                        else if(this.player.attacks[index] === 'Toss'){
+                        else if(this.player.attacks[index] === 'Strength: Toss'){
                             this.sound.add('Toss').play();
                         }
-                        else if(this.player.attacks[index] === 'Rage'){
+                        else if(this.player.attacks[index] === 'Strength: Rage'){
                             this.sound.add('Rage').play();
                         }
                         this.player.attack(this.animal, type, damage, i);
@@ -234,19 +234,19 @@ class Battle extends Phaser.Scene{
                 for(let i = 2; i < this.player.attackText.length; i += 6){
                     if(this.player.attacks[index + 1] === this.player.attackText[i]){
                         let damage = this.player.attacks[index + 2];
-                        if(this.player.attacks[index + 1] === 'Scream'){
+                        if(this.player.attacks[index + 1] === 'Wit: Scream'){
                             this.sound.add('Scream').play();
                         }
-                        else if(this.player.attacks[index + 1] === 'Intimidate'){
+                        else if(this.player.attacks[index + 1] === 'Wit: Intimidate'){
                             this.sound.add('Intimidate').play();
                         }
-                        else if(this.player.attacks[index + 1] === 'Persuade'){
+                        else if(this.player.attacks[index + 1] === 'Wit: Persuade'){
                             this.sound.add('Persuade').play();
                         }
-                        else if(this.player.attacks[index + 1] === 'Trap'){
+                        else if(this.player.attacks[index + 1] === 'Wit: Trap'){
                             this.sound.add('Trap').play();
                         }
-                        else if(this.player.attacks[index + 1] === 'Trick'){
+                        else if(this.player.attacks[index + 1] === 'Wit: Trick'){
                             this.sound.add('Trick').play();
                         }
                         this.player.attack(this.animal, type, damage, i);
@@ -257,19 +257,19 @@ class Battle extends Phaser.Scene{
                 for(let i = 4; i < this.player.attackText.length; i += 6){
                     if(this.player.attacks[index + 2] === this.player.attackText[i]){
                         let damage = this.player.attacks[index + 3];
-                        if(this.player.attacks[index + 2] === 'Cartwheel'){
+                        if(this.player.attacks[index + 2] === 'Dexterity: Cartwheel'){
                             this.sound.add('Cartwheel').play();
                         }
-                        else if(this.player.attacks[index + 2] = 'Spin Attack'){
+                        else if(this.player.attacks[index + 2] = 'Dexterity: Spin Attack'){
                             this.sound.add('Spin Attack').play();
                         }
-                        else if(this.player.attacks[index + 2] = 'Jump Kick'){
+                        else if(this.player.attacks[index + 2] = 'Dexterity: Jump Kick'){
                             this.sound.add('Jump Kick').play();
                         }
-                        else if(this.player.attacks[index + 2] = 'Manuever'){
+                        else if(this.player.attacks[index + 2] = 'Dexterity: Manuever'){
                             this.sound.add('Manuever').play();
                         }
-                        else if(this.player.attacks[index + 2] = 'Acrobatics'){
+                        else if(this.player.attacks[index + 2] = 'Dexterity: Acrobatics'){
                             this.sound.add('Acrobatics').play();
                         }
                         this.player.attack(this.animal, type, damage, i);
