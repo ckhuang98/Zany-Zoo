@@ -15,7 +15,7 @@ class BossBattle extends Phaser.Scene{
         this.load.image('boss', './assets/images/bossSprite.png');
 
         // Animation Sprite Sheet
-        this.load.spritesheet('bossIdle', './assets/images/bossAnim.png', {frameWidth: 291, frameHeight: 379, startFrame: 0, endFrame: 49});
+        this.load.spritesheet('bossIdle', './assets/images/bossAnim.png', {frameWidth: 291, frameHeight: 379, startFrame: 0, endFrame: 50});
         this.load.image('background', './assets/images/bossStage.png');
 
         
@@ -39,7 +39,7 @@ class BossBattle extends Phaser.Scene{
         this.player.createAttacks();
         this.player.createItems();
         console.log(this.player.items);
-        //this.player.flipX = true;
+        
 
         // Displays player
         this.playerHp = this.add.text(760, 330, "", { color: '#ffffff', align: 'left', fontSize: 25}).setOrigin(0.5);
