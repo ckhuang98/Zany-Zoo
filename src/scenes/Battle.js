@@ -260,16 +260,16 @@ class Battle extends Phaser.Scene{
                         if(this.player.attacks[index + 2] === 'Dexterity: Cartwheel'){
                             this.sound.add('Cartwheel').play();
                         }
-                        else if(this.player.attacks[index + 2] = 'Dexterity: Spin Attack'){
+                        else if(this.player.attacks[index + 2] === 'Dexterity: Spin Attack'){
                             this.sound.add('Spin Attack').play();
                         }
-                        else if(this.player.attacks[index + 2] = 'Dexterity: Jump Kick'){
+                        else if(this.player.attacks[index + 2] === 'Dexterity: Jump Kick'){
                             this.sound.add('Jump Kick').play();
                         }
-                        else if(this.player.attacks[index + 2] = 'Dexterity: Manuever'){
+                        else if(this.player.attacks[index + 2] === 'Dexterity: Manuever'){
                             this.sound.add('Manuever').play();
                         }
-                        else if(this.player.attacks[index + 2] = 'Dexterity: Acrobatics'){
+                        else if(this.player.attacks[index + 2] === 'Dexterity: Acrobatics'){
                             this.sound.add('Acrobatics').play();
                         }
                         this.player.attack(this.animal, type, damage, i);
