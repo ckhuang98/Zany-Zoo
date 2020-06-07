@@ -22,11 +22,27 @@ class BossBattle extends Phaser.Scene{
 
         this.load.audio('click', './assets/sounds/click.mp3');
         this.load.audio('bearRoar', './assets/sounds/bearRoar.mp3');
-        this.load.audio('pigSound', './assets/sounds/pigSound.mp3');
-        this.load.audio('monkeySound', './assets/sounds/monkeySound.mp3');
         this.load.audio('Slap', './assets/sounds/slap.mp3');
         this.load.audio('Scream', './assets/sounds/scream.mp3');
         this.load.audio('Cartwheel', './assets/sounds/cartwheel.mp3');
+        this.load.audio('pigSound', './assets/sounds/pigSound.mp3');
+        this.load.audio('monkeySound', './assets/sounds/monkeySound.mp3');
+        this.load.audio('Acrobatics', './assets/sounds/acrobatics.mp3');
+        this.load.audio('Haymaker', './assets/sounds/haymaker.mp3');
+        this.load.audio('Intimidate', './assets/sounds/intimidate.mp3');
+        this.load.audio('JumpKick', './assets/sounds/jumpKick.mp3');
+        this.load.audio('Manuever', './assets/sounds/manuever.mp3');
+        this.load.audio('Persuade', './assets/sounds/persuade.mp3');
+        this.load.audio('Rage', './assets/sounds/rage.mp3');
+        this.load.audio('Scream', './assets/sounds/smash.mp3');
+        this.load.audio('SpinAttack', './assets/sounds/spinAttack.mp3');
+        this.load.audio('Swipe', './assets/sounds/swipe.mp3');
+        this.load.audio('Toss', './assets/sounds/toss.mp3');
+        this.load.audio('Trap', './assets/sounds/trap.mp3');
+        this.load.audio('Trick', './assets/sounds/trick.mp3');
+        this.load.audio('Yawn', './assets/sounds/yawn.mp3');
+        this.load.audio('Smash', './assets/sounds/smash.mp3');
+        this.load.audio('Slurp', './assets/sounds/slurp.mp3');
     }
 
     create(){
