@@ -7,9 +7,9 @@ class BossBattle extends Phaser.Scene{
         this.load.image('bear', './assets/images/bear.png');
         this.load.spritesheet('bearIdle', './assets/images/bearSpriteSheet.png', {frameWidth: 184, frameHeight: 262, startFrame: 0, endFrame: 48});
         this.load.image('pig', './assets/images/piggy.png');
-        this.load.spritesheet('pigIdle', './assets/images/pigSpriteSheet.png', {frameWidth: 198, frameHeight: 138, startFrame: 0, endFrame: 36});
+        this.load.spritesheet('pigIdle', './assets/images/pigSpriteSheet.png', {frameWidth: 199, frameHeight: 138, startFrame: 0, endFrame: 36});
         this.load.image('monkey', './assets/images/monkey.png');
-        this.load.spritesheet('monkeyIdle', './assets/images/monkeySpriteSheet.png', {frameWidth: 226, frameHeight: 202, startFrame: 0, endFrame: 49});
+        this.load.spritesheet('monkeyIdle', './assets/images/monkeySpriteSheet.png', {frameWidth: 226, frameHeight: 202, startFrame: 0, endFrame: 50});
         this.load.image('player', './assets/images/sprite.png');
         this.load.spritesheet('playerIdle', './assets/images/playerSpriteSheet.png', {frameWidth: 138, frameHeight: 264, startFrame: 0, endFrame: 48});
         this.load.image('boss', './assets/images/bossSprite.png');
