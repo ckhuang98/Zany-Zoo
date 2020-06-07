@@ -75,22 +75,18 @@ class Battle extends Phaser.Scene{
 
         // Keeps track of whose turn it is
         this.turnCounter = 0;
+
+        // Adjusts Combat Reward based on days
         if(DAY % 7 == 0){
             REWARD = 15;
         }
 
-        
-        // container to hold the menus
-        this.menus = this.add.container();
+
         this.actionsMenu = new ActionsMenu(this, 575, 725);
         this.attacksMenu = new AttacksMenu(this, 8, 725);
 
         // select current menu
         this.currentMenu = this.actionsMenu;
-
-        // add menu to container
-        this.menus.add(this.actionsMenu);
-        this.menus.add(this.attacksMenu);
 
         // Grabs the attack arrays from BattleScene
         this.attacks = [];
@@ -101,9 +97,6 @@ class Battle extends Phaser.Scene{
 
         // Flag for attacksMenu to determine whether to emit attack or item
         this.selectedItems = false;
-
-        // Event listener for keystrokes
-        this.input.keyboard.on('keydown', this.onKeyInput, this);
 
         // Event listener for player's turn
         this.events.on('PlayerTurn', this.onPlayerTurn, this);
@@ -158,96 +151,56 @@ class Battle extends Phaser.Scene{
         }
     }
 
-    // Function that calls on keystrokes
-    onKeyInput(event){
-        if(this.currentMenu){
-            if(event.code == "ArrowUp"){
-                this.sound.add('click').play();
-                this.currentMenu.moveSelectionUp();
-            } else if(event.code === "ArrowDown") {
-                this.sound.add('click').play();
-                this.currentMenu.moveSelectionDown();
-            } else if(event.code === "ArrowRight" || event.code === "Shift") {
- 
-            } else if(event.code === "Space" || event.code === "ArrowLeft") {
-                this.currentMenu.confirm();
-            }
-        }   
-    }
-
     // Function that calls on Player's turn.
     onPlayerTurn(){
         this.currentMenu = this.actionsMenu;
-        this.actionsMenu.select();
     }
 
     // Function that calls when Player selects a type of attack they want to use.
     showAttacks(){
         this.selectedItems = false;
-        this.attacksMenu.remap(this.attacks);
+        this.attacksMenu.clear();
+        
+        for(let i = 0; i < this.attacks.length; i++){
+            this.attacksMenu.addMenuItem(this.attacks[i], () => {this.events.emit('attack', i);});
+        }
 
         this.currentMenu = this.attacksMenu;
-        this.attacksMenu.select();
-    }
-
-    attackEnemy(){
-        let index = this.attacksMenu.menuItemIndex;
-        this.actionsMenu.deselect();
-        this.attacksMenu.deselect();
-        this.attacksMenu.clear();
-
-        this.currentMenu = null;
-        this.receivePlayerSelection('attack', index);
     }
 
     // Displays the items player has
     showItems(){
         this.selectedItems = true;          // Set items flag to true
 
+        this.attacksMenu.clear();
         // If player has no item, display message and return player to action menu
         if(this.items.length < 1){
             this.events.emit("Message", "You do not have any items to use...");
             let timer = setTimeout(() =>{
                 this.currentMenu = this.actionsMenu;
-                this.actionsMenu.select();
             }, 3500);
             return;
         }
 
-        this.attacksMenu.remap(this.items);
+        for(let i = 0; i < this.items.length; i++){
+            this.attacksMenu.addMenuItem(this.items[i], () => {this.events.emit('item', i);});
+        }
         this.currentMenu = this.attacksMenu;
-        this.attacksMenu.select();
     }
 
-    useItem(){
-        let index = this.attacksMenu.menuItemIndex;
-        this.actionsMenu.deselect();
-        this.attacksMenu.deselect();
+    attackEnemy(index){
+        this.attacksMenu.clear();
+
+        this.currentMenu = null;
+        this.receivePlayerSelection('attack', index);
+    }
+
+    useItem(index){
         this.attacksMenu.clear();
 
         this.currentMenu = null;
         this.receivePlayerSelection('item', index);
     }
-
-
-    shutdown(){
-        console.log('ui shutdown');
-        this.input.keyboard.off('keydown');
-
-        // Event listener for player's turn
-        this.events.off('PlayerTurn');
-
-        // Listerner for actionsMenu Confirm()
-        this.events.off('SelectAttacks');
-
-        this.events.off('SelectItems');
-
-        this.events.off('attack');
-
-        this.events.off('item');
-        this.combatText.destroy();
-    }
-
 
     // recieves player selection and calls nextTurn()
     receivePlayerSelection(action, index){
@@ -357,6 +310,8 @@ class Battle extends Phaser.Scene{
 
     showMessage(text) {
         console.log(text);
+        this.actionsMenu.menuItems[0].disableInteractive()
+        this.actionsMenu.menuItems[1].disableInteractive();
         this.combatText.setText(text);
         this.combatText.visible = true;
         if(this.hideEvent)
@@ -368,6 +323,8 @@ class Battle extends Phaser.Scene{
 
     // Hides displayed text
     hideMessage() {
+        this.actionsMenu.menuItems[0].setInteractive();
+        this.actionsMenu.menuItems[1].setInteractive();
         this.hideEvent = null;
         this.combatText.visible = false;
     }
@@ -375,6 +332,24 @@ class Battle extends Phaser.Scene{
 
     exitBattle(){
         this.scene.start('cityScene');
+    }
+
+    shutdown(){
+        console.log('ui shutdown');
+        this.input.keyboard.off('keydown');
+
+        // Event listener for player's turn
+        this.events.off('PlayerTurn');
+
+        // Listerner for actionsMenu Confirm()
+        this.events.off('SelectAttacks');
+
+        this.events.off('SelectItems');
+
+        this.events.off('attack');
+
+        this.events.off('item');
+        this.combatText.destroy();
     }
 }
 

@@ -7,44 +7,10 @@ class BattleMenu extends Phaser.GameObjects.Container{
         this.y = y;
     }
 
-    addMenuItem(unit){
-        let menuItem = new BattleMenuItem(this.scene, 0, this.menuItems.length * 40, unit);
+    addMenuItem(text, callback){
+        let menuItem = new BattleMenuItem(this.scene, 0, this.menuItems.length * 40, text, callback);
         this.menuItems.push(menuItem);
         this.add(menuItem);
-    }
-
-    moveSelectionUp(){
-        this.menuItems[this.menuItemIndex].deselect();
-        this.menuItemIndex--;
-        if(this.menuItemIndex < 0)
-            this.menuItemIndex = this.menuItems.length - 1;
-        this.menuItems[this.menuItemIndex].select();
-    }
-
-    moveSelectionDown(){
-        this.menuItems[this.menuItemIndex].deselect();
-        this.menuItemIndex++;
-        if(this.menuItemIndex >= this.menuItems.length)
-            this.menuItemIndex = 0;
-        this.menuItems[this.menuItemIndex].select();
-    }
-
-    // select an element with index from menu
-    select(index){
-        if(!index)
-            index = 0;
-        this.menuItems[this.menuItemIndex].deselect();
-        this.menuItemIndex = index;
-        this.menuItems[this.menuItemIndex].select();
-    }
-
-    // deselect this menu
-    deselect(){
-        this.menuItems[this.menuItemIndex].deselect();
-        this.menuItemIndex = 0;
-    }
-
-    confirm(){
     }
 
     // clears menu
@@ -55,14 +21,5 @@ class BattleMenu extends Phaser.GameObjects.Container{
         this.menuItems.length = 0;
         this.menuItemIndex = 0;
     }
-
-    remap(array){
-        this.clear();
-        for(let i = 0; i < array.length; i++){
-            let item = array[i];
-            this.addMenuItem(item);
-        }
-    }
-
 
 }
