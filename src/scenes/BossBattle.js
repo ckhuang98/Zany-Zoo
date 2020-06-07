@@ -133,17 +133,18 @@ class BossBattle extends Phaser.Scene{
                 this.boss.currentAnimal.attack(this.player);
                 this.playerHp.setText("HP: " + this.player.hp);
                 this.time.addEvent({ delay: 3500, callback: this.nextTurn, callbackScope: this });
-            }  
+            }
+            this.animalHp.setText("HP: " + this.boss.currentAnimal.hp);  
         }
         else {
             if(this.boss.currentAnimal.isLiving == true){
                 this.events.emit("Message", "You've been defeated...");
+                GAMEWON = false;
                 let timer = setTimeout(() =>{
                     this.exitBattle();
                 }, 3500);
             } else{
                 this.boss.nextAnimal();
-                this.animalHp.setText("HP: " + this.boss.currentAnimal.hp);
                 if(this.boss.isLiving == false){
                     this.events.emit("Message", "You won! That'll teach him a lesson!");
                     let timer = setTimeout(() => {
@@ -334,7 +335,7 @@ class BossBattle extends Phaser.Scene{
 
 
     exitBattle(){
-        this.scene.start('cityScene');
+        this.scene.start('gameOverScene');
     }
 }
 

@@ -15,6 +15,8 @@ class City extends Phaser.Scene {
         this.load.image('selectApartment', 'selectApartment.png');
         this.load.image('store', 'store.png');
         this.load.image('selectStore', 'selectStore.png');
+        this.load.image('dayOff', 'dayOff.png');
+        this.load.image('workDay', 'workDay.png');
 
         //all menus that can be created
         this.load.image('gymMenu', 'gymMenu.png');
@@ -36,6 +38,7 @@ class City extends Phaser.Scene {
         this.load.image('n/a', 'nothing.png');
         this.load.image('itemButton', 'itemButton.png');
         this.load.image('itemSelect', 'itemSelect.png');
+
     }
 
     create(){
@@ -468,11 +471,35 @@ class City extends Phaser.Scene {
         //sets scene based on day if odd it was players day off if even player goes to work
         if(DAY % 2 == 1){
             DAY++;
-            this.scene.start("cityScene");
+            this.exit.destroy();
+            this.inEvent = true;
+            this.dayOff = this.add.image(0, 0, 'dayOff').setOrigin(0.0, 0.0);
+            this.continue = this.add.image(450, 800, 'continueButton');
+            this.dayOff.setInteractive().on('pointerover',()=>{;
+                this.continue.setTexture('continueButton');
+            }); 
+            this.continue.setInteractive().on('pointerover',()=>{;
+                this.continue.setTexture('continueSelect');
+            }); 
+            this.continue.setInteractive().on('pointerdown',()=>{;
+                this.scene.start("cityScene");
+            }); 
         }else if(DAY == 14){
             this.scene.start("bossBattleScene");
         }else{
-            this.scene.start("battleScene");
+            this.exit.destroy();
+            this.inEvent = true;
+            this.workDay = this.add.image(0, 0, 'workDay').setOrigin(0.0, 0.0);
+            this.continue = this.add.image(450, 800, 'continueButton');
+            this.workDay.setInteractive().on('pointerover',()=>{;
+                this.continue.setTexture('continueButton');
+            }); 
+            this.continue.setInteractive().on('pointerover',()=>{;
+                this.continue.setTexture('continueSelect');
+            }); 
+            this.continue.setInteractive().on('pointerdown',()=>{;
+                this.scene.start("battleScene");
+            });
         }
     }
 
