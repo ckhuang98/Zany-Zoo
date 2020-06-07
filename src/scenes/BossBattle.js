@@ -15,7 +15,7 @@ class BossBattle extends Phaser.Scene{
         this.load.image('boss', './assets/images/bossSprite.png');
 
         // Animation Sprite Sheet
-        this.load.spritesheet('bossIdle', './assets/images/bossAnim.png', {frameWidth: 291, frameHeight: 379, startFrame: 0, endFrame: 49});
+        this.load.spritesheet('bossIdle', './assets/images/bossAnim.png', {frameWidth: 291, frameHeight: 380, startFrame: 0, endFrame: 49});
         this.load.image('background', './assets/images/bossStage.png');
 
         
@@ -274,6 +274,18 @@ class BossBattle extends Phaser.Scene{
                         if(this.player.attacks[index] === 'Slap'){
                             this.sound.add('Slap').play();
                         }
+                        else if(this.player.attacks[index] === 'Smash'){
+                            this.sound.add('Smash').play();
+                        }
+                        else if(this.player.attacks[index] === 'Haymaker'){
+                            this.sound.add('Haymaker').play();
+                        }
+                        else if(this.player.attacks[index] === 'Toss'){
+                            this.sound.add('Toss');
+                        }
+                        else if(this.player.attacks[index] === 'Rage'){
+                            this.sound.add('Rage');
+                        }
                         this.player.attack(this.boss.currentAnimal, type, damage, i);
                     }
                 }
@@ -284,6 +296,18 @@ class BossBattle extends Phaser.Scene{
                         let damage = this.player.attacks[index + 2];
                         if(this.player.attacks[index + 1] === 'Scream'){
                             this.sound.add('Scream').play();
+                        }
+                        else if(this.player.attacks[index + 1] === 'Intimidate'){
+                            this.sound.add('Intimidate').play();
+                        }
+                        else if(this.player.attacks[index + 1] === 'Persuade'){
+                            this.sound.add('Persuade').play();
+                        }
+                        else if(this.player.attacks[index + 1] === 'Trap'){
+                            this.sound.add('Trap').play();
+                        }
+                        else if(this.player.attacks[index + 1] === 'Trick'){
+                            this.sound.add('Trick').play();
                         }
                         this.player.attack(this.boss.currentAnimal, type, damage, i);
                     }
@@ -296,6 +320,18 @@ class BossBattle extends Phaser.Scene{
                         if(this.player.attacks[index + 2] === 'Cartwheel'){
                             this.sound.add('Cartwheel').play();
                         }
+                        else if(this.player.attacks[index + 2] = 'Spin Attack'){
+                            this.sound.add('SpinAttack').play();
+                        }
+                        else if(this.player.attacks[index + 2] = 'JumpKick'){
+                            this.sound.add('JumpKick').play();
+                        }
+                        else if(this.player.attacks[index + 2] = 'Manuever'){
+                            this.sound.add('Manuever').play();
+                        }
+                        else if(this.player.attacks[index + 2] = 'Acrobatics'){
+                            this.sound.add('Acrobatics').play();
+                        }
                         this.player.attack(this.boss.currentAnimal, type, damage, i);
                     }
                 }
@@ -305,6 +341,7 @@ class BossBattle extends Phaser.Scene{
             this.time.addEvent({ delay: 3500, callback: this.nextTurn, callbackScope: this });
         } else if(action == 'item'){
             if(this.player.items[index] == 'Red Potion'){
+                this.sound.add('Slurp').play();
                 this.events.emit("Message", "SLURRRP. You drink greedily from the red potion you just pulled out of your pocket.");
                 this.player.hp += 35;
                 if(this.player.hp > (3 * (END - 1) + 18)){
@@ -316,6 +353,7 @@ class BossBattle extends Phaser.Scene{
                     this.player.items.splice(index, 1);
                 }
             } else if(this.player.items[index] == 'Blue Potion'){
+                this.sound.add('Slurp').play();
                 this.events.emit("Message", "SLURRRP. You drink greedily from the blue potion you just pulled out of your pocket.");
                 this.player.hp += 70;
                 if(this.player.hp >  3 * (END - 1) + 18){
