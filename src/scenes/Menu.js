@@ -39,7 +39,7 @@ class Menu extends Phaser.Scene {
                 this.instructions = this.add.image(450, 450, 'instructions').setOrigin(0.5,0.5);
                 this.pressStart = this.add.image(686, 700, 'pressStart');
                 this.inEvent = true;
-                this.instructions.setInteractive().on('pointerover',()=>{;
+                    this.instructions.setInteractive().on('pointerover',()=>{;
                     this.pressStart.setTexture('pressStart');
                     }); 
                     this.pressStart.setInteractive().on('pointerover',()=>{
@@ -93,5 +93,6 @@ class Menu extends Phaser.Scene {
             this.scene.start("gameOverScene");
             this.bgm.stop();
         });
+
     }
 }
