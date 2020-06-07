@@ -171,97 +171,56 @@ class BossBattle extends Phaser.Scene{
             }
         }
     }
-
-    // Function that calls on keystrokes
-    onKeyInput(event){
-        if(this.currentMenu){
-            if(event.code == "ArrowUp"){
-                this.sound.add('click').play();
-                this.currentMenu.moveSelectionUp();
-            } else if(event.code === "ArrowDown") {
-                this.sound.add('click').play();
-                this.currentMenu.moveSelectionDown();
-            } else if(event.code === "ArrowRight" || event.code === "Shift") {
- 
-            } else if(event.code === "Space" || event.code === "ArrowLeft") {
-                this.currentMenu.confirm();
-            }
-        }   
-    }
-
     // Function that calls on Player's turn.
     onPlayerTurn(){
         this.currentMenu = this.actionsMenu;
-        this.actionsMenu.select();
     }
 
     // Function that calls when Player selects a type of attack they want to use.
     showAttacks(){
         this.selectedItems = false;
-        this.attacksMenu.remap(this.attacks);
+        this.attacksMenu.clear();
+        
+        for(let i = 0; i < this.attacks.length; i++){
+            this.attacksMenu.addMenuItem(this.attacks[i], () => {this.events.emit('attack', i);});
+        }
 
         this.currentMenu = this.attacksMenu;
-        this.attacksMenu.select();
-    }
-
-    attackEnemy(){
-        let index = this.attacksMenu.menuItemIndex;
-        this.actionsMenu.deselect();
-        this.attacksMenu.deselect();
-        this.attacksMenu.clear();
-
-        this.currentMenu = null;
-        this.receivePlayerSelection('attack', index);
     }
 
     // Displays the items player has
     showItems(){
         this.selectedItems = true;          // Set items flag to true
 
+        this.attacksMenu.clear();
         // If player has no item, display message and return player to action menu
         if(this.items.length < 1){
             this.events.emit("Message", "You do not have any items to use...");
             let timer = setTimeout(() =>{
                 this.currentMenu = this.actionsMenu;
-                this.actionsMenu.select();
             }, 3500);
             return;
         }
 
-        this.attacksMenu.remap(this.items);
+        for(let i = 0; i < this.items.length; i++){
+            this.attacksMenu.addMenuItem(this.items[i], () => {this.events.emit('item', i);});
+        }
         this.currentMenu = this.attacksMenu;
-        this.attacksMenu.select();
     }
 
-    useItem(){
-        let index = this.attacksMenu.menuItemIndex;
-        this.actionsMenu.deselect();
-        this.attacksMenu.deselect();
+    attackEnemy(index){
+        this.attacksMenu.clear();
+
+        this.currentMenu = null;
+        this.receivePlayerSelection('attack', index);
+    }
+
+    useItem(index){
         this.attacksMenu.clear();
 
         this.currentMenu = null;
         this.receivePlayerSelection('item', index);
     }
-
-
-    shutdown(){
-        console.log('ui shutdown');
-        this.input.keyboard.off('keydown');
-
-        // Event listener for player's turn
-        this.events.off('PlayerTurn');
-
-        // Listerner for actionsMenu Confirm()
-        this.events.off('SelectAttacks');
-
-        this.events.off('SelectItems');
-
-        this.events.off('attack');
-
-        this.events.off('item');
-        this.combatText.destroy();
-    }
-
 
     // recieves player selection and calls nextTurn()
     receivePlayerSelection(action, index){
@@ -286,7 +245,7 @@ class BossBattle extends Phaser.Scene{
                         else if(this.player.attacks[index] === 'Rage'){
                             this.sound.add('Rage');
                         }
-                        this.player.attack(this.boss.currentAnimal, type, damage, i);
+                        this.player.attack(this.animal, type, damage, i);
                     }
                 }
             } else if(index == 1){
@@ -309,10 +268,10 @@ class BossBattle extends Phaser.Scene{
                         else if(this.player.attacks[index + 1] === 'Trick'){
                             this.sound.add('Trick').play();
                         }
-                        this.player.attack(this.boss.currentAnimal, type, damage, i);
+                        this.player.attack(this.animal, type, damage, i);
                     }
                 }
-            } else{
+            } else if(index == 2){
                 let type = "dex";
                 for(let i = 4; i < this.player.attackText.length; i += 6){
                     if(this.player.attacks[index + 2] === this.player.attackText[i]){
@@ -332,12 +291,12 @@ class BossBattle extends Phaser.Scene{
                         else if(this.player.attacks[index + 2] = 'Acrobatics'){
                             this.sound.add('Acrobatics').play();
                         }
-                        this.player.attack(this.boss.currentAnimal, type, damage, i);
+                        this.player.attack(this.animal, type, damage, i);
                     }
                 }
 
             }
-            this.animalHp.setText("HP: " + this.boss.currentAnimal.hp);
+            this.animalHp.setText("HP: " + this.animal.hp);
             this.time.addEvent({ delay: 3500, callback: this.nextTurn, callbackScope: this });
         } else if(action == 'item'){
             if(this.player.items[index] == 'Red Potion'){
@@ -371,6 +330,8 @@ class BossBattle extends Phaser.Scene{
 
     showMessage(text) {
         console.log(text);
+        this.actionsMenu.menuItems[0].disableInteractive()
+        this.actionsMenu.menuItems[1].disableInteractive();
         this.combatText.setText(text);
         this.combatText.visible = true;
         if(this.hideEvent)
@@ -382,6 +343,8 @@ class BossBattle extends Phaser.Scene{
 
     // Hides displayed text
     hideMessage() {
+        this.actionsMenu.menuItems[0].setInteractive();
+        this.actionsMenu.menuItems[1].setInteractive();
         this.hideEvent = null;
         this.combatText.visible = false;
     }
@@ -389,6 +352,24 @@ class BossBattle extends Phaser.Scene{
 
     exitBattle(){
         this.scene.start('cityScene');
+    }
+
+    shutdown(){
+        console.log('ui shutdown');
+        this.input.keyboard.off('keydown');
+
+        // Event listener for player's turn
+        this.events.off('PlayerTurn');
+
+        // Listerner for actionsMenu Confirm()
+        this.events.off('SelectAttacks');
+
+        this.events.off('SelectItems');
+
+        this.events.off('attack');
+
+        this.events.off('item');
+        this.combatText.destroy();
     }
 }
 
