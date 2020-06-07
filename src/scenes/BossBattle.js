@@ -281,10 +281,10 @@ class BossBattle extends Phaser.Scene{
                             this.sound.add('Haymaker').play();
                         }
                         else if(this.player.attacks[index] === 'Toss'){
-                            this.sound.add('Toss');
+                            this.sound.add('Toss').play();
                         }
                         else if(this.player.attacks[index] === 'Rage'){
-                            this.sound.add('Rage');
+                            this.sound.add('Rage').play();
                         }
                         this.player.attack(this.boss.currentAnimal, type, damage, i);
                     }
@@ -320,7 +320,7 @@ class BossBattle extends Phaser.Scene{
                         if(this.player.attacks[index + 2] === 'Cartwheel'){
                             this.sound.add('Cartwheel').play();
                         }
-                        else if(this.player.attacks[index + 2] = 'Spin Attack'){
+                        else if(this.player.attacks[index + 2] = 'SpinAttack'){
                             this.sound.add('SpinAttack').play();
                         }
                         else if(this.player.attacks[index + 2] = 'JumpKick'){
