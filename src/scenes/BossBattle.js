@@ -15,18 +15,34 @@ class BossBattle extends Phaser.Scene{
         this.load.image('boss', './assets/images/bossSprite.png');
 
         // Animation Sprite Sheet
-        this.load.spritesheet('bossIdle', './assets/images/bossAnim.png', {frameWidth: 291, frameHeight: 379, startFrame: 0, endFrame: 50});
+        this.load.spritesheet('bossIdle', './assets/images/bossAnim.png', {frameWidth: 291, frameHeight: 380, startFrame: 0, endFrame: 49});
         this.load.image('background', './assets/images/bossStage.png');
 
         
 
         this.load.audio('click', './assets/sounds/click.mp3');
         this.load.audio('bearRoar', './assets/sounds/bearRoar.mp3');
-        this.load.audio('pigSound', './assets/sounds/pigSound.mp3');
-        this.load.audio('monkeySound', './assets/sounds/monkeySound.mp3');
         this.load.audio('Slap', './assets/sounds/slap.mp3');
         this.load.audio('Scream', './assets/sounds/scream.mp3');
         this.load.audio('Cartwheel', './assets/sounds/cartwheel.mp3');
+        this.load.audio('pigSound', './assets/sounds/pigSound.mp3');
+        this.load.audio('monkeySound', './assets/sounds/monkeySound.mp3');
+        this.load.audio('Acrobatics', './assets/sounds/acrobatics.mp3');
+        this.load.audio('Haymaker', './assets/sounds/haymaker.mp3');
+        this.load.audio('Intimidate', './assets/sounds/intimidate.mp3');
+        this.load.audio('JumpKick', './assets/sounds/jumpKick.mp3');
+        this.load.audio('Manuever', './assets/sounds/manuever.mp3');
+        this.load.audio('Persuade', './assets/sounds/persuade.mp3');
+        this.load.audio('Rage', './assets/sounds/rage.mp3');
+        this.load.audio('Scream', './assets/sounds/smash.mp3');
+        this.load.audio('SpinAttack', './assets/sounds/spinAttack.mp3');
+        this.load.audio('Swipe', './assets/sounds/swipe.mp3');
+        this.load.audio('Toss', './assets/sounds/toss.mp3');
+        this.load.audio('Trap', './assets/sounds/trap.mp3');
+        this.load.audio('Trick', './assets/sounds/trick.mp3');
+        this.load.audio('Yawn', './assets/sounds/yawn.mp3');
+        this.load.audio('Smash', './assets/sounds/smash.mp3');
+        this.load.audio('Slurp', './assets/sounds/slurp.mp3');
     }
 
     create(){
@@ -55,7 +71,7 @@ class BossBattle extends Phaser.Scene{
         this.anims.create({
             key: 'bossAnim',
             frames: this.anims.generateFrameNumbers('bossAnim', { start: 0, end: 3, first: 0}),
-            frameRate: 30
+            frameRate: 26
         });
 
         // Displays animal health
@@ -156,97 +172,56 @@ class BossBattle extends Phaser.Scene{
             }
         }
     }
-
-    // Function that calls on keystrokes
-    onKeyInput(event){
-        if(this.currentMenu){
-            if(event.code == "ArrowUp"){
-                this.sound.add('click').play();
-                this.currentMenu.moveSelectionUp();
-            } else if(event.code === "ArrowDown") {
-                this.sound.add('click').play();
-                this.currentMenu.moveSelectionDown();
-            } else if(event.code === "ArrowRight" || event.code === "Shift") {
- 
-            } else if(event.code === "Space" || event.code === "ArrowLeft") {
-                this.currentMenu.confirm();
-            }
-        }   
-    }
-
     // Function that calls on Player's turn.
     onPlayerTurn(){
         this.currentMenu = this.actionsMenu;
-        this.actionsMenu.select();
     }
 
     // Function that calls when Player selects a type of attack they want to use.
     showAttacks(){
         this.selectedItems = false;
-        this.attacksMenu.remap(this.attacks);
+        this.attacksMenu.clear();
+        
+        for(let i = 0; i < this.attacks.length; i++){
+            this.attacksMenu.addMenuItem(this.attacks[i], () => {this.events.emit('attack', i);});
+        }
 
         this.currentMenu = this.attacksMenu;
-        this.attacksMenu.select();
-    }
-
-    attackEnemy(){
-        let index = this.attacksMenu.menuItemIndex;
-        this.actionsMenu.deselect();
-        this.attacksMenu.deselect();
-        this.attacksMenu.clear();
-
-        this.currentMenu = null;
-        this.receivePlayerSelection('attack', index);
     }
 
     // Displays the items player has
     showItems(){
         this.selectedItems = true;          // Set items flag to true
 
+        this.attacksMenu.clear();
         // If player has no item, display message and return player to action menu
         if(this.items.length < 1){
             this.events.emit("Message", "You do not have any items to use...");
             let timer = setTimeout(() =>{
                 this.currentMenu = this.actionsMenu;
-                this.actionsMenu.select();
             }, 3500);
             return;
         }
 
-        this.attacksMenu.remap(this.items);
+        for(let i = 0; i < this.items.length; i++){
+            this.attacksMenu.addMenuItem(this.items[i], () => {this.events.emit('item', i);});
+        }
         this.currentMenu = this.attacksMenu;
-        this.attacksMenu.select();
     }
 
-    useItem(){
-        let index = this.attacksMenu.menuItemIndex;
-        this.actionsMenu.deselect();
-        this.attacksMenu.deselect();
+    attackEnemy(index){
+        this.attacksMenu.clear();
+
+        this.currentMenu = null;
+        this.receivePlayerSelection('attack', index);
+    }
+
+    useItem(index){
         this.attacksMenu.clear();
 
         this.currentMenu = null;
         this.receivePlayerSelection('item', index);
     }
-
-
-    shutdown(){
-        console.log('ui shutdown');
-        this.input.keyboard.off('keydown');
-
-        // Event listener for player's turn
-        this.events.off('PlayerTurn');
-
-        // Listerner for actionsMenu Confirm()
-        this.events.off('SelectAttacks');
-
-        this.events.off('SelectItems');
-
-        this.events.off('attack');
-
-        this.events.off('item');
-        this.combatText.destroy();
-    }
-
 
     // recieves player selection and calls nextTurn()
     receivePlayerSelection(action, index){
@@ -259,7 +234,19 @@ class BossBattle extends Phaser.Scene{
                         if(this.player.attacks[index] === 'Slap'){
                             this.sound.add('Slap').play();
                         }
-                        this.player.attack(this.boss.currentAnimal, type, damage, i);
+                        else if(this.player.attacks[index] === 'Smash'){
+                            this.sound.add('Smash').play();
+                        }
+                        else if(this.player.attacks[index] === 'Haymaker'){
+                            this.sound.add('Haymaker').play();
+                        }
+                        else if(this.player.attacks[index] === 'Toss'){
+                            this.sound.add('Toss');
+                        }
+                        else if(this.player.attacks[index] === 'Rage'){
+                            this.sound.add('Rage');
+                        }
+                        this.player.attack(this.animal, type, damage, i);
                     }
                 }
             } else if(index == 1){
@@ -270,10 +257,22 @@ class BossBattle extends Phaser.Scene{
                         if(this.player.attacks[index + 1] === 'Scream'){
                             this.sound.add('Scream').play();
                         }
-                        this.player.attack(this.boss.currentAnimal, type, damage, i);
+                        else if(this.player.attacks[index + 1] === 'Intimidate'){
+                            this.sound.add('Intimidate').play();
+                        }
+                        else if(this.player.attacks[index + 1] === 'Persuade'){
+                            this.sound.add('Persuade').play();
+                        }
+                        else if(this.player.attacks[index + 1] === 'Trap'){
+                            this.sound.add('Trap').play();
+                        }
+                        else if(this.player.attacks[index + 1] === 'Trick'){
+                            this.sound.add('Trick').play();
+                        }
+                        this.player.attack(this.animal, type, damage, i);
                     }
                 }
-            } else{
+            } else if(index == 2){
                 let type = "dex";
                 for(let i = 4; i < this.player.attackText.length; i += 6){
                     if(this.player.attacks[index + 2] === this.player.attackText[i]){
@@ -281,15 +280,28 @@ class BossBattle extends Phaser.Scene{
                         if(this.player.attacks[index + 2] === 'Cartwheel'){
                             this.sound.add('Cartwheel').play();
                         }
-                        this.player.attack(this.boss.currentAnimal, type, damage, i);
+                        else if(this.player.attacks[index + 2] = 'Spin Attack'){
+                            this.sound.add('SpinAttack').play();
+                        }
+                        else if(this.player.attacks[index + 2] = 'JumpKick'){
+                            this.sound.add('JumpKick').play();
+                        }
+                        else if(this.player.attacks[index + 2] = 'Manuever'){
+                            this.sound.add('Manuever').play();
+                        }
+                        else if(this.player.attacks[index + 2] = 'Acrobatics'){
+                            this.sound.add('Acrobatics').play();
+                        }
+                        this.player.attack(this.animal, type, damage, i);
                     }
                 }
 
             }
-            this.animalHp.setText("HP: " + this.boss.currentAnimal.hp);
+            this.animalHp.setText("HP: " + this.animal.hp);
             this.time.addEvent({ delay: 3500, callback: this.nextTurn, callbackScope: this });
         } else if(action == 'item'){
             if(this.player.items[index] == 'Red Potion'){
+                this.sound.add('Slurp').play();
                 this.events.emit("Message", "SLURRRP. You drink greedily from the red potion you just pulled out of your pocket.");
                 this.player.hp += 35;
                 if(this.player.hp > (3 * (END - 1) + 18)){
@@ -301,6 +313,7 @@ class BossBattle extends Phaser.Scene{
                     this.player.items.splice(index, 1);
                 }
             } else if(this.player.items[index] == 'Blue Potion'){
+                this.sound.add('Slurp').play();
                 this.events.emit("Message", "SLURRRP. You drink greedily from the blue potion you just pulled out of your pocket.");
                 this.player.hp += 70;
                 if(this.player.hp >  3 * (END - 1) + 18){
@@ -318,6 +331,8 @@ class BossBattle extends Phaser.Scene{
 
     showMessage(text) {
         console.log(text);
+        this.actionsMenu.menuItems[0].disableInteractive()
+        this.actionsMenu.menuItems[1].disableInteractive();
         this.combatText.setText(text);
         this.combatText.visible = true;
         if(this.hideEvent)
@@ -329,6 +344,8 @@ class BossBattle extends Phaser.Scene{
 
     // Hides displayed text
     hideMessage() {
+        this.actionsMenu.menuItems[0].setInteractive();
+        this.actionsMenu.menuItems[1].setInteractive();
         this.hideEvent = null;
         this.combatText.visible = false;
     }
@@ -336,6 +353,24 @@ class BossBattle extends Phaser.Scene{
 
     exitBattle(){
         this.scene.start('gameOverScene');
+    }
+
+    shutdown(){
+        console.log('ui shutdown');
+        this.input.keyboard.off('keydown');
+
+        // Event listener for player's turn
+        this.events.off('PlayerTurn');
+
+        // Listerner for actionsMenu Confirm()
+        this.events.off('SelectAttacks');
+
+        this.events.off('SelectItems');
+
+        this.events.off('attack');
+
+        this.events.off('item');
+        this.combatText.destroy();
     }
 }
 
