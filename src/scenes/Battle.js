@@ -81,12 +81,13 @@ class Battle extends Phaser.Scene{
             REWARD = 15;
         }
 
-
+        this.menus = this.add.container();
         this.actionsMenu = new ActionsMenu(this, 575, 725);
         this.attacksMenu = new AttacksMenu(this, 8, 725);
 
-        // select current menu
-        this.currentMenu = this.actionsMenu;
+        // add menu to container
+        this.menus.add(this.actionsMenu);
+        this.menus.add(this.attacksMenu);
 
         // Grabs the attack arrays from BattleScene
         this.attacks = [];
@@ -349,6 +350,8 @@ class Battle extends Phaser.Scene{
         this.events.off('attack');
 
         this.events.off('item');
+        this.actionsMenu.destroy();
+        this.attacksMenu.destroy();
         this.combatText.destroy();
     }
 }
