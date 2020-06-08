@@ -236,19 +236,19 @@ class BossBattle extends Phaser.Scene{
                 for(let i = 0; i < this.player.attackText.length; i += 6){
                     if(this.player.attacks[index] === this.player.attackText[i]){
                         let damage = this.player.attacks[index + 1];
-                        if(this.player.attacks[index] === 'Stregth: Slap'){
+                        if(this.player.attacks[index] === 'Strength: Slap'){
                             this.sound.add('Slap').play();
                         }
-                        else if(this.player.attacks[index] === 'Stregth: Smash'){
+                        else if(this.player.attacks[index] === 'Strength: Smash'){
                             this.sound.add('Smash').play();
                         }
-                        else if(this.player.attacks[index] === 'Stregth: Haymaker'){
+                        else if(this.player.attacks[index] === 'Strength: Haymaker'){
                             this.sound.add('Haymaker').play();
                         }
-                        else if(this.player.attacks[index] === 'Stregth: Toss'){
+                        else if(this.player.attacks[index] === 'Strength: Toss'){
                             this.sound.add('Toss').play();
                         }
-                        else if(this.player.attacks[index] === 'Stregth: Rage'){
+                        else if(this.player.attacks[index] === 'Strength: Rage'){
                             this.sound.add('Rage').play();
                         }
                         this.player.attack(this.boss.currentAnimal, type, damage, i);
