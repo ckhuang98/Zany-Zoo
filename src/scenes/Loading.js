@@ -4,9 +4,7 @@ class Loading extends Phaser.Scene {
     }
 
     preload(){
-        // Loading animation
-        this.load.spritesheet('loadingScreen', './assets/images/loadingSpriteSheet.png', {frameWidth: 900, frameHeight: 900, startFrame: 0, endFrame: 49});
-        
+        // Loading animation   
         this.anims.create({
             key: 'loadingAnimation',
             frames: this.anims.generateFrameNumbers('loadingAnimation', { start: 0, end: 49, first: 0}),
@@ -91,6 +89,6 @@ class Loading extends Phaser.Scene {
         
     }
     create(){
-        this.scene.start('skillsScene');
+        this.scene.start('menuScene');
     }
 }

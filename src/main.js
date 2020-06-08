@@ -2,7 +2,7 @@ let config = {
     type: Phaser.CANVAS,
     width: 900,
     height: 900,
-    scene: [ Loading, Menu, Skills, City, Battle, BossBattle, GameOver]
+    scene: [ Preloading, Loading, Menu, Skills, City, Battle, BossBattle, GameOver]
 }
 
 
