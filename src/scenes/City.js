@@ -3,6 +3,7 @@ class City extends Phaser.Scene {
         super("cityScene");
     }
 
+
     create(){
         //main city menu display
         this.background = this.add.tileSprite(0, 0, 900, 900, 'cityBackground').setOrigin(0, 0);

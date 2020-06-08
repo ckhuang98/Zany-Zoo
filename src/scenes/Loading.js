@@ -33,6 +33,46 @@ class Loading extends Phaser.Scene {
         this.load.image('instructionsSelect', './assets/images/instructionsSelect.png');
         this.load.image('instructions', './assets/images/Instructions.png');
 
+        // City assets
+        //all interactable background images and building images
+        this.load.image('cityBackground', './assets/images/CityBackground.png');
+        this.load.image('library', './assets/images/library.png');
+        this.load.image('selectLibrary', './assets/images/selectLibrary.png');
+        this.load.image('gym', './assets/images/gym.png');
+        this.load.image('selectGym', './assets/images/selectGym.png');
+        this.load.image('apartment', './assets/images/apartment.png');
+        this.load.image('selectApartment', './assets/images/selectApartment.png');
+        this.load.image('store', './assets/images/store.png');
+        this.load.image('selectStore', './assets/images/selectStore.png');
+        this.load.image('dayOff', './assets/images/dayOff.png');
+        this.load.image('workDay', './assets/images/workDay.png');
+        this.load.image('preBossPage', './assets/images/preBossPage.png');
+
+        //all menus that can be created
+        this.load.image('gymMenu', './assets/images/gymMenu.png');
+        this.load.image('apartmentMenu', './assets/images/apartmentMenu.png');
+        this.load.image('libraryMenu', './assets/images/libraryMenu.png');
+        this.load.image('storeMenu', './assets/images/storeMenu.png');
+        this.load.image('itemMenu', './assets/images/itemMenu.png');
+
+        //all buttons and displayable images
+        this.load.image('exit', './assets/images/exit.png');
+        this.load.image('exitSmall', './assets/images/exitSmall.png');
+        this.load.image('buy', './assets/images/buy.png');
+        this.load.image('shoe', './assets/images/shoe.png');
+        this.load.image('protein', './assets/images/protein.png');
+        this.load.image('book', './assets/images/book.png');
+        this.load.image('controller', './assets/images/controller.png');
+        this.load.image('redPotion', './assets/images/redPotion.png');
+        this.load.image('bluePotion', './assets/images/bluePotion.png');
+        this.load.image('n/a', './assets/images/nothing.png');
+        this.load.image('itemButton', './assets/images/itemButton.png');
+        this.load.image('itemSelect', './assets/images/itemSelect.png');
+        this.load.image('goBackButton', './assets/images/goBackButton.png');
+        this.load.image('goBackSelect', './assets/images/goBackSelect.png');
+
+        
+
         //images for Game Over
         this.load.image('defeatEnding', './assets/images/defeatEnding.png');
         this.load.image('victoryEnding', './assets/images/victoryEnding.png');
