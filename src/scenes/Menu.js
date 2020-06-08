@@ -2,20 +2,6 @@ class Menu extends Phaser.Scene {
     constructor() {
         super("menuScene");
     }
-    preload(){
-        //menu images and buttons
-        this.load.image('continueButton', './assets/images/continueButton.png');
-        this.load.image('continueSelect', './assets/images/continueSelect.png');
-        this.load.image('menu', './assets/images/TitleMenu.png');
-        this.load.image('pressStart', './assets/images/pressStart.png');
-        this.load.image('startSelect', './assets/images/startSelect.png');
-        this.load.image('backStory', './assets/images/Backstory.png');
-        this.load.image('pressInstruction', './assets/images/instructionsButton.png');
-        this.load.image('instructionsSelect', './assets/images/instructionsSelect.png');
-        this.load.image('instructions', './assets/images/Instructions.png');
-
-        this.load.audio('bgm', './assets/music/BGM.mp3');
-    }
 
     create(){
         this.background = this.add.tileSprite(0, 0, 1000, 1000, 'menu').setOrigin(0, 0);

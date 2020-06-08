@@ -3,47 +3,6 @@ class City extends Phaser.Scene {
         super("cityScene");
     }
 
-    preload(){
-        this.load.path = "./assets/images/";
-        //all interactable background images and building images
-        this.load.image('cityBackground', 'CityBackground.png');
-        this.load.image('library', 'library.png');
-        this.load.image('selectLibrary', 'selectLibrary.png');
-        this.load.image('gym', 'gym.png');
-        this.load.image('selectGym', 'selectGym.png');
-        this.load.image('apartment', 'apartment.png');
-        this.load.image('selectApartment', 'selectApartment.png');
-        this.load.image('store', 'store.png');
-        this.load.image('selectStore', 'selectStore.png');
-        this.load.image('dayOff', 'dayOff.png');
-        this.load.image('workDay', 'workDay.png');
-        this.load.image('preBossPage', 'preBossPage.png');
-
-        //all menus that can be created
-        this.load.image('gymMenu', 'gymMenu.png');
-        this.load.image('apartmentMenu', 'apartmentMenu.png');
-        this.load.image('libraryMenu', 'libraryMenu.png');
-        this.load.image('storeMenu', 'storeMenu.png');
-        this.load.image('itemMenu', 'itemMenu.png');
-
-        //all buttons and displayable images
-        this.load.image('exit', 'exit.png');
-        this.load.image('exitSmall', 'exitSmall.png');
-        this.load.image('buy', 'buy.png');
-        this.load.image('shoe', 'shoe.png');
-        this.load.image('protein', 'protein.png');
-        this.load.image('book', 'book.png');
-        this.load.image('controller', 'controller.png');
-        this.load.image('redPotion', 'redPotion.png');
-        this.load.image('bluePotion', 'bluePotion.png');
-        this.load.image('n/a', 'nothing.png');
-        this.load.image('itemButton', 'itemButton.png');
-        this.load.image('itemSelect', 'itemSelect.png');
-        this.load.image('goBackButton', 'goBackButton.png');
-        this.load.image('goBackSelect', 'goBackSelect.png');
-
-    }
-
     create(){
         //main city menu display
         this.background = this.add.tileSprite(0, 0, 900, 900, 'cityBackground').setOrigin(0, 0);

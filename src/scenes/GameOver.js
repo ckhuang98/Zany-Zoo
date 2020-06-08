@@ -2,18 +2,6 @@ class GameOver extends Phaser.Scene{
     constructor(){
         super("gameOverScene");
     }
-    preload(){
-        //images for Game Over
-        this.load.image('defeatEnding', './assets/images/defeatEnding.png');
-        this.load.image('victoryEnding', './assets/images/victoryEnding.png');
-        this.load.image('creditPage', './assets/images/creditPage.png');
-        this.load.image('creditButton', './assets/images/creditsButton.png');
-        this.load.image('creditSelected', './assets/images/creditsSelected.png');
-        this.load.image('menuButton', './assets/images/menuButton.png');
-        this.load.image('menuSelected', './assets/images/menuSelected.png');
-
-        this.load.audio('credit', './assets/music/credit.mp3');
-    }
 
 
     create(){

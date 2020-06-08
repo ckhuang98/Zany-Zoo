@@ -2,13 +2,6 @@ class Skills extends Phaser.Scene {
     constructor() {
         super("skillsScene");
     }
-    preload(){
-        this.load.path = "./assets/images/";
-        this.load.image('skillsMenu', 'skillsMenu.png');
-        this.load.image('plus', 'plus.png');
-        this.load.image('minus', 'minus.png');
-        this.load.image('confirm', 'confirm.png');
-    }
 
     create(){
         this.add.tileSprite(0, 0, 900, 900, 'skillsMenu').setOrigin(0, 0);
