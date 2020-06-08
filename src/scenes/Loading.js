@@ -8,7 +8,7 @@ class Loading extends Phaser.Scene {
         this.anims.create({
             key: 'loadingAnimation',
             frames: this.anims.generateFrameNumbers('loadingAnimation', { start: 0, end: 49, first: 0}),
-            frameRate: 26,
+            frameRate: 12,
             repeat: -1
         });
             
@@ -85,7 +85,7 @@ class Loading extends Phaser.Scene {
         // Game Music
         this.load.audio('bgm', './assets/music/BGM.mp3');
         this.load.audio('battleMusic', './assets/music/BattleMusic.mp3');
-        this.load.audio('credit', './assets/music/credit.mp3');
+        this.load.audio('credit', './assets/music/Credit.mp3');
         
     }
     create(){
