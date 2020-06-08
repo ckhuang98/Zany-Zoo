@@ -21,7 +21,6 @@ class Menu extends Phaser.Scene {
         this.background = this.add.tileSprite(0, 0, 1000, 1000, 'menu').setOrigin(0, 0);
         this.pressStart = this.add.image(450, 580, 'pressStart');
         this.pressInstructions = this.add.image(450, 400, 'pressInstruction');
-        this.exit = this.load.image('exit', 'exit.png');
         this.inEvent = false;
         this.bgm = this.sound.add('bgm');
         
