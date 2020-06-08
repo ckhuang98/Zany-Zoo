@@ -143,20 +143,20 @@ class Battle extends Phaser.Scene{
             } else{
                 this.animal.attack(this.player);
                 this.playerHp.setText("HP: " + this.player.hp);
-                this.time.addEvent({ delay: 3500, callback: this.nextTurn, callbackScope: this });
+                this.time.addEvent({ delay: 5000, callback: this.nextTurn, callbackScope: this });
             }  
         } else {
             if(this.animal.isLiving == true){
                 this.events.emit("Message", "You've been defeated...");
                 let timer = setTimeout(() =>{
                     this.exitBattle();
-                }, 3500);
+                }, 5000);
             } else{
                 this.events.emit("Message", "You won! You find yourself rewarded with " + REWARD + " dollars!");
                 MONEY += REWARD;
                 let timer = setTimeout(() =>{
                     this.exitBattle();
-                }, 3500);
+                }, 5000);
             }
         }
     }
@@ -188,7 +188,7 @@ class Battle extends Phaser.Scene{
             this.events.emit("Message", "You do not have any items to use...");
             let timer = setTimeout(() =>{
                 this.currentMenu = this.actionsMenu;
-            }, 3500);
+            }, 5000);
             return;
         }
 
@@ -287,7 +287,7 @@ class Battle extends Phaser.Scene{
 
             }
             this.animalHp.setText("HP: " + this.animal.hp);
-            this.time.addEvent({ delay: 3500, callback: this.nextTurn, callbackScope: this });
+            this.time.addEvent({ delay: 5000, callback: this.nextTurn, callbackScope: this });
         } else if(action == 'item'){
             if(this.player.items[index] == 'Red Potion'){
                 this.sound.add('Slurp').play();
@@ -314,7 +314,7 @@ class Battle extends Phaser.Scene{
                     this.player.items.splice(index, 1);
                 }
             }
-            this.time.addEvent({ delay: 3500, callback: this.nextTurn, callbackScope: this });
+            this.time.addEvent({ delay: 5000, callback: this.nextTurn, callbackScope: this });
         }
     }
 
@@ -328,7 +328,7 @@ class Battle extends Phaser.Scene{
             this.hideEvent.remove(false);
 
         // Displays text for 3.5 seconds and then hides it.
-        this.hideEvent = this.time.addEvent({ delay: 3500, callback: this.hideMessage, callbackScope: this });
+        this.hideEvent = this.time.addEvent({ delay: 5000, callback: this.hideMessage, callbackScope: this });
     }
 
     // Hides displayed text
