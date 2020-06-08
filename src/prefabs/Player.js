@@ -13,7 +13,7 @@ class Player extends Phaser.GameObjects.Sprite {
             'Wit: Scream', "\"REEEEEEEEEEEEE,\" screams the zookeeper. The animal stares at you and blinks confusedly.\n\n",
             'Dexterity: Cartwheel', "Gracefully, you cartwheel directly into the animal, slamming it with your body.\n\n",
             'Strength: Smash', "With the righteous force of your passion for zoos, you smash a rock over the animal's head. Ouch.\n\n",
-            'Wit:  Intimidate', "You stomp your feet and insult the animal's mother. It now feels bad about itself.\n\n",
+            'Wit: Intimidate', "You stomp your feet and insult the animal's mother. It now feels bad about itself.\n\n",
             'Dexterity: Spin Attack', "You sort of do like, this spin, karate thing? An ancient kung fu move. It does some damage.\n\n",
             'Strength: Haymaker', "You wind up your fist behind your back and spring it upon the creature with all your zookeeping might.\n\n",
             'Wit: Persuade', "You have a long chat with the animal and convince it that it to do what you want.\n\n",
