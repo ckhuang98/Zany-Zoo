@@ -126,7 +126,7 @@ class Player extends Phaser.GameObjects.Sprite {
         } else if(DEX >= 10 && DEX < 15){
             this.attacks.push('Dexterity: Jump Kick');
             this.attacks.push(12);
-        } else if(DEX >= 15 && WIT < 20){
+        } else if(DEX >= 15 && DEX < 20){
             this.attacks.push('Dexterity: Maneuver');
             this.attacks.push(16)
         } else{
