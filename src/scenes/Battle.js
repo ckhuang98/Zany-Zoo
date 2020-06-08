@@ -134,7 +134,7 @@ class Battle extends Phaser.Scene{
         
     }
 
-    // Moves the battle along
+    // Moves the battle along, keeps track of player turn.
     nextTurn(){
         this.turnCounter++;
         if(this.animal.isLiving && this.player.isLiving){
