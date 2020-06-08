@@ -153,7 +153,7 @@ class BossBattle extends Phaser.Scene{
                 
                 this.boss.currentAnimal.attack(this.player);
                 this.playerHp.setText("HP: " + this.player.hp);
-                this.time.addEvent({ delay: 4500, callback: this.nextTurn, callbackScope: this });
+                this.time.addEvent({ delay: 5000, callback: this.nextTurn, callbackScope: this });
             }
             this.animalHp.setText("HP: " + this.boss.currentAnimal.hp);  
         }
@@ -163,17 +163,17 @@ class BossBattle extends Phaser.Scene{
                 GAMEWON = false;
                 let timer = setTimeout(() =>{
                     this.exitBattle();
-                }, 4500);
+                }, 5000);
             } else{
                 this.boss.nextAnimal();
                 if(this.boss.isLiving == false){
                     this.events.emit("Message", "You won! That'll teach him a lesson!");
                     let timer = setTimeout(() => {
                         this.exitBattle();
-                    }, 4500);
+                    }, 5000);
                 }
                 this.events.emit("Message", "Is this all you got? Who's next?");
-                this.time.addEvent({ delay: 4500, callback: this.nextTurn, callbackScope: this });
+                this.time.addEvent({ delay: 5000, callback: this.nextTurn, callbackScope: this });
             }
         }
     }
@@ -204,7 +204,7 @@ class BossBattle extends Phaser.Scene{
             this.events.emit("Message", "You do not have any items to use...");
             let timer = setTimeout(() =>{
                 this.currentMenu = this.actionsMenu;
-            }, 4500);
+            }, 5000);
             return;
         }
 
@@ -303,7 +303,7 @@ class BossBattle extends Phaser.Scene{
 
             }
             this.animalHp.setText("HP: " + this.boss.currentAnimal.hp);
-            this.time.addEvent({ delay: 4500, callback: this.nextTurn, callbackScope: this });
+            this.time.addEvent({ delay: 5000, callback: this.nextTurn, callbackScope: this });
         } else if(action == 'item'){
             if(this.player.items[index] == 'Red Potion'){
                 this.sound.add('Slurp').play();
@@ -330,7 +330,7 @@ class BossBattle extends Phaser.Scene{
                     this.player.items.splice(index, 1);
                 }
             }
-            this.time.addEvent({ delay: 4500, callback: this.nextTurn, callbackScope: this });
+            this.time.addEvent({ delay: 5000, callback: this.nextTurn, callbackScope: this });
         }
     }
 
@@ -344,7 +344,7 @@ class BossBattle extends Phaser.Scene{
             this.hideEvent.remove(false);
 
         // Displays text for 3.5 seconds and then hides it.
-        this.hideEvent = this.time.addEvent({ delay: 4500, callback: this.hideMessage, callbackScope: this });
+        this.hideEvent = this.time.addEvent({ delay: 5000, callback: this.hideMessage, callbackScope: this });
     }
 
     // Hides displayed text
