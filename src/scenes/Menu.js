@@ -86,7 +86,6 @@ class Menu extends Phaser.Scene {
         }); 
         this.continue.setInteractive().on('pointerdown',()=>{;
             this.scene.start("skillsScene");
-            this.bgm.stop();
         });
 
     }
