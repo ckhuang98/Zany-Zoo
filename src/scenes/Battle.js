@@ -45,7 +45,7 @@ class Battle extends Phaser.Scene{
         // Sets placehold background
         this.background = this.add.tileSprite(0, 0, WIDTH, HEIGHT, 'background').setOrigin(0,0);
 
-        // Added audio to game.
+        // Adds music
         this.battleMusic = this.sound.add('battleMusic');
         this.battleMusic.play({
             loop: true,
