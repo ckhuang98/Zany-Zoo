@@ -17,10 +17,10 @@ class Loading extends Phaser.Scene {
         this.anims.play('loadingAniimation');
 
         // Skills images and buttons
-        this.load.image('./assets/images/skillsMenu', 'skillsMenu.png');
-        this.load.image('./assets/images/plus', 'plus.png');
-        this.load.image('./assets/images/minus', 'minus.png');
-        this.load.image('./assets/images/confirm', 'confirm.png');
+        this.load.image('skillsMenu', './assets/images/skillsMenu.png');
+        this.load.image('plus', './assets/images/plus.png');
+        this.load.image('minus', './assets/images/minus.png');
+        this.load.image('confirm', './assets/images/confirm.png');
 
         // Menu images and buttons
         this.load.image('continueButton', './assets/images/continueButton.png');
