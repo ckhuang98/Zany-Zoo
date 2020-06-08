@@ -30,6 +30,32 @@ class Menu extends Phaser.Scene {
             mute: false
         });
 
+        //main manu interactible
+        this.pressStart.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
+            this.startStory();
+        });
+
+        this.pressStart.setInteractive().on('pointerover',()=>{
+            if(!this.inEvent){
+                this.pressStart.setTexture('startSelect');
+                this.pressInstructions.setTexture('pressInstruction');
+            }
+        });
+        this.pressInstructions.setInteractive().on('pointerover',()=>{
+            if(!this.inEvent){
+                this.pressStart.setTexture('pressStart');
+                this.pressInstructions.setTexture('instructionsSelect');
+            }
+        });
+
+        this.background.setInteractive().on('pointerover',()=>{;
+            if(!this.inEvent){
+                this.pressStart.setTexture('pressStart');
+                this.pressInstructions.setTexture('pressInstruction');
+            }
+        }); 
+
+        //if the instructions are pressed
         this.pressInstructions.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
             if(!this.inEvent){
                 this.pressStart.destroy();
@@ -47,30 +73,6 @@ class Menu extends Phaser.Scene {
                 });
             }
         });
-
-        this.pressStart.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
-            this.startStory();
-        });
-
-            this.pressStart.setInteractive().on('pointerover',()=>{
-                if(!this.inEvent){
-                    this.pressStart.setTexture('startSelect');
-                    this.pressInstructions.setTexture('pressInstruction');
-                }
-            });
-            this.pressInstructions.setInteractive().on('pointerover',()=>{
-                if(!this.inEvent){
-                    this.pressStart.setTexture('pressStart');
-                    this.pressInstructions.setTexture('instructionsSelect');
-                }
-            });
-
-            this.background.setInteractive().on('pointerover',()=>{;
-                if(!this.inEvent){
-                    this.pressStart.setTexture('pressStart');
-                    this.pressInstructions.setTexture('pressInstruction');
-                }
-            }); 
     }
 
     startStory(){
@@ -78,6 +80,7 @@ class Menu extends Phaser.Scene {
         this.pressStart.destroy();
         this.workDay = this.add.image(0, 0, 'backStory').setOrigin(0.0, 0.0);
         this.continue = this.add.image(450, 780, 'continueButton');
+
         this.workDay.setInteractive().on('pointerover',()=>{;
             this.continue.setTexture('continueButton');
         }); 
