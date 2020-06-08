@@ -16,7 +16,7 @@ class Skills extends Phaser.Scene {
         //initialization
         this.points = 5;
         this.maxPoints = 5;
-
+        GAMEWON = true; //by default this will be set to false if the player loses
         END = 1;
         STR = 1;
         WIT = 1;
@@ -122,9 +122,5 @@ class Skills extends Phaser.Scene {
                 this.scene.start("cityScene");
             } 
         });
-    }
-
-    update(){
-
     }
 }

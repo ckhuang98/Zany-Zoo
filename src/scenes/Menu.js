@@ -88,11 +88,7 @@ class Menu extends Phaser.Scene {
             this.continue.setTexture('continueSelect');
         }); 
         this.continue.setInteractive().on('pointerdown',()=>{;
-            //this.scene.start("skillsScene");
-            //this.scene.start("bossBattleScene");
-            //this.scene.start("gameOverScene");
-
-            this.scene.start("cityScene");
+            this.scene.start("skillsScene");
             this.bgm.stop();
         });
 

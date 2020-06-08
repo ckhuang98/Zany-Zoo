@@ -3,6 +3,7 @@ class GameOver extends Phaser.Scene{
         super("gameOverScene");
     }
     preload(){
+        //images for Game Over
         this.load.image('defeatEnding', './assets/images/defeatEnding.png');
         this.load.image('victoryEnding', './assets/images/victoryEnding.png');
         this.load.image('creditPage', './assets/images/creditPage.png');
@@ -16,6 +17,7 @@ class GameOver extends Phaser.Scene{
 
 
     create(){
+        //sets background to outcome of boss battle
         if(GAMEWON){
             this.background = this.add.tileSprite(0, 0, 900, 900, 'victoryEnding').setOrigin(0, 0);
         }else{
@@ -30,50 +32,44 @@ class GameOver extends Phaser.Scene{
 
         this.creditButton = this.add.image(250, 700, 'creditButton');
         this.menuButton = this.add.image(650, 700, 'menuButton');
-        this.inEvent = false;
-        this.creditButton.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
-            if(!this.inEvent){
-                this.inEvent = true;
-                this.creditPage = this.add.image(0, 0, 'creditPage').setOrigin(0.0, 0.0);
-                this.menuButton = this.add.image(680, 780, 'menuButton');
 
-                this.menuButton.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
-                    this.credit.stop();
-                    this.scene.start("menuScene");
-                });
-                this.menuButton.setInteractive().on('pointerover',()=>{
-                    this.menuButton.setTexture('menuSelected');
-                });
-                this.background.setInteractive().on('pointerover',()=>{
-                    this.menuButton.setTexture('menuButton');
-                });
-            }
-        });
-
+        //deals with interactive gameove menu
         this.menuButton.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
-            if(!this.inEvent){
-                this.credit.stop();
-                this.scene.start("menuScene");
-            }
+            this.credit.stop();
+            this.scene.start("menuScene");
         });
 
         this.menuButton.setInteractive().on('pointerover',()=>{
-            if(!this.inEvent){
-                this.menuButton.setTexture('menuSelected');
-                this.creditButton.setTexture('creditButton');
-            }
+            this.menuButton.setTexture('menuSelected');
+            this.creditButton.setTexture('creditButton');
         });
 
         this.creditButton.setInteractive().on('pointerover',()=>{
-            if(!this.inEvent){
-                this.menuButton.setTexture('menuButton');
-                this.creditButton.setTexture('creditSelected');
-            }
+            this.menuButton.setTexture('menuButton');
+            this.creditButton.setTexture('creditSelected');
         });
 
         this.background.setInteractive().on('pointerover',()=>{
             this.menuButton.setTexture('menuButton');
             this.creditButton.setTexture('creditButton');
+        });
+
+        //if the credits are pushes deals with a new background
+        this.creditButton.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
+            this.inEvent = true;
+            this.creditPage = this.add.image(0, 0, 'creditPage').setOrigin(0.0, 0.0);
+            this.menuButton = this.add.image(680, 780, 'menuButton');
+
+            this.menuButton.setInteractive().on('pointerdown',(pointer, localX, localY, event)=>{
+                this.credit.stop();
+                this.scene.start("menuScene");
+            });
+            this.menuButton.setInteractive().on('pointerover',()=>{
+                this.menuButton.setTexture('menuSelected');
+            });
+            this.background.setInteractive().on('pointerover',()=>{
+                this.menuButton.setTexture('menuButton');
+            });
         });
     }
 }
