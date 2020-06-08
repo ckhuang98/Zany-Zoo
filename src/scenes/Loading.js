@@ -8,7 +8,7 @@ class Loading extends Phaser.Scene {
         this.anims.create({
             key: 'loadingAnimation',
             frames: this.anims.generateFrameNumbers('loadingAnimation', { start: 0, end: 49, first: 0}),
-            frameRate: 12,
+            frameRate: 1,
             repeat: -1
         });
             
@@ -71,7 +71,7 @@ class Loading extends Phaser.Scene {
         this.load.image('goBackButton', './assets/images/goBackButton.png');
         this.load.image('goBackSelect', './assets/images/goBackSelect.png');
 
-        
+
 
         //images for Game Over
         this.load.image('defeatEnding', './assets/images/defeatEnding.png');
@@ -92,9 +92,8 @@ class Loading extends Phaser.Scene {
         this.load.image('player', './assets/images/sprite.png');
         this.load.spritesheet('playerIdle', './assets/images/playerSpriteSheet.png', {frameWidth: 138, frameHeight: 264, startFrame: 0, endFrame: 48});
         this.load.image('boss', './assets/images/bossSprite.png');
-
-        // Animation Sprite Sheet
         this.load.spritesheet('bossIdle', './assets/images/bossAnim.png', {frameWidth: 291, frameHeight: 380, startFrame: 0, endFrame: 49});
+        this.load.image('background', './assets/images/minigameBackground.png');
         this.load.image('background1', './assets/images/bossStage.png');
 
         // Sfx
