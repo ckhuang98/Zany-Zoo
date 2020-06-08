@@ -22,8 +22,6 @@ class Menu extends Phaser.Scene {
         this.pressStart = this.add.image(450, 580, 'pressStart');
         this.pressInstructions = this.add.image(450, 400, 'pressInstruction');
         this.exit = this.load.image('exit', 'exit.png');
-        keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
-        keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.inEvent = false;
         this.bgm = this.sound.add('bgm');
         
