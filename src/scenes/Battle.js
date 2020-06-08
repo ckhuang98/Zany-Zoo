@@ -275,7 +275,7 @@ class Battle extends Phaser.Scene{
                         else if(this.player.attacks[index + 2] === 'Dexterity: Jump Kick'){
                             this.sound.add('Jump Kick').play();
                         }
-                        else if(this.player.attacks[index + 2] === 'Dexterity: Manuever'){
+                        else if(this.player.attacks[index + 2] === 'Dexterity: Maneuver'){
                             this.sound.add('Manuever').play();
                         }
                         else if(this.player.attacks[index + 2] === 'Dexterity: Acrobatics'){
