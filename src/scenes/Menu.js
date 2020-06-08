@@ -3,6 +3,7 @@ class Menu extends Phaser.Scene {
         super("menuScene");
     }
     preload(){
+        //menu images and buttons
         this.load.image('continueButton', './assets/images/continueButton.png');
         this.load.image('continueSelect', './assets/images/continueSelect.png');
         this.load.image('menu', './assets/images/TitleMenu.png');
@@ -11,7 +12,6 @@ class Menu extends Phaser.Scene {
         this.load.image('backStory', './assets/images/backstory.png');
         this.load.image('pressInstruction', './assets/images/instructionsButton.png');
         this.load.image('instructionsSelect', './assets/images/instructionsSelect.png');
-
         this.load.image('instructions', './assets/images/instructions.png');
 
         this.load.audio('bgm', './assets/music/BGM.mp3');
